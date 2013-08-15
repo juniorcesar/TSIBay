@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.controller;
 
+import br.edu.utfpr.cm.tsibay.model.Endereco;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,7 +36,7 @@ public class HibernateConfiguration {
             cfg.setProperty("hibernate.show_sql", "true");
             cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
             cfg.setProperty("hibernate.connection.autocommit", "true");
-
+            cfg.addAnnotatedClass(Endereco.class);
             factory = cfg.buildSessionFactory();// construindo uma fabrica de sessão
 
         }
