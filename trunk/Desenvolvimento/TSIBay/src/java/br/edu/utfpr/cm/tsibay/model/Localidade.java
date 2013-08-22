@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,14 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author junior
  */
 @Entity
-@Table(name="LOCALIDADE")
-public class Localidade {
+@Table(name = "LOCALIDADE")
+public class Localidade implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 10, nullable = false, unique = true)
@@ -54,9 +55,4 @@ public class Localidade {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    
-    
-    
-    
-    
 }
