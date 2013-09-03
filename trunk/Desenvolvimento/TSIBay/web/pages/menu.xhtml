@@ -1,0 +1,51 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <div id="sidebar" class="column">
+
+        <h:form>
+            <h3>Gerenciamento de Produtos</h3>
+            <ul class="toggle">
+                <li class="icn_new_article">
+                    <h:commandLink value="Adicionar produtos" action="#{pageManager.setPg1()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Listar produtos" action="#{pageManager.setPagListaSalas()}" />
+                </li>
+            </ul>
+            <h3>Transações</h3>
+            <ul class="toggle">
+                <li class="icn_new_article">
+                    <h:commandLink value="Vendas em andamento" action="#{pageManager.setPg5()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Compras em andamento" action="#{pageManager.setPg5()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Listar compras" action="#{pageManager.setPg5()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Listar vendas" action="#{pageManager.setPagListaDisciplinas()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Comissões" action="#{pageManager.setPagListaDisciplinas()}" />
+                </li>
+            </ul>
+            <h3>Configurações</h3>
+            <ul class="toggle">
+                <li class="icn_new_article">
+                    <h:commandLink value="Editar perfil" action="#{pageManager.setPg4()}" />
+                </li>
+                <li class="icn_new_article">
+                    <h:commandLink value="Alterar senha" action="#{pageManager.setPagListaProfs()}" />
+                </li>
+            </ul>
+            <h3>Administração</h3>
+            <ul class="toggle">
+                <li class="icn_photo"> <h:commandLink value="Comissões" action="#{pageManager.setPagListaSalasReserva()}" /></li>
+                <li class="icn_photo"> <h:commandLink value="Consultar movimentações" action="#{pageManager.setPagListaSalasReserva()}" /></li>
+                <li class="icn_photo"> <h:commandLink value="Usuários" action="#{pageManager.setPagListaSalasReserva()}" /></li>
+            </ul>
+        </h:form>
+    </div>
+</ui:composition>
