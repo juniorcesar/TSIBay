@@ -58,7 +58,7 @@ div#bar_navegacao {
 }
 div#bar_navegacao .user {
 	float: left;
-	width: 23%;
+	width: 18%;
 	height: 38px;
 }
 .user p {
@@ -139,23 +139,23 @@ div.breadcrumbs {
 	float: left;
 	margin: 0 5px;
 }
-div#sidebar {
-	width: 23%;
+div#menu {
+	width: 18%;
         height: auto;
 	float: left;
 	margin-top: -4px;
 	min-height:600px;
 	background: #e4e4e4;
 }
-#sidebar hr {
+#menu hr {
 	border: none;
 	outline: none;
-	background: url(../images/sidebar_divider.png) repeat-x;
+	background: url(../images/menu.png) repeat-x;
 	display: block;
 	width: 100%;
 	height: 2px;
 }
-#sidebar h3 {
+#menu h3 {
 	color: #1F1F20;
 	text-transform: uppercase;
 	text-shadow: 0 1px 0 #fff;
@@ -173,21 +173,21 @@ div#sidebar {
 	float: right;
 	margin-right: 2%
 }
-#sidebar .toggleLink:hover {
+#menu .toggleLink:hover {
 	color: #77BACE;
 	text-decoration: none;
 }
-#sidebar ul {
+#menu ul {
 	clear: both;
 	margin: 0;
 	padding: 0;
 }
-#sidebar li {
+#menu li {
 	list-style: none;
 	margin: 0 0 0 12%;
 	padding: 0;
 }
-#sidebar li a {
+#menu li a {
 	color: #666666;
 	padding-left: 25px;
 	text-decoration: none;
@@ -197,71 +197,71 @@ div#sidebar {
 	text-shadow: 0 1px 0 #fff;
 	margin: 2px 0;
 }
-#sidebar li a:hover {
+#menu li a:hover {
 	color: #444444;
 }
-#sidebar li.icn_new_article a {
+#menu li.icn_new_article a {
 	background: url(../images/icn_new_article.png) no-repeat center left;
 }
-#sidebar li.icn_edit_article a {
+#menu li.icn_edit_article a {
 	background: url(../images/icn_edit_article.png) no-repeat center left;
 }
-#sidebar li.icn_categories a {
+#menu li.icn_categories a {
 	background: url(../images/icn_categories.png) no-repeat center left;
 }
-#sidebar li.icn_tags a {
+#menu li.icn_tags a {
 	background: url(../images/icn_tags.png) no-repeat center left;
 }
-#sidebar li.icn_add_user a {
+#menu li.icn_add_user a {
 	background: url(../images/icn_add_user.png) no-repeat center left;
 }
-#sidebar li.icn_view_users a {
+#menu li.icn_view_users a {
 	background: url(../images/icn_view_users.png) no-repeat center left;
 }
-#sidebar li.icn_profile a {
+#menu li.icn_profile a {
 	background: url(../images/icn_profile.png) no-repeat center left;
 }
-#sidebar li.icn_folder a {
+#menu li.icn_folder a {
 	background: url(../images/icn_folder.png) no-repeat center left;
 }
-#sidebar li.icn_photo a {
+#menu li.icn_photo a {
 	background: url(../images/icn_photo.png) no-repeat center left;
 }
-#sidebar li.icn_audio a {
+#menu li.icn_audio a {
 	background: url(../images/icn_audio.png) no-repeat center left;
 }
-#sidebar li.icn_video a {
+#menu li.icn_video a {
 	background: url(../images/icn_video.png) no-repeat center left;
 }
-#sidebar li.icn_settings a {
+#menu li.icn_settings a {
 	background: url(../images/icn_settings.png) no-repeat center left;
 }
-#sidebar li.icn_security a {
+#menu li.icn_security a {
 	background: url(../images/icn_security.png) no-repeat center left;
 }
-#sidebar li.icn_jump_back a {
+#menu li.icn_jump_back a {
 	background: url(../images/icn_jump_back.png) no-repeat center left;
 }
-#sidebar p {
+#menu p {
 	color: #666666;
 	padding-left: 6%;
 	text-shadow: 0 1px 0 #fff;
 	margin: 10px 0 0 0;
 }
-#sidebar a {
+#menu a {
 	color: #666666;
 	text-decoration: none;
 }
-#sidebar a:hover {
+#menu a:hover {
 	text-decoration: underline;
 }
-#sidebar footer {
+#menu footer {
 	margin-top: 20%;
 }
 div#principal {
-	width: 77%;
+	width: 82%;
 	min-height: 600px;
-	background: url(../images/sidebar_shadow.png) repeat-y left top;
+	background: url(../images/menu_shadow.png) repeat-y left top;
 	float: left;
 	margin-top: -2px;
 }

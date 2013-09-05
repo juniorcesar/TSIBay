@@ -20,65 +20,41 @@ public class PageManager implements Serializable {
         this.paginaAtiva = paginaAtiva;
     }
 
-    public void setPg1() {
-        this.paginaAtiva = "./pages/cad_salas.xhtml";
-    }
-
-    public void setPagListaSalasReserva() {
-        this.paginaAtiva = "./pages/lista_salas_reserva.xhtml";
-    }
-
-    public void setPagListaSalas() {
-        this.paginaAtiva = "./pages/lista_salas.xhtml";
+    public void setPagProdutos() {
+        this.paginaAtiva = "./pages/produtos.xhtml";
     }
     
-    public void setPagListaDisciplinas() {
-        this.paginaAtiva = "./pages/lista_disciplinas.xhtml";
+    public void setPagComissoes() {
+        this.paginaAtiva = "./pages/comissoes.xhtml";
     }
-
-    public void setPagListaProfs() {
-        this.paginaAtiva = "./pages/lista_professores.xhtml";
+    public void setPagCompras() {
+        this.paginaAtiva = "./pages/compras.xhtml";
     }
-
-    public void setListaReservas() {
-        this.paginaAtiva = "./pages/lista_reservas.xhtml";
+    public void setPagConsultarMovimentacoes() {
+        this.paginaAtiva = "./pages/consultar_movimentacoes.xhtml";
     }
-    public void setPagCadTurmas() {
-        this.paginaAtiva = "./pages/cad_turmas.xhtml";
+    public void setPagGerenciarComissoes() {
+        this.paginaAtiva = "./pages/gerenciar_comissoes.xhtml";
     }
-    
-    public void setPagListaTurmas() {
-        this.paginaAtiva = "./pages/list_turmas.xhtml";
+    public void setPagListarCompras() {
+        this.paginaAtiva = "./pages/listar_compras.xhtml";
     }
-
-    public void setPagListaReservasUsuario(){
-        this.paginaAtiva = "./pages/lista_reservas_usuario.xhtml";
+    public void setPagListarProdutos() {
+        this.paginaAtiva = "./pages/listar_produtos.xhtml";
     }
-    public void setPg4() {
-        this.paginaAtiva = "./pages/add_professores.xhtml";
+    public void setPagListarVendas() {
+        this.paginaAtiva = "./pages/listar_vendas.xhtml";
     }
-
-    public void setPg5() {
-        this.paginaAtiva = "./pages/cad_disciplinas.xhtml";
+    public void setPagPerfil() {
+        this.paginaAtiva = "./pages/perfil.xhtml";
     }
-
-    public String getPg1() {
-        return this.paginaAtiva;
+    public void setPagSenha() {
+        this.paginaAtiva = "./pages/senha.xhtml";
     }
-
-    public String getPg2() {
-        return this.paginaAtiva;
+    public void setPagVendas() {
+        this.paginaAtiva = "./pages/vendas.xhtml";
     }
-
-    public String getPg3() {
-        return this.paginaAtiva;
-    }
-
-    public String getPg4() {
-        return this.paginaAtiva;
-    }
-
-    public String getPg5() {
-        return this.paginaAtiva;
+     public void setGerenciarUsuarios() {
+        this.paginaAtiva = "./pages/gerenciar_usuarios.xhtml";
     }
 }
