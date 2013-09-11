@@ -10,7 +10,7 @@ public class PageManager implements Serializable {
 
     public PageManager() {
     }
-    private String paginaAtiva = "./pages/home.xhtml";
+    private String paginaAtiva = "./admin/home.xhtml";
 
     public String getPaginaAtiva() {
         return paginaAtiva;
@@ -21,40 +21,40 @@ public class PageManager implements Serializable {
     }
 
     public void setPagProdutos() {
-        this.paginaAtiva = "./pages/produtos.xhtml";
+        this.paginaAtiva = "./admin/produtos.xhtml";
     }
     
     public void setPagComissoes() {
-        this.paginaAtiva = "./pages/comissoes.xhtml";
+        this.paginaAtiva = "./admin/comissoes.xhtml";
     }
     public void setPagCompras() {
-        this.paginaAtiva = "./pages/compras.xhtml";
+        this.paginaAtiva = "./admin/compras.xhtml";
     }
     public void setPagConsultarMovimentacoes() {
-        this.paginaAtiva = "./pages/consultar_movimentacoes.xhtml";
+        this.paginaAtiva = "./admin/consultar_movimentacoes.xhtml";
     }
     public void setPagGerenciarComissoes() {
-        this.paginaAtiva = "./pages/gerenciar_comissoes.xhtml";
+        this.paginaAtiva = "./admin/gerenciar_comissoes.xhtml";
     }
     public void setPagListarCompras() {
-        this.paginaAtiva = "./pages/listar_compras.xhtml";
+        this.paginaAtiva = "./admin/listar_compras.xhtml";
     }
     public void setPagListarProdutos() {
-        this.paginaAtiva = "./pages/listar_produtos.xhtml";
+        this.paginaAtiva = "./admin/listar_produtos.xhtml";
     }
     public void setPagListarVendas() {
-        this.paginaAtiva = "./pages/listar_vendas.xhtml";
+        this.paginaAtiva = "./admin/listar_vendas.xhtml";
     }
     public void setPagPerfil() {
-        this.paginaAtiva = "./pages/perfil.xhtml";
+        this.paginaAtiva = "./admin/perfil.xhtml";
     }
     public void setPagSenha() {
-        this.paginaAtiva = "./pages/senha.xhtml";
+        this.paginaAtiva = "./admin/senha.xhtml";
     }
     public void setPagVendas() {
-        this.paginaAtiva = "./pages/vendas.xhtml";
+        this.paginaAtiva = "./admin/vendas.xhtml";
     }
      public void setGerenciarUsuarios() {
-        this.paginaAtiva = "./pages/gerenciar_usuarios.xhtml";
+        this.paginaAtiva = "./admin/gerenciar_usuarios.xhtml";
     }
 }

@@ -5,15 +5,15 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="./template/template_main.xhtml">
 
-    <ui:define name="top">
+    <ui:define name="cabecalho">
         <ui:include src="/pages/header.xhtml"></ui:include>
     </ui:define>
 
-    <ui:define name="menu_left">
+    <ui:define name="menu">
         <ui:include src="/pages/menu.xhtml"></ui:include>
     </ui:define>
 
-    <ui:define name="content">
+    <ui:define name="conteudo">
         <ui:include src="#{pageManager.paginaAtiva}"></ui:include>
     </ui:define>
 
