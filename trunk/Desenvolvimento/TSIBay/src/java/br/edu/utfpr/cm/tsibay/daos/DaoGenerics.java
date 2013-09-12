@@ -19,6 +19,10 @@ public class DaoGenerics<T> implements Dao<T> {
     protected Session session = TransactionManager.getCurrentSession();
     protected Class alvo;
 
+    public DaoGenerics(Class alvo) {
+        this.alvo = alvo;
+    }
+
     @Override
     public void persistir(T o) {
         session.saveOrUpdate(o);

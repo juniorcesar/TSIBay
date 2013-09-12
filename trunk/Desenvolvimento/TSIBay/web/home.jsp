@@ -1,5 +1,12 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%-- 
+    Document   : home
+    Created on : 11/09/2013, 20:59:31
+    Author     : alauber
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       dir="ltr">
@@ -126,13 +133,9 @@
                                     <h2>Categorias</h2>
                                     <div class="widget-entry">
                                         <ul>
-                                            <li><a href="#" title="Desktops"><span>Desktops</span></a></li>
-                                            <li><a href="#" title="Laptops &amp; Notebooks"><span>Laptops &amp; Notebooks</span></a></li>
-                                            <li><a href="#" title="Componentes"><span>Componentes</span></a></li>
-                                            <li><a href="#" title="Software"><span>Software</span></a></li>
-                                            <li><a href="#" title="SmartPhones"><span>SmartPhones</span></a></li>
-                                            <li><a href="#" title="Cameras"><span>Cameras</span></a></li>
-                                            <li class="last"><a href="#" title="Outros"><span>Outros</span></a></li>
+                                            <c:forEach items="${familias}" var="f" >
+                                                <li><a href="#" title=${f.nome}><span>${f.nome}</span></a></li>
+                                            </c:forEach>
                                         </ul>
                                     </div>
                                 </li>
@@ -471,4 +474,3 @@
         <!-- End Wrapper -->
     </h:body>
 </html>
-
