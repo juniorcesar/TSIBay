@@ -50,8 +50,8 @@ textarea { overflow: auto; }
 #search .search-button { background: url('../imagesSite/search-button.png') no-repeat 0 0; width: 52px; height: 26px; cursor: pointer; font-size: 0; line-height: 0; text-indent: -4000px; float: left; display: inline; }
 
 /* Header */
-h1#logo { padding-top: 6px; padding-bottom: 22px; }
-h1#logo a { width: 214px; height: 43px; background: url('../imagesSite/logo.png') no-repeat 0 0; display: block; }
+h1#logo { padding-top: 0px; padding-bottom: 5px; }
+h1#logo a { width: 214px; height: 53px; background: url('../imagesSite/logo.png') no-repeat 0 0; display: block; }
 
 /* Navigation */
 #navigation { background: url('../imagesSite/nav-bg.png') no-repeat center 0; margin-bottom: 24px; }
