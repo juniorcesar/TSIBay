@@ -5,7 +5,6 @@
                  xmlns:f="http://java.sun.com/jsf/core">
     <div id="principal"> 
         <h:form id="produto">  
-
             <p:panel id="panel_produto" header="Cadastro do Produto" closable="true"> 
 
                 <p:fieldset legend="Dados do Produto">  
@@ -13,27 +12,29 @@
                     <h:panelGrid columns="4" cellpadding="3">  
 
                         <h:outputLabel for="id" value="Id:" />  
-                        <p:inputText id="id" value="#{produtoBean.produto.id}"  readonly="true" size="15" style="margin-left: 61px"/>  
+                        <p:inputText id="id" value="#{produtoBean.produto.id}"  readonly="true" size="15" style="margin-left: 55px"/>  
 
-                        <h:outputLabel for="data" value="Data cadastro:" style="margin-left: 2px" />  
-                        <p:calendar value="#{produtoBean.produto.data}" id="popupCal" readonly="true" size="15"/>
+                        <h:outputLabel for="data" value="Data cadastro:" style="margin-left: 13px" />  
+                        <p:calendar value="#{produtoBean.produto.data}" id="popupCal" readonly="true" size="15" disabled="true"/>
 
                     </h:panelGrid>  
                     <h:panelGrid columns="3" cellpadding="3">  
 
-                        <h:outputLabel for="nome" value="Nome *:" />  
+                        <h:outputLabel for="nome" value="Nome*:" />  
                         <p:inputText id="nome" value="#{produtoBean.produto.nome}" required="true" size="47"/> 
                         <p:message for="nome" /> 
 
-                        <h:outputLabel for="familia" value="Familia *:"/>  
-                        <p:inputText id="familia" value="#{produtoBean.produto.familia.nome}" required="true" size="47"/> 
+                        <h:outputLabel for="familia" value="Familia*:"/>  
+                        <p:selectOneMenu id="familia" value="#{produtoBean.produto.familia}" required="true">  
+                            <f:selectItems value="#{familiaBean.familias}" var="f" itemLabel="#{f.nome}" itemValue="#{f}" /> 
+                        </p:selectOneMenu> 
                         <p:message for="familia" /> 
 
-                        <h:outputLabel for="fabricante" value="Fabricante *:" />  
+                        <h:outputLabel for="fabricante" value="Fabricante*:" />  
                         <p:inputText id="fabricante" value="#{produtoBean.produto.fabricante}" required="true" size="47"/> 
                         <p:message for="fabricante" /> 
 
-                        <h:outputLabel for="descricao" value="Descrição *:"/>  
+                        <h:outputLabel for="descricao" value="Descrição*:"/>  
                         <p:inputTextarea id="descricao" rows="5" cols="45" counter="contador" maxlength="150"       
                                          counterTemplate="{0} caracteres restantes." autoResize="false" required="true"/>  
                         <h:outputText id="contador" /> 
@@ -46,41 +47,45 @@
 
                     <h:panelGrid columns="6" cellpadding="3">  
 
-                        <h:outputLabel for="precoVenda" value="Preço Venda *:" />  
+                        <h:outputLabel for="precoVenda" value="Preço Venda*:" />  
                         <p:inputMask id="precoVenda" mask="9?999999999999999" value="#{produtoBean.produto.precoVenda}" required="true" size="15"/> 
                         <p:message for="precoVenda" /> 
 
-                        <h:outputLabel for="qtdeDisponivel" value="Quantidade Disponível*:" />  
+                        <h:outputLabel for="qtdeDisponivel" value="Quantidade Disponível:" />  
                         <p:inputMask id="qtdeDisponivel" mask="9?999999999" value="#{produtoBean.produto.precoVenda}" readonly="true" size="15"/> 
                         <p:message for="qtdeDisponivel" /> 
 
-                        <h:outputLabel for="quantidade" value="Quantidade *:" />  
+                        <h:outputLabel for="quantidade" value="Quantidade*:" />  
                         <p:inputMask id="quantidade" mask="9?999999999" value="#{produtoBean.produto.precoVenda}" required="true" size="15"/> 
                         <p:message for="quantidade" /> 
 
-                        <h:outputLabel for="qtdeVendida" value="Quantidade Vendida*:" />  
+                        <h:outputLabel for="qtdeVendida" value="Quantidade Vendida:" />  
                         <p:inputMask id="qtdeVendida" mask="9?999999999" value="#{produtoBean.produto.precoVenda}" readonly="true" size="15"/> 
                         <p:message for="qtdeVendida" /> 
 
                         <h:outputLabel for="prazo" value="Prazo Pagamento*:" />  
-                        <p:inputMask id="prazo" mask="9?999999999" value="#{produtoBean.produto.precoVenda}" readonly="true" size="15"/> 
+                        <p:inputMask id="prazo" mask="9?99" value="#{produtoBean.produto.precoVenda}" size="15"/> 
                         <p:message for="prazo" /> 
 
 
-                        <h:outputLabel for="dataLimite" value="Data Limite Venda:" />  
+                        <h:outputLabel for="dataLimite" value="Data Limite Venda*:" />  
                         <p:calendar  value="#{produtoBean.produto.data}" id="dataLimite" readonly="true" size="15"/>
                         <p:message for="dataLimite" /> 
 
                     </h:panelGrid>
-                    
+
                     <h:panelGrid columns="3" cellpadding="3">  
-                        
-                        <h:outputLabel for="frete" value="Frete *:" />  
-                        <p:inputText id="frete" value="#{produtoBean.produto.fabricante}" required="true" size="53" style="margin-left: 50px"/> 
+
+                        <h:outputLabel for="frete" value="Frete*:" />  
+                        <p:selectOneMenu id="frete"  value="#{produtoBean.produto.fabricante}" required="true" style="margin-left: 54px">  
+                            <f:selectItem itemLabel="À Combinar" itemValue="true" />  
+                            <f:selectItem itemLabel="Grátis" itemValue="false" /> 
+                            <f:selectItem itemLabel="Por conta do comprador" itemValue="false" />  
+                        </p:selectOneMenu>
                         <p:message for="frete" /> 
-                        
-                        <h:outputLabel for="oferta" value="Ofertado *:" />  
-                        <p:selectBooleanButton value="#{produtoBean.produto.ofertado}" onLabel="Sim" offLabel="Não" style="margin-left: 50px"/> 
+
+                        <h:outputLabel for="oferta" value="Ofertado*:" />  
+                        <p:selectBooleanButton value="#{produtoBean.produto.ofertado}" onLabel="Sim" offLabel="Não" style="margin-left: 54px"/> 
 
                     </h:panelGrid>
                 </p:fieldset>
@@ -92,7 +97,6 @@
 
                 <h:panelGrid columns="2" cellpadding="3">
                     <p:commandButton value="Adicionar" action="#{produtoBean.addProduto()}" update="produto" ajax="true"/>
-                    <!--                    <p:commandButton value="Cancelar" action="" update="form:grow" ajax="false"/>-->
                 </h:panelGrid>
             </p:panel> 
         </h:form>

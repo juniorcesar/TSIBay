@@ -6,6 +6,8 @@ package br.edu.utfpr.cm.tsibay.managedbean;
 
 import br.edu.utfpr.cm.tsibay.daos.DaoGenerics;
 import br.edu.utfpr.cm.tsibay.model.Produto;
+import java.io.Serializable;
+import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -17,7 +19,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "produtoBean")
 @RequestScoped
-public class ProdutoBean {
+public class ProdutoBean implements Serializable{
 
     private Produto produto;
 
@@ -26,6 +28,7 @@ public class ProdutoBean {
      */
     public ProdutoBean() {
         produto = new Produto();
+        produto.setData(new Date());
     }
 
     public Produto getProduto() {
@@ -37,10 +40,10 @@ public class ProdutoBean {
     }
 
     public String addProduto() {
-        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>();
+//        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>(Produto.class);
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            daoProduto.persistir(this.produto);
+//            daoProduto.persistir(this.produto);
             this.produto = new Produto();
 
             context.addMessage(null, new FacesMessage("Successful", "Gravado"));
