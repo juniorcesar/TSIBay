@@ -39,7 +39,7 @@ textarea { overflow: auto; }
 .left, .alignleft { float: left; display: inline; }
 .right, .alignright { float: right; display: inline; }
 
-#wrapper { background: url('../imagesSite/wrapper-bg.png') repeat-x center 18px; }
+#wrapper { background: url('../imagesSite/wrapper-bg.png') repeat-x center 5px; }
 
 /* Search */
 #search { background: url('../imagesSite/search-bg.png') repeat-x 0 0; padding-top: 5px; }
@@ -58,34 +58,6 @@ h1#logo a { width: 214px; height: 53px; background: url('../imagesSite/logo.png'
 #navigation li { float: left; display: inline; border-right: 1px solid #5b5b5b; }
 #navigation li a { float: left; height: 48px; line-height: 48px; font-weight: bold; font-size: 14px; color: #fff; display: inline; padding-left: 17px; padding-right: 16px; }
 #navigation li a:hover { background: url('../imagesSite/nav-item.png') repeat-x 0 0; text-decoration: none; color: #85ff02; }
-
-/* Slider */
-#slider { background: url('../imagesSite/slider-bg.png') repeat-x 0 bottom; }
-#slider .slider-outer { background: url('../imagesSite/slider-shadows.png') no-repeat center bottom; padding-bottom: 44px; margin-bottom: 2px; }
-#slider .slider-inner { background: #fff; padding: 6px 7px 29px 7px; width: 964px; height: 310px; position: relative; }
-#slider .jcarousel-clip ,
-#slider ul.slider-items,
-#slider ul.slider-items li { width: 964px; height: 310px; overflow: hidden; position: relative ; }
-#slider ul.slider-items li { float: left; display: inline; }
-#slider li .slide-entry { position: absolute; top: 38px; right: 76px; width: 386px; padding-bottom: 69px; }
-#slider li .slide-entry h2,
-#slider li .slide-entry h3 { font-family: 'MyriadProSemiboldCondensed', arial, sans-serif; font-weight: normal; }
-#slider li .slide-entry h2 { font-size: 70px; color: #343434; line-height: 62px; }
-#slider li .slide-entry h3 { font-size: 35px; color: #646464; line-height: 35px; padding-bottom: 36px; padding-left: 3px; }
-#slider li .slide-entry p { color: #fff; font-size: 16px; padding-left: 6px; line-height: 22px; }
-#slider li .more { position: absolute; bottom: 0; right: 21px; width: 164px; height: 69px; background: url('../imagesSite/slide-more.png') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
-#slider .slider-controls { position: absolute; bottom: 10px; left: 50%; }
-#slider .slider-controls ul { float: left; display: inline; }
-#slider .slider-controls li { float: left; display: inline; padding-right: 5px; }
-#slider .slider-controls li.last { padding-right: 0; }
-#slider .slider-controls li a { background: url('../imagesSite/slider-control.png') no-repeat 0 0; width: 11px; height: 11px; display: block; font-size: 0; line-height: 0; text-indent: -4000px; }
-#slider .slider-controls li.active a,
-#slider .slider-controls li a:hover { background-position: 0 -11px; }
-#slider .jcarousel-prev,
-#slider .jcarousel-next { font-size: 0; line-height: 0; text-indent: -4000px; position: absolute; top: 50%; width: 50px; height: 50px; margin-top: -19px; cursor: pointer; }
-#slider .jcarousel-prev { background: url('../imagesSite/slide-left.png') no-repeat 0 0; left: 15px; }
-#slider .jcarousel-next { background: url('../imagesSite/slide-right.png') no-repeat 0 0; right: 13px; }
-#slider .carousel-active { background-position: 0 -50px; }
 
 /* Main */
 #main { padding-top: 42px; background: url('../imagesSite/main-top.png') no-repeat center 0; }
@@ -135,9 +107,9 @@ h1#logo a { width: 214px; height: 53px; background: url('../imagesSite/logo.png'
 .products-box li a:hover .price span { color: #949494; }
 
 /* Content */
-#content { width: 569px; padding-left: 31px; float: left; display: inline; }
+#content { width: 580px; padding-left: 31px; float: left; display: inline; }
 #content h2 { font-size: 18px; color: #fff; background: url('../imagesSite/title-top.png') no-repeat 0 0; margin-bottom: 14px; padding: 16px 2px 12px; position: relative; }
-#content h2 .title-bottom { background: url('../imagesSite/title-bottom.png') no-repeat 0 0; display: block; position: absolute; bottom: 0; left: 0; width: 569px; height: 1px; font-size: 0; line-height: 0; text-indent: -4000px; }
+#content h2 .title-bottom { background: url('../imagesSite/title-bottom.png') no-repeat 0 0; display: block; position: absolute; bottom: 0; left: 0; width: 580px; height: 1px; font-size: 0; line-height: 0; text-indent: -4000px; }
 #content p { word-spacing: -1px; }
 #content .post { padding-bottom: 31px; }
 
