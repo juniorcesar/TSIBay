@@ -29,19 +29,13 @@ public class ListasHome extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession s = request.getSession();
-        
-//        String pesqIdFamilia = null;
-//        String pesqNomeProduto = null;
-//        
-//        s.setAttribute("pesqIdFamilia", pesqIdFamilia);
-//        s.setAttribute("pesqNomeProduto", pesqNomeProduto);
-
+                
         DaoFamilia daoFamilia = new DaoFamilia();
         List<Familia> familias = null;
 
         DaoProduto daoProduto = new DaoProduto();
         List<Produto> produtoListas = null;
-        
+
         familias = daoFamilia.listar();
         s.setAttribute("familias", familias);
 
@@ -50,20 +44,8 @@ public class ListasHome extends HttpServlet {
 
         produtoListas = daoProduto.listarProdutosUltimos();
         s.setAttribute("produtosUltimos", produtoListas);
-
-//        if (!request.getParameter("pesqIdFamilia").isEmpty()) {
-//            int idFamilia = Integer.parseInt(request.getParameter("idFamilia"));
-//            produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
-//            s.setAttribute("produtosPesqPorFamilia", produtoListas);
-//            s.removeAttribute("produtosPesqPorNome");
-//        }
-//        if (!request.getParameter("pesqNomeProduto").isEmpty()) {
-//            String pesquisa = request.getParameter("pesqNomeProduto");
-//            produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
-//            s.setAttribute("produtosPesqPorNome", produtoListas);
-//            s.removeAttribute("produtosPesqPorFamilia");
-//        }
-
+        s.setAttribute("produtosPrincipal", produtoListas);
+        
         response.sendRedirect("home.jsp");
 
     }
@@ -72,6 +54,31 @@ public class ListasHome extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+//        HttpSession s = request.getSession();
+//        
+//        DaoProduto daoProduto = new DaoProduto();
+//        List<Produto> produtoListas = null;
+//
+//        String pesqIdFamilia = null;
+//        String pesqNomeProduto = null;
+//        
+//        s.setAttribute("pesqIdFamilia", pesqIdFamilia);
+//        s.setAttribute("pesqNomeProduto", pesqNomeProduto);
+//        
+//        if (!request.getSession().getAttribute("pesqIdFamilia").equals(null)) {
+//            int idFamilia = Integer.parseInt(request.getParameter("pesqIdFamilia"));
+//            produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
+//            s.setAttribute("produtosPrincipal", produtoListas);
+//        } else if (!request.getSession().getAttribute("pesqNomeProduto").equals(null)) {
+//            String pesquisa = request.getParameter("pesqNomeProduto");
+//            produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
+//            s.setAttribute("produtosPrincipal", produtoListas);
+//        } else {
+//            produtoListas = daoProduto.listarProdutosUltimos();
+//            s.setAttribute("produtosPrincipal", produtoListas);
+//        }
+//        response.sendRedirect("home.jsp");
     }
 
     @Override

@@ -22,6 +22,17 @@
         <![endif]-->
         <script src="resources/js/jquery.jcarousel.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="resources/js/functions.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            function buscarProdutosPorFamilia(id) {
+                var id = "id="+id;
+
+                jQuery.ajax({
+                    type: "get",
+                    url: "ListasHomePesqProdutoPorFamilia",
+                    data: id
+                });
+            }
+        </script>
     </head>
     <body>
         <!-- Begin Wrapper -->
@@ -29,9 +40,9 @@
             <!-- Begin Search -->
             <div id="search">
                 <div class="shell">
-                    <form action="/ProdutoPesquisa" method="get" accept-charset="utf-8">
+                    <form action="./ListasHomePesqProdutoNome" method="get" accept-charset="utf-8">
                         <div class="container">
-                            <input type="text" name="descricaoProduto" title="Pesquisa..." class="blink" />
+                            <input type="text" name="pesqNomeProduto" title="Pesquisa..." class="blink" />
                         </div>
                         <input class="search-button" type="submit" value="Submit" />
                     </form>
@@ -163,7 +174,7 @@
                             <!-- Begin Products -->
                             <h2>Produtos selecionados<span class="title-bottom">&nbsp;</span></h2>
                             <div id="products">
-                                <c:forEach items="${produtosUltimos}" var="p" >
+                                <c:forEach items="${produtosPrincipal}" var="p" >
                                     <div class="product">
                                         <a href="#" title=${p.nome}>
                                             <span class="title">${p.familia.nome}</span>
