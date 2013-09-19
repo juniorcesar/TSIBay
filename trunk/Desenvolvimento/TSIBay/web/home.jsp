@@ -29,9 +29,9 @@
             <!-- Begin Search -->
             <div id="search">
                 <div class="shell">
-                    <form action="#" method="get" accept-charset="utf-8">
+                    <form action="/ProdutoPesquisa" method="get" accept-charset="utf-8">
                         <div class="container">
-                            <input type="text" value="pesquisa..." title="Pesquisa..." class="blink" onClick="javascript:this.value = '';"/>
+                            <input type="text" name="descricaoProduto" title="Pesquisa..." class="blink" />
                         </div>
                         <input class="search-button" type="submit" value="Submit" />
                     </form>
@@ -59,6 +59,34 @@
                 </div>
             </div>
             <!-- End Navigation -->
+            <!-- Begin Slider -->
+            <div id="slider">
+                <div class="slider-outer">
+                    <div class="slider-inner shell">
+                        <!-- Begin Slider Items -->
+                        <ul class="slider-items">
+                            <c:forEach items="${produtos}" var="p" begin="1" end="5" >
+                                <li>
+                                    <img src="resources/imagesSite/slide-img1.jpg" alt="Slide Image 1" />
+                                    <div class="slide-entry">
+                                        <h2>${p.familia.nome}</h2>
+                                        <h3>${p.nome}</h3>
+                                        <p>R$ ${p.precoVenda}
+                                    </div>
+                                    <a href="#" class="more" title="Veja mais">Veja mais</a>
+                                </li>
+                            </c:forEach>                                    
+                        </ul>
+                        <!-- End Slider Items -->
+                        <div class="cl">&nbsp;</div>
+                        <div class="slider-controls">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="cl">&nbsp;</div>
+            </div>
+            <!-- End Slider -->
             <!-- Begin Main -->
             <div id="main">
                 <!-- Begin Inner -->
@@ -67,7 +95,19 @@
                         <!-- Begin Left Sidebar -->
                         <div id="left-sidebar" class="sidebar">
                             <ul>
-                                <c:import url="/listaFamilias.jsp" />
+                                <li class="widget">
+                                    <h2>Categorias</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${familias}" var="f" >
+                                                <li>
+                                                    <a href="#" onclick="buscarProdutosPorFamilia(${f.id});" title="${f.nome}" ><span>${f.nome}</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="widget">
                                     <h2>Informações</h2>
                                     <div class="widget-entry">
@@ -120,12 +160,69 @@
                                 <p>Confira os produtos oferecidos logo abaixo.</p>
                             </div>
                             <!-- End Post -->
-                            <c:import url="/listaProdutosUltimos.jsp" />
+                            <!-- Begin Products -->
+                            <h2>Produtos selecionados<span class="title-bottom">&nbsp;</span></h2>
+                            <div id="products">
+                                <c:forEach items="${produtos}" var="p" begin="1" end="9" >
+                                    <div class="product">
+                                        <a href="#" title=${p.nome}>
+                                            <span class="title">${p.familia.nome}</span>
+                                            <img src="resources/imagesSite/product-img1.jpg" alt=${p.nome} " Image 1" />
+                                            <span class="number">${p.nome} </span>
+                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                        </a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                            <!-- End Products -->
                         </div>
                         <!-- End Content -->
                         <!-- Begin Right Sidebar -->
                         <div id="right-sidebar" class="sidebar">
-                            <c:import url="/listaProdutosMaisVendidosELancamentos.jsp" />                            
+                            <!-- Begin Products -->
+                            <ul>
+                                <li class="widget products-box">
+                                    <h2>Mais vendidos</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${produtos}" var="p" begin="1" end="7" >
+                                                <li>
+                                                    <a href="#" title=${p.nome}>
+                                                        <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
+                                                        <span class="info">
+                                                            <span class="title">${p.nome}</span>
+                                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                                        </span>
+                                                        <span class="cl">&nbsp;</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>                                            
+                                        </ul>
+                                        <div class="cl">&nbsp;</div>
+                                    </div>
+                                </li>
+                                <li class="widget products-box">
+                                    <h2>Lançamentos</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${produtos}" var="p" begin="1" end="7" >
+                                                <li>
+                                                    <a href="#" title=${p.nome}>
+                                                        <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
+                                                        <span class="info">
+                                                            <span class="title">${p.nome}</span>
+                                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                                        </span>
+                                                        <span class="cl">&nbsp;</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                        <div class="cl">&nbsp;</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- End Products -->
                         </div>
                         <!-- End Sidebar -->
                         <div class="cl">&nbsp;</div>

@@ -174,4 +174,31 @@ public class Produto implements Serializable{
     public void setFrete(String frete) {
         this.frete = frete;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Produto other = (Produto) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" + "id=" + id + ", descricao=" + descricao + ", fabricante=" + fabricante + ", nome=" + nome + ", qtdeDisponivel=" + qtdeDisponivel + ", familia=" + familia + '}';
+    }
+       
 }

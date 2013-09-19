@@ -11,6 +11,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
+        <script type="text/javascript">
+            function buscarProdutosPorFamilia(id) {
+                var idFamilia = "idFamilia=" + id;
+                
+                jQuery.ajax({
+                    type: "POST",
+                    url: "ProdutoPesquisa",
+                    data: idFamilia
+                });
+            }
+        </script>
     </head>
     <body>
         <!-- Begin Products -->
@@ -20,7 +31,7 @@
             <ul>
                 <c:forEach items="${familias}" var="f" >
                     <li>
-                        <a href="./ProdutoPesquisaPorFamilia" name="idFamilia${f.id}" value="${f.id}" title="${f.nome}" ><span>${f.nome}</span>
+                        <a href="#" onclick="buscarProdutosPorFamilia(${f.id});" title="${f.nome}" ><span>${f.nome}</span>
                         </a>
                     </li>
                 </c:forEach>

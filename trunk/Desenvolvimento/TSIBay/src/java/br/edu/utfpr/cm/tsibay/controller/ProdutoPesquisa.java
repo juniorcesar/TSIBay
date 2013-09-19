@@ -4,9 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.controller;
 
-import br.edu.utfpr.cm.tsibay.daos.DaoFamilia;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
-import br.edu.utfpr.cm.tsibay.model.Familia;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.io.IOException;
 import java.util.List;
@@ -21,23 +19,38 @@ import javax.servlet.http.HttpSession;
  *
  * @author alauber
  */
-@WebServlet(name = "ProdutoPesquisaPorFamilia", urlPatterns = {"/ProdutoPesquisaPorFamilia"})
-public class ProdutoPesquisaPorFamilia extends HttpServlet {
+@WebServlet(name = "ProdutoPesquisa", urlPatterns = {"/ProdutoPesquisa"})
+public class ProdutoPesquisa extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String id = request.getParameter("idFamilia1");
-        int idFamilia = Integer.parseInt(id);
-        Familia familia = (Familia) new DaoFamilia().obterPorId(idFamilia);
-        List<Produto> produtosPesquisaPorFamilia = new DaoProduto().listarProdutosPorFamilia(familia);
+        List<Produto> listaProdutos = null;
+        DaoProduto daoProduto = new DaoProduto();
+
+        if (!request.getParameter("idFamilia").isEmpty()) {
+            int idFamilia = Integer.parseInt(request.getParameter("idFamilia"));
+            listaProdutos = daoProduto.listarProdutosPorFamilia(idFamilia);
+        } 
+        if (!request.getParameter("descricaoProduto").isEmpty()) {
+            String pesquisa = request.getParameter("descricaoProduto");
+            listaProdutos = daoProduto.listarProdutosPesquisa(pesquisa);
+        } 
         
+
+
+
+
+
+
+
+
         HttpSession s = request.getSession();
-        s.setAttribute("produtosPesquisaPorFamilia", produtosPesquisaPorFamilia);
+        s.setAttribute("listaProdutos", listaProdutos);
 
         response.sendRedirect("home.jsp");
-        
+
     }
 
     @Override
@@ -56,5 +69,4 @@ public class ProdutoPesquisaPorFamilia extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
