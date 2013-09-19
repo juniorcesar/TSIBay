@@ -25,7 +25,7 @@
                         <p:message for="nome" /> 
 
                         <h:outputLabel for="familia" value="Familia*:"/>  
-                        <p:selectOneMenu id="familia" value="#{produtoBean.produto.familia}" required="true">  
+                        <p:selectOneMenu id="familia" value="#{produtoBean.produto.familia}" required="true" converter="familiaConverter">  
                             <f:selectItems value="#{familiaBean.familias}" var="f" itemLabel="#{f.nome}" itemValue="#{f}" /> 
                         </p:selectOneMenu> 
                         <p:message for="familia" /> 
@@ -35,8 +35,7 @@
                         <p:message for="fabricante" /> 
 
                         <h:outputLabel for="descricao" value="Descrição*:"/>  
-                        <p:inputTextarea id="descricao" rows="5" cols="45" counter="contador" maxlength="150"       
-                                         counterTemplate="{0} caracteres restantes." autoResize="false" required="true"/>  
+                        <p:inputTextarea id="descricao" rows="5" cols="45" autoResize="false" required="true"/>  
                         <h:outputText id="contador" /> 
                         <p:message for="descricao" /> 
 

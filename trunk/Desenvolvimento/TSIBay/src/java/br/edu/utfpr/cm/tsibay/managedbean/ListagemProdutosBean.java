@@ -23,8 +23,9 @@ import javax.faces.context.FacesContext;
 public class ListagemProdutosBean {
 
     private List<Produto> listaProdutos;
-    private Produto produtoSelecionado;
+    public Produto produtoSelecionado;
     private List<Produto> produtoFiltrado;
+    private DaoGenerics<Produto> daoProduto;
 
     public List<Produto> getProdutoFiltrado() {
         return produtoFiltrado;
@@ -32,55 +33,54 @@ public class ListagemProdutosBean {
 
     public void setProdutoFiltrado(List<Produto> produtoFiltrado) {
         this.produtoFiltrado = produtoFiltrado;
-    }   
-//    
-//
-//    public List<> getListaSalas() {
-//        return listaSalas;
-//    }
-//
-//    public void setListaSalas(List<ClassRoom> listaSalas) {
-//        this.listaSalas = listaSalas;
-//    }
-//
-//    public List<ClassRoom> getSalas() {
-//        DaoClassRoom dC = new DaoClassRoom();
-//        listaSalas = dC.listar();
-//        //System.out.println(listaSalas);
-//        return listaSalas;
-//    }
-//
-//    public ClassRoom getSelectedClassRoom() {
-////        System.out.println("peguei a selecionada"+ this.selectedClassRoom.getName());
-//        return selectedClassRoom;
-//    }
-//
-//    public void setSelectedClassRoom(ClassRoom selectedClassRoom) {
-//        this.selectedClassRoom = selectedClassRoom;
-//    }
-//
-//    @PostConstruct
-//    public void construct() {
-//        setSelectedClassRoom(new ClassRoom());
-//    }
-//    
-//    public String editClassRoom() {
-//        DaoClassRoom dcr = new DaoClassRoom();
-//        dcr.persistir(this.selectedClassRoom);
-//        
-//        this.selectedClassRoom = new ClassRoom();
-//        FacesContext context = FacesContext.getCurrentInstance();
-//
-//        context.addMessage(null, new FacesMessage("Successful", "Sala Editada!"));
-//        return "cad_salas";
-////        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));
-//    }
-    
+    }
+
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
+    public List<Produto> getProdutos() {
+        daoProduto = new DaoGenerics<Produto>(Produto.class);
+        listaProdutos = daoProduto.listar();
+        //System.out.println(listaProdutos);
+        return listaProdutos;
+    }
+
+    public Produto getProdutoSelecionado() {
+//        System.out.println("peguei a selecionada"+ this.selectedProduto.getName());
+        return produtoSelecionado;
+    }
+
+    public void setProdutoSelecionado(Produto selectedProduto) {
+        this.produtoSelecionado = selectedProduto;
+    }
+
+    @PostConstruct
+    public void construct() {
+        setProdutoSelecionado(new Produto());
+    }
+
+    public String editProduto() {
+        daoProduto = new DaoGenerics<Produto>(Produto.class);
+        daoProduto.persistir(this.produtoSelecionado);
+
+        this.produtoSelecionado = new Produto();
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        context.addMessage(null, new FacesMessage("Successful", "Sala Editada!"));
+        return "cad_salas";
+//        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));
+    }
+
     public String removeProduto() {
-            System.out.println("removendo");
-//        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>(Produto.class);
-//        daoProduto.remover(produtoSelecionado);
-        
+        System.out.println("removendo");
+        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>(Produto.class);
+        daoProduto.remover(produtoSelecionado);
+
         this.produtoSelecionado = new Produto();
         FacesContext context = FacesContext.getCurrentInstance();
 

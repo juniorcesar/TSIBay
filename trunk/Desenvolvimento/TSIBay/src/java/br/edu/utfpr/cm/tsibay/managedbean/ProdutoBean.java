@@ -40,10 +40,10 @@ public class ProdutoBean implements Serializable{
     }
 
     public String addProduto() {
-//        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>(Produto.class);
+        DaoGenerics<Produto> daoProduto = new DaoGenerics<Produto>(Produto.class);
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-//            daoProduto.persistir(this.produto);
+            daoProduto.persistir(this.produto);
             this.produto = new Produto();
 
             context.addMessage(null, new FacesMessage("Successful", "Gravado"));
