@@ -22,17 +22,6 @@
         <![endif]-->
         <script src="resources/js/jquery.jcarousel.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="resources/js/functions.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-            function buscarProdutosPorFamilia(id) {
-                var id = "id="+id;
-
-                jQuery.ajax({
-                    type: "get",
-                    url: "ListasHomePesqProdutoPorFamilia",
-                    data: id
-                });
-            }
-        </script>
     </head>
     <body>
         <!-- Begin Wrapper -->
@@ -112,7 +101,7 @@
                                         <ul>
                                             <c:forEach items="${familias}" var="f" >
                                                 <li>
-                                                    <a href="#" onclick="buscarProdutosPorFamilia(${f.id});" title="${f.nome}" ><span>${f.nome}</span>
+                                                    <a href=".\ListasHomePesqProdutoPorFamilia?id=${f.id}" name="id" title="${f.nome}" ><span>${f.nome}</span>
                                                     </a>
                                                 </li>
                                             </c:forEach>
