@@ -4,7 +4,8 @@
  */
 package br.edu.utfpr.cm.tsibay.controller;
 
-import br.edu.utfpr.cm.tsibay.daos.DaoGenerics;
+import br.edu.utfpr.cm.tsibay.daos.DaoFamilia;
+import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Familia;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.io.IOException;
@@ -27,15 +28,44 @@ public class ListasHome extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        List<Familia> familias = new DaoGenerics<Familia>(Familia.class).listar();
-        List<Produto> produtos = new DaoGenerics<Produto>(Produto.class).listar();
-        
         HttpSession s = request.getSession();
+        
+//        String pesqIdFamilia = null;
+//        String pesqNomeProduto = null;
+//        
+//        s.setAttribute("pesqIdFamilia", pesqIdFamilia);
+//        s.setAttribute("pesqNomeProduto", pesqNomeProduto);
+
+        DaoFamilia daoFamilia = new DaoFamilia();
+        List<Familia> familias = null;
+
+        DaoProduto daoProduto = new DaoProduto();
+        List<Produto> produtoListas = null;
+        
+        familias = daoFamilia.listar();
         s.setAttribute("familias", familias);
-        s.setAttribute("produtos", produtos);
+
+        produtoListas = daoProduto.listarProdutosMaisVendidos();
+        s.setAttribute("produtosMaisVendidos", produtoListas);
+
+        produtoListas = daoProduto.listarProdutosUltimos();
+        s.setAttribute("produtosUltimos", produtoListas);
+
+//        if (!request.getParameter("pesqIdFamilia").isEmpty()) {
+//            int idFamilia = Integer.parseInt(request.getParameter("idFamilia"));
+//            produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
+//            s.setAttribute("produtosPesqPorFamilia", produtoListas);
+//            s.removeAttribute("produtosPesqPorNome");
+//        }
+//        if (!request.getParameter("pesqNomeProduto").isEmpty()) {
+//            String pesquisa = request.getParameter("pesqNomeProduto");
+//            produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
+//            s.setAttribute("produtosPesqPorNome", produtoListas);
+//            s.removeAttribute("produtosPesqPorFamilia");
+//        }
 
         response.sendRedirect("home.jsp");
-        
+
     }
 
     @Override
@@ -54,5 +84,4 @@ public class ListasHome extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

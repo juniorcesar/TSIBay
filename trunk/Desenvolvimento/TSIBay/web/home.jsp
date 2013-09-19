@@ -65,7 +65,7 @@
                     <div class="slider-inner shell">
                         <!-- Begin Slider Items -->
                         <ul class="slider-items">
-                            <c:forEach items="${produtos}" var="p" begin="1" end="5" >
+                            <c:forEach items="${produtosMaisVendidos}" var="p" begin="1" end="5" >
                                 <li>
                                     <img src="resources/imagesSite/slide-img1.jpg" alt="Slide Image 1" />
                                     <div class="slide-entry">
@@ -163,7 +163,7 @@
                             <!-- Begin Products -->
                             <h2>Produtos selecionados<span class="title-bottom">&nbsp;</span></h2>
                             <div id="products">
-                                <c:forEach items="${produtos}" var="p" begin="1" end="9" >
+                                <c:forEach items="${produtosUltimos}" var="p" >
                                     <div class="product">
                                         <a href="#" title=${p.nome}>
                                             <span class="title">${p.familia.nome}</span>
@@ -185,13 +185,13 @@
                                     <h2>Mais vendidos</h2>
                                     <div class="widget-entry">
                                         <ul>
-                                            <c:forEach items="${produtos}" var="p" begin="1" end="7" >
+                                            <c:forEach items="${produtosMaisVendidos}" var="p" >
                                                 <li>
                                                     <a href="#" title=${p.nome}>
                                                         <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
                                                         <span class="info">
                                                             <span class="title">${p.nome}</span>
-                                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                                            <span class="orders">${p.qtdeVendida}</span>
                                                         </span>
                                                         <span class="cl">&nbsp;</span>
                                                     </a>
@@ -205,13 +205,13 @@
                                     <h2>Lançamentos</h2>
                                     <div class="widget-entry">
                                         <ul>
-                                            <c:forEach items="${produtos}" var="p" begin="1" end="7" >
+                                            <c:forEach items="${produtosUltimos}" var="p" begin="1" end="6" >
                                                 <li>
                                                     <a href="#" title=${p.nome}>
                                                         <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
                                                         <span class="info">
                                                             <span class="title">${p.nome}</span>
-                                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                                            <span class="price"><span>Id </span>${p.id}</span>
                                                         </span>
                                                         <span class="cl">&nbsp;</span>
                                                     </a>
