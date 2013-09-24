@@ -32,7 +32,7 @@ public class Endereco implements Serializable{
     private String cep;
     private String complemento;
     private String logradouro;
-    private Integer numero;
+    private String numero;
     private String tipoLogradouro;
     @ManyToOne(fetch = FetchType.EAGER)
     private Localidade local;
@@ -73,11 +73,11 @@ public class Endereco implements Serializable{
         this.logradouro = logradouro;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -96,7 +96,14 @@ public class Endereco implements Serializable{
     public void setLocal(Localidade local) {
         this.local = local;
     }
-    
 
- 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    
 }

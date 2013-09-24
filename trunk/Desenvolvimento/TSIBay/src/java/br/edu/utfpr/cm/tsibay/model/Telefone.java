@@ -27,18 +27,18 @@ public class Telefone implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 10, nullable = false, unique = true)
     private Long id;
-    private Integer numero;
+    private String numero;
     private String tipo;
 
     public Long getId() {
         return id;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -49,5 +49,13 @@ public class Telefone implements Serializable {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+ 
 }

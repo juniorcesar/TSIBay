@@ -7,7 +7,6 @@ package br.edu.utfpr.cm.tsibay.controller;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alex
  */
-@WebServlet(name = "ListasHomePesqProdutoPorFamilia", urlPatterns = {"/ListasHomePesqProdutoPorFamilia"})
-public class ListasHomePesqProdutoPorFamilia extends HttpServlet {
+@WebServlet(name = "ProdutosPequisaPorId", urlPatterns = {"/ProdutosPequisaPorId"})
+public class ProdutosPequisaPorId extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,15 +28,17 @@ public class ListasHomePesqProdutoPorFamilia extends HttpServlet {
         HttpSession s = request.getSession();
 
         DaoProduto daoProduto = new DaoProduto();
-        List<Produto> produtoListas = null;
+        Produto produtoPesquisa = null;
 
-        int idFamilia = Integer.parseInt(request.getParameter("id"));
-        produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
-        if (!produtoListas.isEmpty()) {
-            s.setAttribute("produtosPrincipal", produtoListas);
+        int idProduto = Integer.parseInt(request.getParameter("idProduto"));
+        produtoPesquisa = daoProduto.obterPorId(idProduto);
+        if (!produtoPesquisa.equals(null)) {
+            s.setAttribute("produtoPesquisa", produtoPesquisa);
+        } else {
+            s.removeAttribute("produtoPesquisa");
         }
 
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("produtoPequisaPorId.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

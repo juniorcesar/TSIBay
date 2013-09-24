@@ -6,15 +6,13 @@ package br.edu.utfpr.cm.tsibay.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -32,15 +30,26 @@ public class Transacao implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
-    private String idVenda;
-    private String qtdeProduto;
+    private int qtdeProduto;
     private Double valorUnitario;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date prazoValidade;
     private String tpPagamento;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pessoa> pessoas;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Pessoa comprador;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Pessoa vendedor;
     private String frete;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Produto produto;
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
     public Long getId() {
         return id;
@@ -54,19 +63,11 @@ public class Transacao implements Serializable {
         this.data = data;
     }
 
-    public String getIdVenda() {
-        return idVenda;
-    }
-
-    public void setIdVenda(String idVenda) {
-        this.idVenda = idVenda;
-    }
-
-    public String getQtdeProduto() {
+    public int getQtdeProduto() {
         return qtdeProduto;
     }
 
-    public void setQtdeProduto(String qtdeProduto) {
+    public void setQtdeProduto(int qtdeProduto) {
         this.qtdeProduto = qtdeProduto;
     }
 
@@ -94,12 +95,20 @@ public class Transacao implements Serializable {
         this.tpPagamento = tpPagamento;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
+    public Pessoa getComprador() {
+        return comprador;
     }
 
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public void setComprador(Pessoa comprador) {
+        this.comprador = comprador;
+    }
+
+    public Pessoa getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Pessoa vendedor) {
+        this.vendedor = vendedor;
     }
 
     public String getFrete() {
