@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -5,7 +6,6 @@
 package br.edu.utfpr.cm.tsibay.daos;
 
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
-import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.util.List;
 import org.hibernate.Query;
 
@@ -29,4 +29,18 @@ public class DaoPessoa extends DaoGenerics<Pessoa> {
         }
         return null;
     }
+
+    public Pessoa getLogin(String login, String senha) {
+
+        List<Pessoa> pessoas = this.listar();
+
+        for (Pessoa p : pessoas) {
+            if (p.getLogin().equals(login) && p.getSenha().equals(senha)) {
+                return p;
+            }
+        }
+
+        return null;
+    }
 }
+
