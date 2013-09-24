@@ -22,68 +22,6 @@
         <![endif]-->
         <script src="resources/js/jquery.jcarousel.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="resources/js/functions.js" type="text/javascript" charset="utf-8"></script>
-
-        <script type="text/javascript">
-
-            function atualizaDivContentPesqProdutoPorId(id) {
-                $.ajax({
-                    url: "ProdutosPequisaPorId",
-                    data: {
-                        idProduto: id
-                    },
-                    success: function(data) {
-                        $('#content').html(data);
-                    }
-                });
-            }
-
-            function atualizaDivContentPesqProdutoPorFamilia(id) {
-                $.ajax({
-                    url: "ProdutosPesquisaPorFamilia",
-                    data: {
-                        idFamilia: id
-                    },
-                    success: function(data) {
-                        $('#content').html(data);
-                    }
-                });
-            }
-
-            function atualizaDivContentPesqProdutoPorDescricao(descricao) {
-                $.ajax({
-                    url: "ProdutosPesquisaPorNome",
-                    data: {
-                        descricaoProduto: id
-                    },
-                    success: function(data) {
-                        $('#content').html(data);
-                    }
-                });
-            }
-            
-            function atualizaDivContentLogin() {
-                alert("teste");
-                $.ajax({
-                    url: "login.jsp",
-                    success: function(data) {
-                        $('#content').html(data);
-                    }
-                });
-            }
-
-            function atualizaDivContentVenda(id, login_id) {
-                $.ajax({
-                    url: "ProdutoTransacao",
-                    data: {
-                        idProduto: id, qtdeCompra: $('#qtdeCompra').val(), comprador_id: login_id
-                    },
-                    success: function(data) {
-                        $('#content').html(data);
-                    }
-                });
-            }
-
-        </script>
     </head>
     <body>
         <!-- Begin Wrapper -->
@@ -91,16 +29,17 @@
             <!-- Begin Search -->
             <div id="search">
                 <div class="shell">
-                    <form action="./ProdutosPesquisaPorDescricao" method="get" accept-charset="utf-8">
+                    <form action="./ListasHomePesqProdutoNome" method="get" accept-charset="utf-8">
                         <div class="container">
-                            <input type="text" id="pesqDescricaoProduto" name="pesqDescricaoProduto" title="Pesquisa..." class="blink" />
+                            <input type="text" name="pesqNomeProduto" title="Pesquisa..." class="blink" />
                         </div>
-                        <input class="search-button" type="button" onclick=""  />
+                        <input class="search-button" type="submit" value="Submit" />
                     </form>
                     <div class="cl">&nbsp;</div>
                 </div>
             </div>
-            <!-- End Search -->            <!-- Begin Header -->
+            <!-- End Search -->
+            <!-- Begin Header -->
             <div id="header" class="shell">
                 <h1 id="logo"><a class="notext" href="#" title="TSIBay">TSYBay</a></h1>
             </div>
@@ -112,7 +51,7 @@
                         <li><a href="#" title="Home">Home</a></li>
                         <li><a href="#" title="Ofertas especiais">Ofertas especiais</a></li>
                         <li><a href="#" title="Login">Login</a></li>
-                        <li><a href="faces/admin/login.xhtml" title="Administração"  target="blank">Administração</a></li>
+                        <li><a href="admin.xhtml" title="Administração"  target="blank">Administração</a></li>
                         <li><a href="#" title="Checkout">Checkout</a></li>
                         <li><a href="#" title="Contact">Contato</a></li>
                     </ul>
@@ -134,7 +73,7 @@
                                         <h3>${p.nome}</h3>
                                         <p>R$ ${p.precoVenda}
                                     </div>
-                                    <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" class="more" title="Veja mais">Veja mais</a>
+                                    <a href="#" class="more" title="Veja mais">Veja mais</a>
                                 </li>
                             </c:forEach>                                    
                         </ul>
@@ -156,7 +95,19 @@
                         <!-- Begin Left Sidebar -->
                         <div id="left-sidebar" class="sidebar">
                             <ul>
-                                <jsp:include page="familias.jsp" />
+                                <li class="widget">
+                                    <h2>Categorias</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${familias}" var="f" >
+                                                <li>
+                                                    <a href=".\ListasHomePesqProdutoPorFamilia?id=${f.id}" name="id" title="${f.nome}" ><span>${f.nome}</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="widget">
                                     <h2>Informações</h2>
                                     <div class="widget-entry">
@@ -203,12 +154,75 @@
                         <!-- End Sidebar -->
                         <!-- Begin Content -->
                         <div id="content">
-                            <jsp:include page="pessoa.jsp" />
+                            <!-- Begin Post -->
+                            <div class="post">
+                                <h2>Bem vindo à nossa loja<span class="title-bottom">&nbsp;</span></h2>
+                                <p>Confira os produtos oferecidos logo abaixo.</p>
+                            </div>
+                            <!-- End Post -->
+                            <!-- Begin Products -->
+                            <h2>Produtos selecionados<span class="title-bottom">&nbsp;</span></h2>
+                            <div id="products">
+                                <c:forEach items="${produtosPrincipal}" var="p" >
+                                    <div class="product">
+                                        <a href="#" title=${p.nome}>
+                                            <span class="title">${p.familia.nome}</span>
+                                            <img src="resources/imagesSite/product-img1.jpg" alt=${p.nome} " Image 1" />
+                                            <span class="number">${p.nome} </span>
+                                            <span class="price"><span>R$</span>${p.precoVenda}</span>
+                                        </a>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                            <!-- End Products -->
                         </div>
                         <!-- End Content -->
                         <!-- Begin Right Sidebar -->
                         <div id="right-sidebar" class="sidebar">
-                            <jsp:include page="produtosMaisVendidosELancamentos.jsp" />
+                            <!-- Begin Products -->
+                            <ul>
+                                <li class="widget products-box">
+                                    <h2>Mais vendidos</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${produtosMaisVendidos}" var="p" >
+                                                <li>
+                                                    <a href="#" title=${p.nome}>
+                                                        <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
+                                                        <span class="info">
+                                                            <span class="title">${p.nome}</span>
+                                                            <span class="orders">${p.qtdeVendida}</span>
+                                                        </span>
+                                                        <span class="cl">&nbsp;</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>                                            
+                                        </ul>
+                                        <div class="cl">&nbsp;</div>
+                                    </div>
+                                </li>
+                                <li class="widget products-box">
+                                    <h2>Lançamentos</h2>
+                                    <div class="widget-entry">
+                                        <ul>
+                                            <c:forEach items="${produtosUltimos}" var="p" begin="1" end="6" >
+                                                <li>
+                                                    <a href="#" title=${p.nome}>
+                                                        <img src="resources/imagesSite/side-img1.jpg" alt="Product Side Image 1" />
+                                                        <span class="info">
+                                                            <span class="title">${p.nome}</span>
+                                                            <span class="price"><span>Id </span>${p.id}</span>
+                                                        </span>
+                                                        <span class="cl">&nbsp;</span>
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                        <div class="cl">&nbsp;</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- End Products -->
                         </div>
                         <!-- End Sidebar -->
                         <div class="cl">&nbsp;</div>

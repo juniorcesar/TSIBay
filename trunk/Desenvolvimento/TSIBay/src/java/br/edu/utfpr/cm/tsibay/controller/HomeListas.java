@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author alauber
  */
-@WebServlet(name = "ListasHome", urlPatterns = {"/ListasHome"})
-public class ListasHome extends HttpServlet {
+@WebServlet(name = "HomeListas", urlPatterns = {"/HomeListas"})
+public class HomeListas extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,30 +55,6 @@ public class ListasHome extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-//        HttpSession s = request.getSession();
-//        
-//        DaoProduto daoProduto = new DaoProduto();
-//        List<Produto> produtoListas = null;
-//
-//        String pesqIdFamilia = null;
-//        String pesqNomeProduto = null;
-//        
-//        s.setAttribute("pesqIdFamilia", pesqIdFamilia);
-//        s.setAttribute("pesqNomeProduto", pesqNomeProduto);
-//        
-//        if (!request.getSession().getAttribute("pesqIdFamilia").equals(null)) {
-//            int idFamilia = Integer.parseInt(request.getParameter("pesqIdFamilia"));
-//            produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
-//            s.setAttribute("produtosPrincipal", produtoListas);
-//        } else if (!request.getSession().getAttribute("pesqNomeProduto").equals(null)) {
-//            String pesquisa = request.getParameter("pesqNomeProduto");
-//            produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
-//            s.setAttribute("produtosPrincipal", produtoListas);
-//        } else {
-//            produtoListas = daoProduto.listarProdutosUltimos();
-//            s.setAttribute("produtosPrincipal", produtoListas);
-//        }
-//        response.sendRedirect("home.jsp");
     }
 
     @Override

@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alex
  */
-@WebServlet(name = "ListasHomePesqProdutoNome", urlPatterns = {"/ListasHomePesqProdutoNome"})
-public class ListasHomePesqProdutoNome extends HttpServlet {
+@WebServlet(name = "ProdutosPesquisaPorDescricao", urlPatterns = {"/ProdutosPesquisaPorDescricao"})
+public class ProdutosPesquisaPorDescricao extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class ListasHomePesqProdutoNome extends HttpServlet {
         DaoProduto daoProduto = new DaoProduto();
         List<Produto> produtoListas = null;
 
-        String pesquisa = request.getParameter("pesqNomeProduto");
+        String pesquisa = request.getParameter("pesqDescricaoProduto");
         produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
         if (!produtoListas.isEmpty()) {
             s.setAttribute("produtosPrincipal", produtoListas);
