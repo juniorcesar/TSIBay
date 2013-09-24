@@ -111,13 +111,8 @@
                     <ul>
                         <li><a href="#" title="Home">Home</a></li>
                         <li><a href="#" title="Ofertas especiais">Ofertas especiais</a></li>
-<<<<<<< HEAD
-                        <li><a href="#" title="Login">Login</a></li>
-                        <li><a href="faces/admin/login.xhtml" title="Administração"  target="blank">Administração</a></li>
-=======
                         <li><a href="#content" onclick="atualizaDivContentLogin()" title="Login">Login</a></li>
-                        <li><a href="admin.xhtml" title="Administração"  target="blank">Administração</a></li>
->>>>>>> refs/remotes/origin/master
+                        <li><a href="faces/admin/login.xhtml" title="Administração"  target="blank">Administração</a></li>
                         <li><a href="#" title="Checkout">Checkout</a></li>
                         <li><a href="#" title="Contact">Contato</a></li>
                     </ul>
