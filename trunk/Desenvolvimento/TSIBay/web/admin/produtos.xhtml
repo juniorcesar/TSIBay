@@ -7,6 +7,7 @@
     <c:if test="#{loginBean.loggedIn}">
         <div id="principal"> 
             <h:form id="produto">  
+                <p:growl id="growl" showDetail="true" sticky="true" />  
                 <p:panel id="panel_produto" header="Cadastro do Produto" closable="true"> 
 
                     <p:fieldset legend="Dados do Produto">  
@@ -97,7 +98,7 @@
                     </p:fieldset>
 
                     <h:panelGrid columns="2" cellpadding="3">
-                        <p:commandButton value="Adicionar" action="#{produtoBean.addProduto()}" update="produto" ajax="true"/>
+                        <p:commandButton value="Adicionar" action="#{produtoBean.addProduto()}" update="form:growl" ajax="false"/>
                     </h:panelGrid>
                 </p:panel> 
             </h:form>
