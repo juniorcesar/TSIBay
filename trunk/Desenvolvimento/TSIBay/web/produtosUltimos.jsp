@@ -25,7 +25,7 @@
                 <div class="product">
                     <a href="#" title=${p.nome}>
                         <span class="title">${p.familia.nome}</span>
-                        <img src="resources/imagesSite/product-img1.jpg" alt=${p.nome} " Image 1" />
+                        <img src="${p.uriImagem}" alt=${p.nome} " Image 1" />
                         <span class="number">${p.nome} </span>
                         <span class="price"><span>R$</span>${p.precoVenda}</span>
                     </a>

@@ -22,7 +22,7 @@
                         <c:forEach items="${produtosMaisVendidos}" var="p" >
                             <li>
                                 <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" title=${p.nome}>
-                                    <img src="resources/imagesSite/side-img2.jpg" alt="Product Side Image 1" />
+                                    <img src="${p.uriImagem}" alt="Product Side Image 1" />
                                     <span class="info">
                                         <span class="number">${p.nome}</span>
                                         <span class="orders">${p.qtdeVendida}</span>
@@ -42,7 +42,7 @@
                         <c:forEach items="${produtosUltimos}" var="p" begin="1" end="6" >
                             <li>
                                 <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" title=${p.nome}>
-                                    <img src="resources/imagesSite/side-img3.jpg" alt="Product Side Image 1" />
+                                    <img src="${p.uriImagem}" alt="Product Side Image 1" />
                                     <span class="info">
                                         <span class="number">${p.nome}</span>
                                         <span class="price"><span>Id </span>${p.id}</span>

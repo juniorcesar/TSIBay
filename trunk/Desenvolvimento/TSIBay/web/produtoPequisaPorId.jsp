@@ -22,7 +22,7 @@
         <div id="products">
             <div class="productselect">
                 <span class="title">${produtoPesquisa.familia.nome}</span>
-                <img src="resources/imagesSite/product-img3.jpg" alt=${produtoPesquisa.nome} " Image 1" />
+                <img src="${produtoPesquisa.uriImagem}" alt=${produtoPesquisa.nome} " Image 1" />
                 <span class="number">${produtoPesquisa.nome} </span>
                 <span class="price"><span>R$</span>${produtoPesquisa.precoVenda}</span>
                 </br>

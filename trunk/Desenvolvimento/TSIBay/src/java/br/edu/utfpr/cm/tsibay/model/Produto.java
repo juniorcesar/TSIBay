@@ -40,6 +40,8 @@ public class Produto implements Serializable{
     private Integer qtdeVendida;
     private Integer quantidade;
     private Integer qtdeDisponivel;
+    private String uriImagem;
+    private String uriImagemSlide;
     @ManyToOne(fetch = FetchType.EAGER)
     private Familia familia;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -174,6 +176,14 @@ public class Produto implements Serializable{
         this.frete = frete;
     }
 
+    public String getUriImagem() {
+        return uriImagem;
+    }
+
+    public void setUriImagem(String uriImagem) {
+        this.uriImagem = uriImagem;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
