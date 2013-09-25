@@ -5,6 +5,8 @@
 package br.edu.utfpr.cm.tsibay.daos;
 
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
+import br.edu.utfpr.cm.tsibay.model.Produto;
+import br.edu.utfpr.cm.tsibay.model.Transacao;
 import java.util.List;
 import org.hibernate.Query;
 
