@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +27,13 @@
                 <span class="number">${produtoPesquisa.nome} </span>
                 <span class="price"><span>R$</span>${produtoPesquisa.precoVenda}</span>
                 </br>
-                <span class="price">Quantidade <input type="text" name="qtdeCompra" id="qtdeCompra" /></span>
+                <c:if test="${produtoPesquisa.qtdeDisponivel == '0'}">
+                    <span class="price">Produto esgotado!</span>
+                </c:if>
+                <c:if test="${produtoPesquisa.qtdeDisponivel != '0'}">                
+                    <span class="price">Quantidade <input type="text" name="qtdeCompra" id="qtdeCompra" /></span>
+                    <a href="#content" class="comprar" title="Comprar" onclick="atualizaDivContentVenda(${produtoPesquisa.id}, $('#qtdeCompra').val(), ${login_id})" >Comprar</a>
+                </c:if>
                 </br>
                 <p>Fabricante: ${produtoPesquisa.fabricante}</p>
                 </br>
@@ -36,7 +43,6 @@
                 </br>
                 <p>Vendedor: ${produtoPesquisa.pessoa.nome}</p>
                 </br>
-                <a href="#content" class="comprar" title="Comprar" onclick="atualizaDivContentVenda(${produtoPesquisa.id}, ${login_id})" >Comprar</a>
             </div>
         </div>
     </div>

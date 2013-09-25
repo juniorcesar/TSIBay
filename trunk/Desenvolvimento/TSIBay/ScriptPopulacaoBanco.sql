@@ -2,11 +2,16 @@ USE tsibay;
 
 INSERT INTO Familia (id, nome) values (1, "Computadores");
 INSERT INTO Familia (id, nome) values (2, "Notebooks");
-INSERT INTO Familia (id, nome) values (3, "Componentes");
+INSERT INTO Familia (id, nome) values (3, "Impressoras");
 INSERT INTO Familia (id, nome) values (4, "Software");
 INSERT INTO Familia (id, nome) values (5, "Smartphones");
 INSERT INTO Familia (id, nome) values (6, "Cameras");
-INSERT INTO Familia (id, nome) values (7, "Outros");
+INSERT INTO Familia (id, nome) values (7, "Suprimentos");
+INSERT INTO Familia (id, nome) values (8, "Mídias");
+INSERT INTO Familia (id, nome) values (9, "Jogos");
+INSERT INTO Familia (id, nome) values (10, "HDs e memórias");
+INSERT INTO Familia (id, nome) values (11, "Armazenamento portátil");
+INSERT INTO Familia (id, nome) values (12, "Outros");
 
 INSERT INTO Pessoa (id, cpf, dtCadastro, dtNascimento, email, login, nome, senha, tipo)
 VALUES (1, "12345678910", "2013-09-11", "1985-10-10", "fulano@fulano.com.br", "fulano", "Fulano de Tal", "123", "Usuario");

@@ -13,6 +13,7 @@ import br.edu.utfpr.cm.tsibay.model.Transacao;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +30,18 @@ public class ProdutoTransacao extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession s = request.getSession();
 
         SimpleDateFormat outFmt = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
 
+        List<Produto> produtoListas = null;
         Produto produto = new Produto();
         DaoProduto daoProduto = new DaoProduto();
 
@@ -72,7 +74,11 @@ public class ProdutoTransacao extends HttpServlet {
 
         double valorTransacao = transacao.getQtdeProduto() * transacao.getValorUnitario();
 
-        HttpSession s = request.getSession();
+        produtoListas = daoProduto.listarProdutosMaisVendidos();
+        
+        s.removeAttribute("produtosMaisVendidos");
+        s.setAttribute("produtosMaisVendidos", produtoListas);
+
         s.setAttribute("vendedor", vendedor);
         s.setAttribute("produtoTransacao", transacao);
         s.setAttribute("valorTransacao", valorTransacao);

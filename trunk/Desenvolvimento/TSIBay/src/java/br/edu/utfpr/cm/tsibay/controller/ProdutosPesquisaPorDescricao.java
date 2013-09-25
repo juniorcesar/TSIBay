@@ -24,20 +24,6 @@ public class ProdutosPesquisaPorDescricao extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession s = request.getSession();
-
-        DaoProduto daoProduto = new DaoProduto();
-        List<Produto> produtoListas = null;
-
-        String pesquisa = request.getParameter("pesqDescricaoProduto");
-        produtoListas = daoProduto.listarProdutosPorNome(pesquisa);
-        if (!produtoListas.isEmpty()) {
-            s.setAttribute("produtosPrincipal", produtoListas);
-        }
-
-        response.sendRedirect("home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,6 +40,20 @@ public class ProdutosPesquisaPorDescricao extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession s = request.getSession();
+
+        DaoProduto daoProduto = new DaoProduto();
+        List<Produto> produtoListas = null;
+
+        String pesquisa = request.getParameter("descricaoProduto");
+        produtoListas = daoProduto.listarProdutosPorDescricao(pesquisa);
+        if (!produtoListas.isEmpty()) {
+            s.setAttribute("produtosPrincipal", produtoListas);
+        }
+
+        response.sendRedirect("produtosPesquisaPorDescricao.jsp");
     }
 
     /**

@@ -24,7 +24,7 @@
         <div id="products">
             <c:forEach items="${produtosPrincipal}" var="p" >
                 <div class="product">
-                    <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" title=${p.nome}>
+                    <a href="#" title=${p.nome}>
                         <span class="title">${p.familia.nome}</span>
                         <img src="${p.uriImagem}" alt=${p.nome} " Image 1" />
                         <span class="number">${p.nome} </span>

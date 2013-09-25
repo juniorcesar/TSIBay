@@ -14,14 +14,27 @@
     </head>
     <body>
     <body bgcolor="#c0c0c0">  
-        <div align="center"><h2>Login do Sistema</h2></div>  
+        <div align="left"><h2>Login do Sistema</h2></div>  
         <form action='LoginController' method="POST">  
-            <p>Login:  
-                <input type='text' name='login' value="alauber">   
-            <p>Senha:  
-                <input type='password' name='senha' value="alauber">   
-            <p>  
-                <input type='submit' value='Entrar'>  
+            <table width="100" border="0" cellpadding="10" cellspacing="10">
+                <tr>
+                    <td width="80">Login:</td>
+                    <td>
+                        <input type='text' name='login' value="alauber"> 
+                    </td>
+                </tr>
+                <tr>
+                    <td width="80">Senha:</td>
+                    <td>
+                        <input type='password' name='senha' value="alauber"> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type='submit' value='Entrar'>  
+                    </td>
+                </tr>
+            </table>
         </form>  
     </body>
 </html>

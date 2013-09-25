@@ -36,7 +36,7 @@ public class DaoProduto extends DaoGenerics<Produto> {
         return produtos;
     }
 
-    public List<Produto> listarProdutosPorNome(String pesquisa) {
+    public List<Produto> listarProdutosPorDescricao(String pesquisa) {
         List<Produto> produtos = null;
         if (pesquisa != null) {
             Query query = session.createQuery("FROM " + alvo.getSimpleName()

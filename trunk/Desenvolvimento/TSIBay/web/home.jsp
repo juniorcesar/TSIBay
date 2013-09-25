@@ -51,18 +51,17 @@
 
             function atualizaDivContentPesqProdutoPorDescricao(descricao) {
                 $.ajax({
-                    url: "ProdutosPesquisaPorNome",
+                    url: "ProdutosPesquisaPorDescricao",
                     data: {
-                        descricaoProduto: id
+                        descricaoProduto: descricao
                     },
                     success: function(data) {
                         $('#content').html(data);
                     }
                 });
             }
-            
+
             function atualizaDivContentLogin() {
-                alert("teste");
                 $.ajax({
                     url: "login.jsp",
                     success: function(data) {
@@ -71,11 +70,29 @@
                 });
             }
 
-            function atualizaDivContentVenda(id, login_id) {
+            function atualizaDivContentPessoa() {
+                $.ajax({
+                    url: "pessoa.jsp",
+                    success: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
+            function atualizaDivContentApresentacao() {
+                $.ajax({
+                    url: "apresentacao.jsp",
+                    success: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
+            function atualizaDivContentVenda(id, qtdeCompra, login_id) {
                 $.ajax({
                     url: "ProdutoTransacao",
                     data: {
-                        idProduto: id, qtdeCompra: $('#qtdeCompra').val(), comprador_id: login_id
+                        idProduto: id, qtdeCompra: qtdeCompra, comprador_id: login_id
                     },
                     success: function(data) {
                         $('#content').html(data);
@@ -88,19 +105,7 @@
     <body>
         <!-- Begin Wrapper -->
         <div id="wrapper">
-            <!-- Begin Search -->
-            <div id="search">
-                <div class="shell">
-                    <form action="./ProdutosPesquisaPorDescricao" method="get" accept-charset="utf-8">
-                        <div class="container">
-                            <input type="text" id="pesqDescricaoProduto" name="pesqDescricaoProduto" title="Pesquisa..." class="blink" />
-                        </div>
-                        <input class="search-button" type="button" onclick=""  />
-                    </form>
-                    <div class="cl">&nbsp;</div>
-                </div>
-            </div>
-            <!-- End Search -->            <!-- Begin Header -->
+            <!-- Begin Header -->
             <div id="header" class="shell">
                 <h1 id="logo"><a class="notext" href="#" title="TSIBay">TSYBay</a></h1>
             </div>
@@ -109,12 +114,17 @@
             <div id="navigation">
                 <div class="shell">
                     <ul>
-                        <li><a href="#" title="Home">Home</a></li>
-                        <li><a href="#" title="Ofertas especiais">Ofertas especiais</a></li>
+                        <li><a href="#content" onclick="atualizaDivContentApresentacao()" title="Home">Home</a></li>
                         <li><a href="#content" onclick="atualizaDivContentLogin()" title="Login">Login</a></li>
-                        <li><a href="faces/admin/login.xhtml" title="Administração"  target="blank">Administração</a></li>
-                        <li><a href="#" title="Checkout">Checkout</a></li>
+                        <li><a href="#content" onclick="atualizaDivContentPessoa()" title="Cadastro">Cadastro</a></li>
+                        <li><a href="faces/admin/login.xhtml" title="Administração" target="blank">Administração</a></li>
                         <li><a href="#" title="Contact">Contato</a></li>
+                        <li><a> Usuário logado: 
+                                <c:if test="${comprador.login != ''}">
+                                    ${comprador.nome}
+                                </c:if>
+                            </a>
+                        </li>
                     </ul>
                     <div class="cl">&nbsp;</div>
                 </div>
@@ -148,6 +158,19 @@
                 <div class="cl">&nbsp;</div>
             </div>
             <!-- End Slider -->
+            <!-- Begin Search -->
+            <div id="search">
+                <div class="shell">
+                    <form>
+                        <div class="container">
+                            <input type="text" id="descricao" title="Pesquisa..." class="blink" />
+                        </div>
+                        <a href="#content" onclick="atualizaDivContentPesqProdutoPorDescricao($('#descricao').val())" class="search-button" >Pesquisa</a> 
+                        <div class="cl">&nbsp;</div>
+                    </form>
+                </div>
+            </div>
+            <!-- End Search -->
             <!-- Begin Main -->
             <div id="main">
                 <!-- Begin Inner -->
@@ -169,41 +192,12 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="widget select-widget">
-                                    <h2>Brands</h2>
-                                    <div class="widget-entry">
-                                        <div class="selectbox">
-                                            <span class="currentItem">--- <span>Please Select</span> ---</span>
-                                            <div class="list">
-                                                <ul>
-                                                    <li class="active"><a href="#" title="Please Select">Please Select</a></li>
-                                                    <li><a href="#" title="Brand 1">Brand 1</a></li>
-                                                    <li><a href="#" title="Brand 2">Brand 2</a></li>
-                                                    <li><a href="#" title="Brand 3">Brand 3</a></li>
-                                                </ul>
-                                            </div>
-                                            <select>
-                                                <option value="option" selected="selected">Please Select</option>
-                                                <option value="option1">Brand 1</option>
-                                                <option value="option2">Brand 2</option>
-                                                <option value="option3">Brand 3</option>
-                                            </select>
-                                        </div>
-                                        <div class="cl">&nbsp;</div>
-                                    </div>
-                                </li>
-                                <li class="widget">
-                                    <h2>Shopping Card</h2>
-                                    <div class="widget-entry">
-                                        <a href="#" class="items" title="Shopping Card Items">0 items</a>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <!-- End Sidebar -->
                         <!-- Begin Content -->
                         <div id="content">
-                            <jsp:include page="pessoa.jsp" />
+                            <jsp:include page="apresentacao.jsp" />
                         </div>
                         <!-- End Content -->
                         <!-- Begin Right Sidebar -->

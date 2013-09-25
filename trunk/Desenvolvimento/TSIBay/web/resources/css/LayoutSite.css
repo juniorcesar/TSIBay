@@ -43,7 +43,7 @@ textarea { overflow: auto; }
 
 /* Search */
 #search { background: url('../imagesSite/search-bg.png') repeat-x 0 0; padding-top: 5px; }
-#search form { float: right; display: inline; width: 193px; padding-right: 9px; }
+#search form { float: right; display: inline; width: 193px; padding-right: 0px; padding-top: 8px;}
 #search input { background: none; border: none; }
 #search .container { background: url('../imagesSite/search-field.png') no-repeat 0 0; width: 141px; height: 26px; float: left; display: inline; }
 #search .container input { color: #c5c5c5; font-size: 12px; line-height: 16px; padding: 5px 9px; width: 119px; height: 16px; }
@@ -170,7 +170,6 @@ h1#logo a { width: 214px; height: 43px; background: url('../imagesSite/logo.png'
 
 #pessoa  { float: left; display: inline; padding-right: 5px; padding-bottom: 34px; text-align: left; position: relative; overflow: hidden; width: 500px; }
 #pessoa span { display: block; }
-
 
 /* Footer */
 #footer { background: url('../imagesSite/footer-bg.png') repeat-x 0 0; color: #c5db87; font-size: 11px; padding-top: 9px; padding-bottom: 30px; }
