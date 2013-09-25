@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +26,7 @@
                 <span class="title">${produtoPesquisa.familia.nome}</span>
                 <img src="${produtoPesquisa.uriImagem}" alt=${produtoPesquisa.nome} " Image 1" />
                 <span class="number">${produtoPesquisa.nome} </span>
-                <span class="price"><span>R$</span>${produtoPesquisa.precoVenda}</span>
+                <span class="price"><fmt:formatNumber value="${produtoPesquisa.precoVenda}" pattern="R$ #,##0.00"/></span>
                 </br>
                 <c:if test="${produtoPesquisa.qtdeDisponivel == '0'}">
                     <span class="price">Produto esgotado!</span>

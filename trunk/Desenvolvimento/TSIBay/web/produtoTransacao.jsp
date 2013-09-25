@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,7 +58,7 @@
             </tr>
             <tr>
                 <td width="120">Data:</td>
-                <td width="546">${produtoTransacao.data}</td>
+                <td width="546"><fmt:formatDate value="${produtoTransacao.data}" pattern="dd/MM/yyyy" /></td>
             </tr>
             <tr>
                 <td>Frete:</td>
@@ -69,7 +70,7 @@
             </tr>
             <tr>
                 <td>Prazo:</td>
-                <td>${produtoTransacao.prazoValidade}</td>
+                <td><fmt:formatDate value="${produtoTransacao.prazoValidade}" pattern="dd/MM/yyyy" /></td>
             </tr>
         </table>
 
@@ -91,11 +92,11 @@
             </tr>
             <tr>
                 <td>Valor Unitário:</td>
-                <td>${produtoTransacao.valorUnitario}</td>
+                <td><fmt:formatNumber value="${produtoTransacao.valorUnitario}" pattern="R$ #,##0.00"/></td>
             </tr>
             <tr>
                 <td>Valor Transação:</td>
-                <td>${valorTransacao}</td>
+                <td><fmt:formatNumber value="${valorTransacao}" pattern="R$ #,##0.00"/></td>
             </tr>
         </table>
         <!-- End Compra -->

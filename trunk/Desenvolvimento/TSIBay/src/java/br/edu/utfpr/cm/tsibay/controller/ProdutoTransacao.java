@@ -11,7 +11,6 @@ import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import br.edu.utfpr.cm.tsibay.model.Transacao;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -41,10 +40,8 @@ public class ProdutoTransacao extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         HttpSession s = request.getSession();
-
-        SimpleDateFormat outFmt = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat inFmt = new SimpleDateFormat("dd/MM/yyyy");
 
         List<Produto> produtoListas = null;
         Produto produto = new Produto();
@@ -57,7 +54,7 @@ public class ProdutoTransacao extends HttpServlet {
         DaoTransacao daoTransacao = new DaoTransacao();
 
         produto = daoProduto.obterPorId(Integer.parseInt(request.getParameter("idProduto")));
-
+        
         transacao.setProduto(produto);
         transacao.setValorUnitario(produto.getPrecoVenda());
         transacao.setQtdeProduto(Integer.parseInt(request.getParameter("qtdeCompra")));
@@ -67,12 +64,13 @@ public class ProdutoTransacao extends HttpServlet {
         prazo.setDate(prazo.getDate() + produto.getPrazo());
         transacao.setPrazoValidade(prazo);
         transacao.setData(new Date());
-        Pessoa comprador = daoPessoa.obterPorId(Integer.parseInt(request.getParameter("comprador_id")));
+        Pessoa comprador = daoPessoa.obterPorId(Integer.parseInt(request.getParameter("idComprador")));
         Pessoa vendedor = produto.getPessoa();
         transacao.setComprador(comprador);
         transacao.setVendedor(vendedor);
-
+        
         daoTransacao.persistir(transacao);
+
         produto.setQtdeDisponivel(produto.getQtdeDisponivel() - transacao.getQtdeProduto());
         produto.setQtdeVendida(produto.getQtdeVendida() + transacao.getQtdeProduto());
         daoProduto.persistir(produto);
@@ -84,6 +82,10 @@ public class ProdutoTransacao extends HttpServlet {
         s.removeAttribute("produtosMaisVendidos");
         s.setAttribute("produtosMaisVendidos", produtoListas);
 
+        s.removeAttribute("vendedor");
+        s.removeAttribute("produtoTransacao");
+        s.removeAttribute("valorTransacao");
+        
         s.setAttribute("vendedor", vendedor);
         s.setAttribute("produtoTransacao", transacao);
         s.setAttribute("valorTransacao", valorTransacao);

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -90,12 +91,16 @@
 
             function atualizaDivContentVenda(id, qtdeCompra, login_id) {
                 $.ajax({
+                    type: 'POST',
                     url: "ProdutoTransacao",
                     data: {
-                        idProduto: id, qtdeCompra: qtdeCompra, comprador_id: login_id
+                        idProduto: id, qtdeCompra: qtdeCompra, idComprador: login_id
                     },
                     success: function(data) {
                         $('#content').html(data);
+                    },
+                    error: function (data) {
+                        alert(data);
                     }
                 });
             }
@@ -142,7 +147,7 @@
                                     <div class="slide-entry">
                                         <h2>${p.familia.nome}</h2>
                                         <h3>${p.nome}</h3>
-                                        <p>R$ ${p.precoVenda}
+                                        <p><fmt:formatNumber value="${p.precoVenda}" pattern="R$ #,##0.00"/>
                                     </div>
                                     <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" class="more" title="Veja mais">Veja mais</a>
                                 </li>
@@ -197,7 +202,7 @@
                         <!-- End Sidebar -->
                         <!-- Begin Content -->
                         <div id="content">
-                            <jsp:include page="produtoTransacao.jsp" />
+                            <jsp:include page="apresentacao.jsp" />
                         </div>
                         <!-- End Content -->
                         <!-- Begin Right Sidebar -->
