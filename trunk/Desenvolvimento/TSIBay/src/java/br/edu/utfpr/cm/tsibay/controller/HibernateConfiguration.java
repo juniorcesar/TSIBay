@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.controller;
 
+import br.edu.utfpr.cm.tsibay.model.Comissao;
 import br.edu.utfpr.cm.tsibay.model.Endereco;
 import br.edu.utfpr.cm.tsibay.model.Familia;
 import br.edu.utfpr.cm.tsibay.model.Imagem;
@@ -51,6 +52,7 @@ public class HibernateConfiguration {
             cfg.addAnnotatedClass(Produto.class);
             cfg.addAnnotatedClass(Telefone.class);
             cfg.addAnnotatedClass(Transacao.class);
+            cfg.addAnnotatedClass(Comissao.class);
             
             factory = cfg.buildSessionFactory();// construindo uma fabrica de sessão
 
