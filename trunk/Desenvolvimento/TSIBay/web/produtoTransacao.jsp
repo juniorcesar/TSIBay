@@ -17,23 +17,19 @@
 
         <table width="500" border="0" cellpadding="10" cellspacing="10">
             <tr>
-                <td width="75" colspan="2">Comprador</td>
+                <td width="69" colspan="2">Comprador</td>
             </tr>
             <tr>
-                <td width="120">Nome:</td>
-                <td width="546">"${comprador.nome}" </td>
+                <td width="150">Nome:</td>
+                <td width="546">${comprador.nome} </td>
             </tr>
             <tr>
                 <td>CPF:</td>
-                <td>"${comprador.cpf}"</td>
+                <td>${comprador.cpf}</td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td>"${comprador.email}"</td>
-            </tr>
-            <tr>
-                <td>Telefone:</td>
-                <td>"${comprador.telefone[0]}"</td>
+                <td>${comprador.email}</td>
             </tr>
         </table>    
 
@@ -42,20 +38,16 @@
                 <td width="69" colspan="2">Vendedor</td>
             </tr>
             <tr>
-                <td width="120">Nome:</td>
-                <td width="546">"${vendedor.nome}" </td>
+                <td width="150">Nome:</td>
+                <td width="546">${vendedor.nome}</td>
             </tr>
             <tr>
                 <td>CPF:</td>
-                <td>"${vendedor.cpf}"</td>
+                <td>${vendedor.cpf}</td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td>"${vendedor.email}"</td>
-            </tr>
-            <tr>
-                <td>Telefone:</td>
-                <td>"${vendedor.telefone[0]}"</td>
+                <td>${vendedor.email}</td>
             </tr>
         </table>
 
@@ -65,19 +57,19 @@
             </tr>
             <tr>
                 <td width="120">Data:</td>
-                <td width="546">"${produtoTransacao.data}" </td>
+                <td width="546">${produtoTransacao.data}</td>
             </tr>
             <tr>
                 <td>Frete:</td>
-                <td>"${produtoTransacao.frete}"</td>
+                <td>${produtoTransacao.frete}</td>
             </tr>
             <tr>
                 <td>Pagamento:</td>
-                <td>"${produtoTransacao.tpPagamento}"</td>
+                <td>${produtoTransacao.tpPagamento}</td>
             </tr>
             <tr>
                 <td>Prazo:</td>
-                <td>"${produtoTransacao.prazoValidade}"</td>
+                <td>${produtoTransacao.prazoValidade}</td>
             </tr>
         </table>
 
@@ -87,23 +79,23 @@
             </tr>
             <tr>
                 <td width="120">Tipo:</td>
-                <td width="546">"${produtoTransacao.produto.familia.nome}" </td>
+                <td width="546">${produtoTransacao.produto.familia.nome} </td>
             </tr>
             <tr>
                 <td>Produto:</td>
-                <td>"${produtoTransacao.produto.nome}"</td>
+                <td>${produtoTransacao.produto.nome}</td>
             </tr>
             <tr>
                 <td>Quantidade:</td>
-                <td>"${produtoTransacao.qtdeProduto}"</td>
+                <td>${produtoTransacao.qtdeProduto}</td>
             </tr>
             <tr>
                 <td>Valor Unitário:</td>
-                <td>"${produtoTransacao.valorUnitario}"</td>
+                <td>${produtoTransacao.valorUnitario}</td>
             </tr>
             <tr>
                 <td>Valor Transação:</td>
-                <td>"${valorTransacao}"</td>
+                <td>${valorTransacao}</td>
             </tr>
         </table>
         <!-- End Compra -->

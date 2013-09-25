@@ -32,7 +32,7 @@
                 </c:if>
                 <c:if test="${produtoPesquisa.qtdeDisponivel != '0'}">                
                     <span class="price">Quantidade <input type="text" name="qtdeCompra" id="qtdeCompra" /></span>
-                    <a href="#content" class="comprar" title="Comprar" onclick="atualizaDivContentVenda(${produtoPesquisa.id}, $('#qtdeCompra').val(), ${login_id})" >Comprar</a>
+                    <a href="#content" class="comprar" title="Comprar" onclick="atualizaDivContentVenda(${produtoPesquisa.id}, $('#qtdeCompra').val(), ${login_id})"></a>
                 </c:if>
                 </br>
                 <p>Fabricante: ${produtoPesquisa.fabricante}</p>

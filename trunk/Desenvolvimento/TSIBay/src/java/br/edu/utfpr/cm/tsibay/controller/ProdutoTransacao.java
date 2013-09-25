@@ -35,6 +35,11 @@ public class ProdutoTransacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession s = request.getSession();
 
@@ -75,7 +80,7 @@ public class ProdutoTransacao extends HttpServlet {
         double valorTransacao = transacao.getQtdeProduto() * transacao.getValorUnitario();
 
         produtoListas = daoProduto.listarProdutosMaisVendidos();
-        
+
         s.removeAttribute("produtosMaisVendidos");
         s.setAttribute("produtosMaisVendidos", produtoListas);
 
@@ -83,14 +88,8 @@ public class ProdutoTransacao extends HttpServlet {
         s.setAttribute("produtoTransacao", transacao);
         s.setAttribute("valorTransacao", valorTransacao);
 
-        response.sendRedirect("transacao.jsp");
+        response.sendRedirect("produtoTransacao.jsp");
 
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override
