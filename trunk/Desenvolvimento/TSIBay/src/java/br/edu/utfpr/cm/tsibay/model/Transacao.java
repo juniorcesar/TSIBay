@@ -42,6 +42,8 @@ public class Transacao implements Serializable {
     private String frete;
     @ManyToOne(fetch = FetchType.EAGER)
     private Produto produto;
+    
+    private boolean status;
 
     public Produto getProduto() {
         return produto;
@@ -118,4 +120,13 @@ public class Transacao implements Serializable {
     public void setFrete(String frete) {
         this.frete = frete;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
 }
