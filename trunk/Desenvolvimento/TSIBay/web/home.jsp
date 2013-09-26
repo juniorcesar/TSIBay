@@ -135,34 +135,6 @@
                 </div>
             </div>
             <!-- End Navigation -->
-            <!-- Begin Slider -->
-            <div id="slider">
-                <div class="slider-outer">
-                    <div class="slider-inner shell">
-                        <!-- Begin Slider Items -->
-                        <ul class="slider-items">
-                            <c:forEach items="${produtosMaisVendidos}" var="p" begin="1" end="5" >
-                                <li>
-                                    <img src="resources/imagesSite/slide-img1.jpg" alt="Slide Image 1" />
-                                    <div class="slide-entry">
-                                        <h2>${p.familia.nome}</h2>
-                                        <h3>${p.nome}</h3>
-                                        <p><fmt:formatNumber value="${p.precoVenda}" pattern="R$ #,##0.00"/>
-                                    </div>
-                                    <a href="#content" onclick="atualizaDivContentPesqProdutoPorId(${p.id})" name="idProduto" class="more" title="Veja mais">Veja mais</a>
-                                </li>
-                            </c:forEach>                                    
-                        </ul>
-                        <!-- End Slider Items -->
-                        <div class="cl">&nbsp;</div>
-                        <div class="slider-controls">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="cl">&nbsp;</div>
-            </div>
-            <!-- End Slider -->
             <!-- Begin Search -->
             <div id="search">
                 <div class="shell">
