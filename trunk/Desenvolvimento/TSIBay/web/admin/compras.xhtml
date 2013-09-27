@@ -9,8 +9,8 @@
     <c:if test="#{loginBean.loggedIn}">
         <div id="principal">
             <h:form id="form">  
-                <p:growl id="growl" showDetail="true" sticky="true" />  
                 <p:panel id="panel" header="Compras em andamento"  closable="true" style="margin:10px;">
+                    <p:growl id="message" showDetail="true"/>  
                     <p:dataTable var="compras" value="#{listagemComprasBean.comprasEmAndamento}" selection="#{listagemComprasBean.selectedCompra}" paginator="true" rows="10" editable="true" rowKey="#{compras.id}"  selectionMode="single" id="comprasTable">  
                         <p:ajax event="rowSelect" update=":form" /> 
 
@@ -55,27 +55,24 @@
                         <p:column headerText="Validade">  
                             <h:outputText value="#{compras.prazoValidade}"/>   
                         </p:column>
-     
-                        <p:column headerText="Validade">  
 
-                            <p:commandButton id="cancelar"  value="Cancelar Compra" oncomplete="compraCancelar.show()" style="margin-left: 15px;margin-top: 10px;" ajax="false" /> 
-                        </p:column>
- 
                     </p:dataTable> 
+                        <p:commandButton id="cancelar" value="Cancelar Compra"  oncomplete="compraCancelar.show()" style="margin-left: 15px;margin-top: 10px;" /> 
+                    
 
                     <c:if test="${listagemComprasBean.selectedCompra != null}">
-                        <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta compra?"  
-                                         header="Cancelar compra" severity="alert" widgetVar="compraCancelar"> 
-                            <p:commandButton value="Sim" style="margin-left: 25px;" action="#{listagemComprasBean.cancelarCompra()}" oncomplete="compraCancelar.hide(); #{listagemComprasBean.comprasEmAndamento}"/>
-                            <p:commandButton value="Não" onclick="compraCancelar.hide()" style="margin-left: 40px;"/>
-                        </p:confirmDialog>
+                    <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta compra?"  
+                                     header="Cancelar compra" severity="alert" widgetVar="compraCancelar"> 
+                        <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemComprasBean.cancelarCompra()}" oncomplete="vendaCancelar.hide(); #{listagemComprasBean.comprasEmAndamento}"/>
+                        <p:commandButton value="Não" onclick="compraCancelar.hide()" style="margin-left: 40px;"/>
+                    </p:confirmDialog>
                     </c:if>
                     <c:if test="${listagemComprasBean.selectedCompra == null}">
-                        <p:confirmDialog id="dialogInfo" message="É necessário selecionar uma compra!"  
-                                         severity="info" widgetVar="compraCancelar" >
-                            <p:commandButton value="Ok" onclick="compraCancelar.hide()" style="margin-left: 40px;text-align: center;"/>
-                        </p:confirmDialog>
-
+                          <p:confirmDialog id="dialogInfo" message="É necessário selecionar uma compra!"  
+                                          severity="info" widgetVar="compraCancelar" >
+                              <p:commandButton value="Ok" onclick="compraCancelar.hide()" style="margin-left: 40px;text-align: center;"/>
+                          </p:confirmDialog>
+                              
                     </c:if>
                 </p:panel> 
             </h:form> 
