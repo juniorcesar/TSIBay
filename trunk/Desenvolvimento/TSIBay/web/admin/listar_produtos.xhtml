@@ -1,0 +1,84 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:uri="http://primefaces.prime.com.tr/ui"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:if test="#{loginBean.loggedIn}">
+        <div id="principal">
+            <h:form id="form">  
+                <p:panel id="lista_produtos" header="Listagem de Produtos"> 
+                    <p:growl id="message" showDetail="true"/>  
+                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  resizableColumns="true" scrollable="true" scrollWidth="98%"  selection="#{listagemProdutosBean.produtoSelecionado}" rowKey="#{produto.nome}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable">  
+                        <p:ajax event="rowSelect" update=":form" /> 
+                        <p:column headerText="id">  
+                            <h:outputText value="#{produto.id}" />  
+                        </p:column>  
+
+                        <p:column headerText="Nome">  
+                            <h:outputText value="#{produto.nome}" id="name"/>  
+                        </p:column>  
+
+                        <p:column headerText="Familia">  
+                            <h:outputText value="#{produto.familia.nome}" id="familia"/>  
+                        </p:column>  
+
+                        <p:column headerText="Fabricante">  
+                            <h:outputText value="#{produto.fabricante}" id="fabricante"/>  
+                        </p:column> 
+
+                        <p:column headerText="Descrição">  
+                            <h:outputText value="#{produto.fabricante}" id="descricao"/>  
+                        </p:column> 
+
+                        <p:column headerText="Data Cad.">  
+                            <h:outputText value="#{produto.data}" id="data"/>  
+                        </p:column> 
+
+                        <p:column headerText="Quantidade Total">  
+                            <h:outputText value="#{produto.quantidade}" id="qtadeTotal"/>  
+                        </p:column> 
+
+                        <p:column headerText="Quantidade Disp.">  
+                            <h:outputText value="#{produto.qtdeDisponivel}" id="qtadeDisponivel"/>  
+                        </p:column> 
+
+                        <p:column headerText="Quantidade Vendida">  
+                            <h:outputText value="#{produto.qtdeVendida}" id="qtdeVendida"/>  
+                        </p:column> 
+
+                        <p:column headerText="Frete">  
+                            <h:outputText value="#{produto.frete}" id="frete"/>  
+                        </p:column> 
+
+                        <p:column headerText="Preço Venda">  
+                            <h:outputText value="#{produto.precoVenda}" id="preco"/>  
+                        </p:column> 
+                        <p:column headerText="Prazo Pag.">  
+                            <h:outputText value="#{produto.prazo}" id="prazo"/>  
+                        </p:column> 
+
+                        <p:column headerText="Editar" style="width:6%">  
+                            <p:commandButton id="viewButton" icon="icn_edit_article"  
+                                             update=":form" oncomplete="classeEdit.show()"/> 
+                        </p:column>  
+
+                        <p:column headerText="Excluir" style="width:4%"> 
+                            <p:commandButton id="viewButton2" icon="icn_trash" oncomplete="classeDelete.show()"/> 
+                        </p:column>  
+
+                    </p:dataTable> 
+                    <p:confirmDialog id="dialog" message="Deseja excluir este registro?"  
+                                     header="Deletar registro" severity="alert" widgetVar="classeDelete"> 
+                        <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listarProdutos.removeProduto()}" oncomplete="classeDelete.hide(); #{listarTurmas.turmas}"/>
+                        <p:commandButton value="Não" onclick="classeDelete.hide()" style="margin-left: 40px;"/>
+                    </p:confirmDialog>
+
+                </p:panel>
+
+            </h:form> 
+        </div>
+    </c:if>
+</ui:composition>
+
