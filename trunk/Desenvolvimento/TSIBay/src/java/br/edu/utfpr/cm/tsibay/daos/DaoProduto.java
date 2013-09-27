@@ -61,15 +61,20 @@ public class DaoProduto extends DaoGenerics<Produto> {
             System.out.println(p.getId() + " - " + p.getNome() + " - " + p.getQtdeVendida());
         }
     }
-    
-        public boolean verificaDependencias(Long id) {
+
+    public boolean verificaDependencias(Long id) {
 
         List<Produto> produtos = null;
-        Query query = session.createQuery("FROM "+alvo.getSimpleName()+" p WHERE p.pessoa.id = " + id.intValue() + "");
-        
+        Query query = session.createQuery("FROM " + alvo.getSimpleName() + " p WHERE p.pessoa.id = " + id.intValue() + "");
+
         produtos = query.list();
 
         return !produtos.isEmpty();
 
+    }
+
+    public List<Produto> listarPorUsuario(Long id) {
+        Query query = session.createQuery("FROM " + alvo.getSimpleName() + " p WHERE p.pessoa.id = " + id.intValue() + "");
+        return query.list();
     }
 }
