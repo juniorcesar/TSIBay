@@ -6,10 +6,13 @@ package br.edu.utfpr.cm.tsibay.managedbean;
 
 import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.daos.DaoTransacao;
+import br.edu.utfpr.cm.tsibay.model.Status;
 import br.edu.utfpr.cm.tsibay.model.Transacao;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -32,16 +35,12 @@ public class listagemComprasBean {
     }
 
     public List<Transacao> getComprasEmAndamento() {
-        if (LoginBean.usuario.getTipo().equals("admin")) {
-            compras = daoCompra.listar();
-        } else {
-            compras = daoCompra.listarComprasEmAndamento(LoginBean.usuario);
-        }
+        compras = daoCompra.listarComprasEmAndamento(LoginBean.usuario);
         return compras;
     }
 
-    public List<Transacao> getComprasTotalCompras() {
-        compras = daoCompra.listar();
+    public List<Transacao> getTotalCompras() {
+        compras = daoCompra.listarTotalCompras(LoginBean.usuario);
         return compras;
     }
 
@@ -49,24 +48,23 @@ public class listagemComprasBean {
         this.compras = Compras;
     }
 
-//    @PostConstruct
-//    public void construct() {
-//        setSelectedCompra(new Pessoa());
-//    }
-    public void deletePessoa() {
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//            DaoProduto daoProduto = new DaoProduto();
-//            if (!daoProduto.verificaDependencias(this.selectedPessoa.getId())) {
-//                daoPessoa.remover(this.selectedPessoa);
-//                this.selectedPessoa = new Pessoa();
-//                context.addMessage(null, new FacesMessage("Sucesso", "Usuário removido com sucesso."));
-//            } else {
-//                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", "O Usuário não pode ser removido, pois existem produtos/transações associados a ele."));
-//            }
-//        } catch (Exception ex) {
-//            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível remover o usuário."));
-//            ex.printStackTrace();
-//        }
+    public void cancelarCompra() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            if (daoCompra == null) {
+                daoCompra = new DaoTransacao();
+            }
+            if (selectedCompra != null) {
+                selectedCompra.setStatus(Status.CANCELADO.getStatus());
+                daoCompra.persistir(selectedCompra);
+                context.addMessage(null, new FacesMessage("Sucesso", "Compra cancelada com sucesso."));
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", "Selecione a compra para cancelar!"));
+            }
+
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível cancelar a compra."));
+            ex.printStackTrace();
+        }
     }
 }

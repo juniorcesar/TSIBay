@@ -7,61 +7,84 @@
                 xmlns:uri="http://primefaces.prime.com.tr/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     <c:if test="#{loginBean.loggedIn}">
-        <c:if test="#{loginBean.tipoPessoa == 'admin'}">
-            <div id="principal">
-                <h:form id="form">  
-                    <p:panel id="panel" header="Vendas em andamento"  closable="true" style="margin:10px;">
-                        <p:growl id="message" showDetail="true"/>  
-                        <p:dataTable var="pessoa" value="#{listagemUsuariosBean.pessoas}" selection="#{listagemUsuariosBean.selectedPessoa}" editable="true" rowKey="#{pessoa.nome}"  selectionMode="single" id="pessoaTable">  
-                            <p:ajax event="rowSelect" update=":form" /> 
+        <div id="principal">
+            <h:form id="form">  
+                <p:panel id="panel" header="Vendas em andamento"  closable="true" style="margin:10px;">
+                    <p:growl id="message" showDetail="true"/>  
+                    <p:dataTable var="vendas" value="#{listagemVendasBean.vendasEmAndamento}" paginator="true" rows="10" selection="#{listagemVendasBean.selectedVenda}" editable="true" rowKey="#{vendas.id}"  selectionMode="single" id="vendasTable">  
+                        <p:ajax event="rowSelect" update=":form" /> 
 
+                        <p:column headerText="id">  
+                            <h:outputText value="#{vendas.id}" />  
+                        </p:column>  
 
-                            <p:column headerText="id">  
-                                <h:outputText value="#{pessoa.id}" />  
-                            </p:column>  
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{vendas.tpPagamento}" />  
+                        </p:column>  
 
-                            <p:column headerText="Nome">  
-                                <h:outputText value="#{pessoa.nome}" />  
-                            </p:column>  
+                        <p:column headerText="Data">  
+                            <h:outputText value="#{vendas.data}" />   
+                        </p:column> 
 
-                            <p:column headerText="CPF">  
-                                <h:outputText value="#{pessoa.cpf}" />   
-                            </p:column> 
+                        <p:column headerText="Produto">  
+                            <h:outputText value="#{vendas.produto.nome}" />   
+                        </p:column> 
 
-                            <p:column headerText="Email">  
-                                <h:outputText value="#{pessoa.email}" />   
-                            </p:column> 
+                        <p:column headerText="Quantidade">  
+                            <h:outputText value="#{vendas.qtdeProduto}" />   
+                        </p:column> 
 
-                            <p:column headerText="Tipo">  
-                                <h:outputText value="#{pessoa.tipo}" />   
-                            </p:column> 
+                        <p:column headerText="Valor Uni.">  
+                            <h:outputText value="#{vendas.valorUnitario}" />   
+                        </p:column> 
 
-                            <p:column headerText="Login">  
-                                <h:outputText value="#{pessoa.login}" />   
-                            </p:column> 
+                        <p:column headerText="Valor Total">  
+                            <h:outputText value="#{vendas.valorTotal}" />   
+                        </p:column> 
 
-                            <p:column headerText="Data Nasc.">  
-                                <h:outputText value="#{pessoa.dtNascimento}" />   
-                            </p:column> 
+                        <p:column headerText="Comprador">  
+                            <h:outputText value="#{vendas.comprador.nome}" />   
+                        </p:column>  
 
-                            <p:column headerText="Data Cad.">  
-                                <h:outputText value="#{pessoa.dtCadastro}" />   
-                            </p:column>  
+                        <p:column headerText="Status">  
+                            <h:outputText value="#{vendas.status}"/>   
+                        </p:column>
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{vendas.tpPagamento}"/>   
+                        </p:column>
+                        <p:column headerText="Validade">  
+                            <h:outputText value="#{vendas.prazoValidade}"/>   
+                        </p:column>
+                    </p:dataTable> 
 
-                            <p:column headerText="Excluir" style="width:4%"> 
-                                <p:commandButton id="viewButton2" icon="icn_trash" oncomplete="pessoaDelete.show()"/> 
-                            </p:column> 
-
-                        </p:dataTable> 
-
-                        <p:confirmDialog id="dialog" message="Deseja excluir este registro?"  
-                                         header="Deletar registro" severity="alert" widgetVar="pessoaDelete"> 
-                            <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemUsuariosBean.deletePessoa}" oncomplete="pessoaDelete.hide(); #{listagemUsuariosBean.pessoas}"/>
-                            <p:commandButton value="Não" onclick="pessoaDelete.hide()" style="margin-left: 40px;"/>
+                    <p:commandButton id="cancelar" value="Cancelar venda" oncomplete="vendaCancelar.show()" style="margin-left: 15px;margin-top: 10px;"  /> 
+                    <p:commandButton id="concluir" value="Conluir Venda" oncomplete="vendaConcluir.show()" style="margin-left: 15px;margin-top: 10px;" /> 
+                    <c:if test="${listagemVendasBean.selectedVenda != null}">
+                        <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta venda?"  
+                                         header="Cancelar venda" severity="alert" widgetVar="vendaCancelar"> 
+                            <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.cancelarVenda()}" oncomplete="vendaCancelar.hide(); #{listagemVendasBean.vendasEmAndamento}"/>
+                            <p:commandButton value="Não" onclick="vendaCancelar.hide()" style="margin-left: 40px;"/>
                         </p:confirmDialog>
-                    </p:panel> 
-                </h:form> 
-            </div>
-        </c:if>
+                        <p:confirmDialog id="dialogConluir" message="Deseja concluir esta venda?"  
+                                         header="Deletar registro" severity="alert" widgetVar="vendaConcluir"> 
+                            <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.concluirVenda()}" oncomplete="vendaConcluir.hide(); #{listagemUsuariosBean.pessoas}"/>
+                            <p:commandButton value="Não" onclick="vendaConcluir.hide()" style="margin-left: 40px;"/>
+                        </p:confirmDialog>
+                    </c:if>
+
+                    <c:if test="${listagemVendasBean.selectedVenda == null}">
+                        <p:confirmDialog id="dialogInfoCancelar" message="É necessário selecionar uma venda!"  
+                                         severity="info" widgetVar="vendaCancelar" >
+                            <p:commandButton value="Ok" onclick="vendaCancelar.hide()" style="margin-left: 40px;text-align: center;"/>
+                        </p:confirmDialog>
+                        <p:confirmDialog id="dialogInfoConcluir" message="É necessário selecionar uma venda!"  
+                                         severity="info" widgetVar="vendaConcluir" >
+                            <p:commandButton value="Ok" onclick="vendaConcluir.hide()" style="margin-left: 40px;text-align: center;"/>
+                        </p:confirmDialog>
+
+                    </c:if>
+                </p:panel> 
+            </h:form> 
+        </div>
     </c:if>
 </ui:composition>

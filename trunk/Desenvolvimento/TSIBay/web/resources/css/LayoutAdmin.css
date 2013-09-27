@@ -266,5 +266,6 @@ div#principal {
     float: left;
     margin-top: -2px;
 }
-
-
+.cancelar {
+    background-image: url(../imagesAdmin/cancel.png)
+}

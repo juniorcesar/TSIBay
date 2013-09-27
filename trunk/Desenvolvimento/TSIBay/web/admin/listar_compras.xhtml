@@ -1,15 +1,63 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-      <c:if test="#{loginBean.loggedIn}">
-        Hello from Facelets
-        </c:if>
-    </h:body>
-</html>
 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:uri="http://primefaces.prime.com.tr/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:if test="#{loginBean.loggedIn}">
+        <div id="principal">
+            <h:form id="form">  
+                <p:panel id="panel" header="Compras em andamento"  closable="true" style="margin:10px;">
+                    <p:growl id="message" showDetail="true"/>  
+                    <p:dataTable var="compras" value="#{listagemComprasBean.totalCompras}" selection="#{listagemComprasBean.selectedCompra}" paginator="true" rows="20" editable="true" rowKey="#{compras.id}"  selectionMode="single" id="comprasTable">  
+                        <p:ajax event="rowSelect" update=":form" /> 
+
+                        <p:column headerText="id">  
+                            <h:outputText value="#{compras.id}" />  
+                        </p:column>  
+
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{compras.tpPagamento}" />  
+                        </p:column>  
+
+                        <p:column headerText="Data">  
+                            <h:outputText value="#{compras.data}" />   
+                        </p:column> 
+
+                        <p:column headerText="Produto">  
+                            <h:outputText value="#{compras.produto.nome}" />   
+                        </p:column> 
+
+                        <p:column headerText="Quantidade">  
+                            <h:outputText value="#{compras.qtdeProduto}" />   
+                        </p:column> 
+
+                        <p:column headerText="Valor Uni.">  
+                            <h:outputText value="#{compras.valorUnitario}" />   
+                        </p:column> 
+
+                        <p:column headerText="Valor Total">  
+                            <h:outputText value="#{compras.valorTotal}" />   
+                        </p:column> 
+
+                        <p:column headerText="Comprador">  
+                            <h:outputText value="#{compras.vendedor.nome}" />   
+                        </p:column>  
+
+                        <p:column headerText="Status">  
+                            <h:outputText value="#{compras.status}"/>   
+                        </p:column>
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{compras.tpPagamento}"/>   
+                        </p:column>
+                        <p:column headerText="Validade">  
+                            <h:outputText value="#{compras.prazoValidade}"/>   
+                        </p:column>
+                    </p:dataTable> 
+                </p:panel> 
+            </h:form> 
+        </div>
+    </c:if>
+</ui:composition>

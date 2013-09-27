@@ -1,15 +1,84 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <c:if test="#{loginBean.loggedIn}">
-        Hello from Facelets
-        </c:if>
-    </h:body>
-</html>
 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:uri="http://primefaces.prime.com.tr/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:if test="#{loginBean.loggedIn}">
+        <div id="principal">
+            <h:form id="form">  
+                <p:growl id="growl" showDetail="true" sticky="true" />  
+                <p:panel id="panel" header="Compras em andamento"  closable="true" style="margin:10px;">
+                    <p:dataTable var="compras" value="#{listagemComprasBean.comprasEmAndamento}" selection="#{listagemComprasBean.selectedCompra}" paginator="true" rows="10" editable="true" rowKey="#{compras.id}"  selectionMode="single" id="comprasTable">  
+                        <p:ajax event="rowSelect" update=":form" /> 
+
+                        <p:column headerText="id">  
+                            <h:outputText value="#{compras.id}" />  
+                        </p:column>  
+
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{compras.tpPagamento}" />  
+                        </p:column>  
+
+                        <p:column headerText="Data">  
+                            <h:outputText value="#{compras.data}" />   
+                        </p:column> 
+
+                        <p:column headerText="Produto">  
+                            <h:outputText value="#{compras.produto.nome}" />   
+                        </p:column> 
+
+                        <p:column headerText="Quantidade">  
+                            <h:outputText value="#{compras.qtdeProduto}" />   
+                        </p:column> 
+
+                        <p:column headerText="Valor Uni.">  
+                            <h:outputText value="#{compras.valorUnitario}" />   
+                        </p:column> 
+
+                        <p:column headerText="Valor Total">  
+                            <h:outputText value="#{compras.valorTotal}" />   
+                        </p:column> 
+
+                        <p:column headerText="Comprador">  
+                            <h:outputText value="#{compras.vendedor.nome}" />   
+                        </p:column>  
+
+                        <p:column headerText="Status">  
+                            <h:outputText value="#{compras.status}"/>   
+                        </p:column>
+                        <p:column headerText="Tipo Pag.">  
+                            <h:outputText value="#{compras.tpPagamento}"/>   
+                        </p:column>
+                        <p:column headerText="Validade">  
+                            <h:outputText value="#{compras.prazoValidade}"/>   
+                        </p:column>
+     
+                        <p:column headerText="Validade">  
+
+                            <p:commandButton id="cancelar"  value="Cancelar Compra" oncomplete="compraCancelar.show()" style="margin-left: 15px;margin-top: 10px;" ajax="false" /> 
+                        </p:column>
+ 
+                    </p:dataTable> 
+
+                    <c:if test="${listagemComprasBean.selectedCompra != null}">
+                        <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta compra?"  
+                                         header="Cancelar compra" severity="alert" widgetVar="compraCancelar"> 
+                            <p:commandButton value="Sim" style="margin-left: 25px;" action="#{listagemComprasBean.cancelarCompra()}" oncomplete="compraCancelar.hide(); #{listagemComprasBean.comprasEmAndamento}"/>
+                            <p:commandButton value="Não" onclick="compraCancelar.hide()" style="margin-left: 40px;"/>
+                        </p:confirmDialog>
+                    </c:if>
+                    <c:if test="${listagemComprasBean.selectedCompra == null}">
+                        <p:confirmDialog id="dialogInfo" message="É necessário selecionar uma compra!"  
+                                         severity="info" widgetVar="compraCancelar" >
+                            <p:commandButton value="Ok" onclick="compraCancelar.hide()" style="margin-left: 40px;text-align: center;"/>
+                        </p:confirmDialog>
+
+                    </c:if>
+                </p:panel> 
+            </h:form> 
+        </div>
+    </c:if>
+</ui:composition>

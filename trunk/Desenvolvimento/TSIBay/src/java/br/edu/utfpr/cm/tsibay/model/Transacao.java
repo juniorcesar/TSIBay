@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -42,8 +43,7 @@ public class Transacao implements Serializable {
     private String frete;
     @ManyToOne(fetch = FetchType.EAGER)
     private Produto produto;
-    
-    private boolean status;
+    private String status;
 
     public Produto getProduto() {
         return produto;
@@ -121,12 +121,15 @@ public class Transacao implements Serializable {
         this.frete = frete;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public Double getValorTotal() {
+        return (valorUnitario * qtdeProduto);
+    }
 }

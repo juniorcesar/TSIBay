@@ -9,6 +9,7 @@ import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.daos.DaoTransacao;
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Produto;
+import br.edu.utfpr.cm.tsibay.model.Status;
 import br.edu.utfpr.cm.tsibay.model.Transacao;
 import java.io.IOException;
 import java.util.Date;
@@ -68,6 +69,7 @@ public class ProdutoTransacao extends HttpServlet {
         Pessoa vendedor = produto.getPessoa();
         transacao.setComprador(comprador);
         transacao.setVendedor(vendedor);
+        transacao.setStatus(Status.EM_ANDAMENTO.getStatus());
         
         daoTransacao.persistir(transacao);
 
