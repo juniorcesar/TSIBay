@@ -55,9 +55,9 @@
                         <p:column headerText="Validade">  
                             <h:outputText value="#{vendas.prazoValidade}"/>   
                         </p:column>
-                        <p:column headerText="Opções" colspan="2">  
-                            <p:commandButton id="cancelar" title="Cancelar Venda" value="X" oncomplete="vendaCancelar.show()"  style="text-align: center;background: #FF0000;color:#ffffff ;font-weight: bold;font-size: 10px;" /> 
-                            <p:commandButton id="concluir" title="Concluir Venda" value="V" oncomplete="vendaConcluir.show()" style="text-align: center;background: #017c10;color:#ffffff ;font-weight: bold;font-size: 10px;" /> 
+                        <p:column headerText="Opções" colspan="2" style="text-align: center;">  
+                            <p:commandButton id="cancelar" title="Cancelar Venda" icon="ui-icon-circle-close" oncomplete="vendaCancelar.show()"  style="text-align: center;font-size: 12px;" /> 
+                            <p:commandButton id="concluir" title="Concluir Venda" icon="ui-icon-circle-check" oncomplete="vendaConcluir.show()" style="text-align: center;font-size: 12px;" /> 
                         </p:column>
                     </p:dataTable> 
                     <h:outputLabel value="Valor total das vendas em andamento #{listagemVendasBean.valorTotalVendas}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"/>  

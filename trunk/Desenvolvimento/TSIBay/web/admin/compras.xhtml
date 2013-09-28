@@ -55,11 +55,11 @@
                         <p:column headerText="Validade">  
                             <h:outputText value="#{compras.prazoValidade}"/>   
                         </p:column>
-                        <p:column headerText="Cancelar" style="width:4%"> 
-                            <p:commandButton id="cancelar" title="Cancelar Compra" value="X" oncomplete="compraCancelar.show()"  style="text-align:center;background: #FF0000;color:#ffffff ;font-weight: bold;font-size: 10px;" /> 
+                        <p:column headerText="Cancelar" style="width:4%;text-align: center;"> 
+                            <p:commandButton id="cancelar" title="Cancelar Compra" icon="ui-icon-circle-close" oncomplete="compraCancelar.show()"  style="text-align:center;font-size:12px;" /> 
                         </p:column>
                     </p:dataTable> 
-                    <h:outputLabel value="Valor total das compras em andamento #{listagemComprasBean.valorTotalCompras}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;text-align: center;"/>  
+                    <h:outputLabel value="Valor total das compras em andamento #{listagemComprasBean.valorTotalCompras}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;text-align:center;"/>  
                     <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta compra?"  
                                      header="Cancelar compra" severity="alert" widgetVar="compraCancelar"> 
                         <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemComprasBean.cancelarCompra()}" oncomplete="compraCancelar.hide(); #{listagemComprasBean.comprasEmAndamento}"/>

@@ -26,6 +26,15 @@ public class Familia  implements Serializable{
     private Long id;
     private String nome;
 
+    public Familia() {
+    }
+
+    public Familia(String nome) {
+        this.nome = nome;
+    }
+    
+    
+
     public Long getId() {
         return id;
     }

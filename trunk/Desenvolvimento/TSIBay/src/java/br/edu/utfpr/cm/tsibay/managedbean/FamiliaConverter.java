@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.managedbean;
 
+import br.edu.utfpr.cm.tsibay.daos.DaoFamilia;
 import br.edu.utfpr.cm.tsibay.daos.DaoGenerics;
 import br.edu.utfpr.cm.tsibay.model.Familia;
 import java.util.List;
@@ -21,34 +22,15 @@ import javax.faces.model.SelectItem;
  *
  * @author Junior
  */
-@ManagedBean(name="familiaBean")
+@ManagedBean(name = "familiaBean")
 @FacesConverter("familiaConverter")
 @SessionScoped
-public class FamiliaConverter implements Converter{
+public class FamiliaConverter implements Converter {
 
     private static List<Familia> familias;
-    Familia familia;
 
     public FamiliaConverter() {
         familias = new DaoGenerics<Familia>(Familia.class).listar();
-    }
-
-    public Familia getFamilia() {
-        return familia;
-    }
-
-    public void setFamilia(Familia familia) {
-        this.familia = familia;
-    }
-
-    public SelectItem[] getFamilias() {
-        List<Familia> familias = new DaoGenerics<Familia>(Familia.class).listar();
-        SelectItem[] items = new SelectItem[familias.size()];
-        int i = 0;
-        for (Familia f : familias) {
-            items[i++] = new SelectItem(f, f.getNome());
-        }
-        return items;
     }
 
     @Override
@@ -59,11 +41,11 @@ public class FamiliaConverter implements Converter{
             try {
                 int number = Integer.parseInt(value);
 
-                for (Familia f : familias) {  
-                    if (f.getId()== number) {  
-                        return f;  
-                    }  
-                } 
+                for (Familia f : familias) {
+                    if (f.getId() == number) {
+                        return f;
+                    }
+                }
 
             } catch (NumberFormatException exception) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid player"));
@@ -75,11 +57,18 @@ public class FamiliaConverter implements Converter{
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value == null || value.equals("")) {  
-            return "";  
-        } else {  
-            return String.valueOf(((Familia) value).getId());  
-        } 
+        if (value == null || value.equals("")) {
+            return "";
+        } else {
+            return String.valueOf(((Familia) value).getId());
+        }
     }
 
+    public List<Familia> completaFamilia(String nome) {
+        return new DaoFamilia().listar(nome);
+    }
+
+    public List<Familia> getFamilias() {
+        return new DaoFamilia().listar();
+    }
 }
