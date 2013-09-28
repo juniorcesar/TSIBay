@@ -57,4 +57,7 @@ public class PageManager implements Serializable {
      public void setGerenciarUsuarios() {
         this.paginaAtiva = "./admin/gerenciar_usuarios.xhtml";
     }
+     public void setComissoesReceber() {
+        this.paginaAtiva = "./admin/comissoes_receber.xhtml";
+    }
 }

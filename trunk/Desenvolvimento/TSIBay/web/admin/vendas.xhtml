@@ -30,16 +30,16 @@
                             <h:outputText value="#{vendas.produto.nome}" />   
                         </p:column> 
 
-                        <p:column headerText="Quantidade">  
+                        <p:column headerText="Qtde">  
                             <h:outputText value="#{vendas.qtdeProduto}" />   
                         </p:column> 
 
                         <p:column headerText="Valor Uni.">  
-                            <h:outputText value="#{vendas.valorUnitario}" />   
+                            <h:outputText value="#{vendas.valorUnitarioFormatado}" />   
                         </p:column> 
 
-                        <p:column headerText="Valor Total">  
-                            <h:outputText value="#{vendas.valorTotal}" />   
+                        <p:column headerText="Total">  
+                            <h:outputText value="#{vendas.valorTotalFormatado}" />   
                         </p:column> 
 
                         <p:column headerText="Comprador">  
@@ -55,34 +55,24 @@
                         <p:column headerText="Validade">  
                             <h:outputText value="#{vendas.prazoValidade}"/>   
                         </p:column>
+                        <p:column headerText="Opções" colspan="2">  
+                            <p:commandButton id="cancelar" title="Cancelar Venda" value="X" oncomplete="vendaCancelar.show()"  style="text-align: center;background: #FF0000;color:#ffffff ;font-weight: bold;font-size: 10px;" /> 
+                            <p:commandButton id="concluir" title="Concluir Venda" value="V" oncomplete="vendaConcluir.show()" style="text-align: center;background: #017c10;color:#ffffff ;font-weight: bold;font-size: 10px;" /> 
+                        </p:column>
                     </p:dataTable> 
+                    <h:outputLabel value="Valor total das vendas em andamento #{listagemVendasBean.valorTotalVendas}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"/>  
 
-                    <p:commandButton id="cancelar" value="Cancelar venda" oncomplete="vendaCancelar.show()" style="margin-left: 15px;margin-top: 10px;"  /> 
-                    <p:commandButton id="concluir" value="Conluir Venda" oncomplete="vendaConcluir.show()" style="margin-left: 15px;margin-top: 10px;" /> 
-                    <c:if test="${listagemVendasBean.selectedVenda != null}">
-                        <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta venda?"  
-                                         header="Cancelar venda" severity="alert" widgetVar="vendaCancelar"> 
-                            <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.cancelarVenda()}" oncomplete="vendaCancelar.hide(); #{listagemVendasBean.vendasEmAndamento}"/>
-                            <p:commandButton value="Não" onclick="vendaCancelar.hide()" style="margin-left: 40px;"/>
-                        </p:confirmDialog>
-                        <p:confirmDialog id="dialogConluir" message="Deseja concluir esta venda?"  
-                                         header="Deletar registro" severity="alert" widgetVar="vendaConcluir"> 
-                            <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.concluirVenda()}" oncomplete="vendaConcluir.hide(); #{listagemUsuariosBean.pessoas}"/>
-                            <p:commandButton value="Não" onclick="vendaConcluir.hide()" style="margin-left: 40px;"/>
-                        </p:confirmDialog>
-                    </c:if>
+                    <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta venda?"  
+                                     header="Cancelar venda" severity="alert" widgetVar="vendaCancelar"> 
+                        <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.cancelarVenda()}" oncomplete="vendaCancelar.hide(); #{listagemVendasBean.vendasEmAndamento}"/>
+                        <p:commandButton value="Não" onclick="vendaCancelar.hide()" style="margin-left: 40px;"/>
+                    </p:confirmDialog>
+                    <p:confirmDialog id="dialogConluir" message="Deseja concluir esta venda?"  
+                                     header="Deletar registro" severity="alert" widgetVar="vendaConcluir"> 
+                        <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemVendasBean.concluirVenda()}" oncomplete="vendaConcluir.hide(); #{listagemUsuariosBean.pessoas}"/>
+                        <p:commandButton value="Não" onclick="vendaConcluir.hide()" style="margin-left: 40px;"/>
+                    </p:confirmDialog>
 
-                    <c:if test="${listagemVendasBean.selectedVenda == null}">
-                        <p:confirmDialog id="dialogInfoCancelar" message="É necessário selecionar uma venda!"  
-                                         severity="info" widgetVar="vendaCancelar" >
-                            <p:commandButton value="Ok" onclick="vendaCancelar.hide()" style="margin-left: 40px;text-align: center;"/>
-                        </p:confirmDialog>
-                        <p:confirmDialog id="dialogInfoConcluir" message="É necessário selecionar uma venda!"  
-                                         severity="info" widgetVar="vendaConcluir" >
-                            <p:commandButton value="Ok" onclick="vendaConcluir.hide()" style="margin-left: 40px;text-align: center;"/>
-                        </p:confirmDialog>
-
-                    </c:if>
                 </p:panel> 
             </h:form> 
         </div>

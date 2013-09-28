@@ -46,9 +46,10 @@
                 <c:if test="#{loginBean.tipoPessoa == 'admin'}">
                 <h3>Administração</h3>
                 <ul class="toggle">
-                    <li class="icn_photo"> <h:commandLink value="Comissões" action="#{pageManager.setPagGerenciarComissoes()}" /></li>
+                    <li class="icn_photo"> <h:commandLink value="Gerenciar comissões" action="#{pageManager.setPagGerenciarComissoes()}" /></li>
                     <li class="icn_photo"> <h:commandLink value="Consultar movimentações" action="#{pageManager.setPagConsultarMovimentacoes()}" /></li>
-                    <li class="icn_photo"> <h:commandLink value="Usuários" action="#{pageManager.setGerenciarUsuarios()}" /></li>
+                    <li class="icn_photo"> <h:commandLink value="Gerenciar Usuários" action="#{pageManager.setGerenciarUsuarios()}" /></li>
+                    <li class="icn_photo"> <h:commandLink value="Comissões à receber" action="#{pageManager.setComissoesReceber()}" /></li>
                 </ul>
                 </c:if>
             </h:form>

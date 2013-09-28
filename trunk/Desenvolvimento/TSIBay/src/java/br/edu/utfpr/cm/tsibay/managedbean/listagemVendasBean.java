@@ -8,6 +8,8 @@ import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.daos.DaoTransacao;
 import br.edu.utfpr.cm.tsibay.model.Status;
 import br.edu.utfpr.cm.tsibay.model.Transacao;
+import br.edu.utfpr.cm.tsibay.util.Moeda;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +22,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "listagemVendasBean")
 @RequestScoped
-public class listagemVendasBean {
+public class listagemVendasBean implements Serializable{
 
     private List<Transacao> vendas;
     private Transacao selectedVenda;
@@ -37,6 +39,14 @@ public class listagemVendasBean {
     public List<Transacao> getVendasEmAndamento() {
         vendas = daoVenda.listarVendasEmAndamento(LoginBean.usuario);
         return vendas;
+    }
+
+    public String getValorTotalVendas() {
+        Double valorTotal = 0D;
+        for (Transacao transacao : vendas) {
+            valorTotal += transacao.getValorTotal();
+        }
+        return Moeda.mascaraDinheiro(valorTotal, Moeda.DINHEIRO_REAL);
     }
 
     public List<Transacao> getTotalVendas() {

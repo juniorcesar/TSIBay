@@ -35,11 +35,11 @@
                         </p:column> 
 
                         <p:column headerText="Valor Uni.">  
-                            <h:outputText value="#{compras.valorUnitario}" />   
+                            <h:outputText value="#{compras.valorUnitarioFormatado}" />   
                         </p:column> 
 
                         <p:column headerText="Valor Total">  
-                            <h:outputText value="#{compras.valorTotal}" />   
+                            <h:outputText value="#{compras.valorTotalFormatado}" />   
                         </p:column> 
 
                         <p:column headerText="Comprador">  
@@ -56,6 +56,7 @@
                             <h:outputText value="#{compras.prazoValidade}"/>   
                         </p:column>
                     </p:dataTable> 
+                    <h:outputLabel value="Valor total das compras realizadas #{listagemComprasBean.valorTotalCompras}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"></h:outputLabel>  
                 </p:panel> 
             </h:form> 
         </div>

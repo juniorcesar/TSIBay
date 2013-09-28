@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.model;
 
+import br.edu.utfpr.cm.tsibay.util.Moeda;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -75,6 +76,15 @@ public class Transacao implements Serializable {
 
     public Double getValorUnitario() {
         return valorUnitario;
+    }
+    
+    public String getValorUnitarioFormatado(){
+        return Moeda.mascaraDinheiro(valorUnitario, Moeda.DINHEIRO_REAL);
+    }
+    
+    public String getValorTotalFormatado(){
+        return Moeda.mascaraDinheiro((valorUnitario * qtdeProduto), Moeda.DINHEIRO_REAL);
+        
     }
 
     public void setValorUnitario(Double valorUnitario) {
