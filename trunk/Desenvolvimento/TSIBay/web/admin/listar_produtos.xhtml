@@ -11,7 +11,7 @@
                 <p:panel id="lista_produtos" header="Listagem de Produtos"> 
                     <p:growl id="message" showDetail="true"/>  
                     <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  selection="#{listagemProdutosBean.produtoSelecionado}" rowKey="#{produto.nome}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable" style="text-align: center;">  
-                        <p:ajax event="rowSelect"/> 
+                           <p:ajax event="rowSelect" update=":form" /> 
                         <p:column headerText="id" width="15">  
                             <h:outputText value="#{produto.id}"/>  
                         </p:column>  
