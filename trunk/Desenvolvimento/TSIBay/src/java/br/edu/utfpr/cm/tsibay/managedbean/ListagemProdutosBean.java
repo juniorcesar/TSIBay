@@ -5,7 +5,6 @@
 package br.edu.utfpr.cm.tsibay.managedbean;
 
 import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
-import br.edu.utfpr.cm.tsibay.daos.DaoGenerics;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.util.List;

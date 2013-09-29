@@ -19,6 +19,8 @@ import org.primefaces.event.FileUploadEvent;
 public class FileManager {
   
     public void handleFileUpload(FileUploadEvent event) {  
+        
+        System.out.println("IMAGEM ENVIADA"+event.getFile().getFileName());
         FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  

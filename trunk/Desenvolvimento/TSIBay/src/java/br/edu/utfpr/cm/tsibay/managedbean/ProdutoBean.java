@@ -23,7 +23,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class ProdutoBean implements Serializable {
 
-    private Produto produto;
+    private static Produto produto;
 
     /**
      * Creates a new instance of ProdutoBean
@@ -37,8 +37,8 @@ public class ProdutoBean implements Serializable {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setProduto(Produto p) {
+        produto = p;
     }
 
     public void addProduto() {
@@ -52,8 +52,8 @@ public class ProdutoBean implements Serializable {
                 }
                 produto.setFamilia(familia);
             }
-            daoProduto.persistir(this.produto);
-            this.produto = new Produto();
+            daoProduto.persistir(produto);
+            produto = new Produto();
             context.addMessage(null, new FacesMessage("Sucesso", "O produto foi inserido com sucesso!"));
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage("Error", "Erro ao gravar"));
