@@ -14,8 +14,6 @@ import org.primefaces.event.FileUploadEvent;
  *
  * @author junior
  */
-@ManagedBean(name = "uploadArquivo")
-@SessionScoped
 public class FileManager {
   
     public void handleFileUpload(FileUploadEvent event) {  

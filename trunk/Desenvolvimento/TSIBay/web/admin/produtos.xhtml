@@ -104,8 +104,8 @@
                     </p:fieldset>
 
                     <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px" >
-                        <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                                      multiple="true" sizeLimit="999999"  allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />  
+                        <p:fileUpload id="upload" fileUploadListener="#{produtoBean.uploadAction}" auto="true"
+                                       allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />  
                     </p:fieldset>
 
                     <h:panelGrid columns="2" cellpadding="3">

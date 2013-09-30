@@ -77,4 +77,15 @@ public class DaoProduto extends DaoGenerics<Produto> {
         Query query = session.createQuery("FROM " + alvo.getSimpleName() + " p WHERE p.pessoa.id = " + id.intValue() + "");
         return query.list();
     }
+    
+     public int obterUltimoId() {
+        List<Produto> lista = null;
+
+        Query query = session.createQuery("FROM " + alvo.getSimpleName() + " C WHERE C.id = (select  max(id) from " + alvo.getSimpleName() + ")");
+        lista = query.list();
+        if (!lista.isEmpty()) {
+            return lista.get(0).getId().intValue();
+        }
+        return 0;
+    }
 }

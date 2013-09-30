@@ -26,26 +26,25 @@ public class Imagem implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 10, nullable = false, unique = true)
     private Long id;
-    private String descricao;
     private String imagem;
     @OneToOne(fetch = FetchType.EAGER)
     private Produto produto;
     private Boolean principal;
 
+    public Imagem() {
+    }
+
+    public Imagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public String getImagem() {

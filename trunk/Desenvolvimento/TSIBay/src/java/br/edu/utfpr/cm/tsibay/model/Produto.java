@@ -6,6 +6,7 @@ package br.edu.utfpr.cm.tsibay.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,7 +25,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "PRODUTO")
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
     @OneToOne(mappedBy = "produto")
     private Imagem imagem;
@@ -51,14 +53,17 @@ public class Produto implements Serializable{
     private Integer prazo;
     private String frete;
     private boolean principal;
-    
-    public Imagem getImagem() {
-        return imagem;
+    @OneToMany
+    private List<Imagem> imagens;
+
+    public List<Imagem> getImagens() {
+        return imagens;
     }
 
-    public void setImagem(Imagem imagem) {
-        this.imagem = imagem;
+    public void setImagens(List<Imagem> imagens) {
+        this.imagens = imagens;
     }
+
 
     public Long getId() {
         return id;
@@ -191,5 +196,4 @@ public class Produto implements Serializable{
     public void setPrincipal(boolean principal) {
         this.principal = principal;
     }
-       
 }

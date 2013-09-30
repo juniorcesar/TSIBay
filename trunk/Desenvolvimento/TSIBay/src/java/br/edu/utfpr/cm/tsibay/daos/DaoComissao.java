@@ -27,6 +27,5 @@ public class DaoComissao extends DaoGenerics<Comissao> {
             return lista.get(0).getPorcentagem();
         }
         return 0D;
-
     }
 }
