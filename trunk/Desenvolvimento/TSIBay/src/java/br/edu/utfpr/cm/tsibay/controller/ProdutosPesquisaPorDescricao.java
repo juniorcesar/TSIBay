@@ -51,6 +51,8 @@ public class ProdutosPesquisaPorDescricao extends HttpServlet {
         produtoListas = daoProduto.listarProdutosPorDescricao(pesquisa);
         if (!produtoListas.isEmpty()) {
             s.setAttribute("produtosPrincipal", produtoListas);
+        } else {
+            s.removeAttribute("produtosPrincipal");
         }
 
         response.sendRedirect("produtosPesquisaPorDescricao.jsp");

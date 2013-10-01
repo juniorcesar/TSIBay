@@ -35,6 +35,8 @@ public class ProdutosPesquisaPorFamilia extends HttpServlet {
         produtoListas = daoProduto.listarProdutosPorFamilia(idFamilia);
         if (!produtoListas.isEmpty()) {
             s.setAttribute("produtosPrincipal", produtoListas);
+        } else {
+            s.removeAttribute("produtosPrincipal");
         }
 
         response.sendRedirect("produtosPesquisaPorFamilia.jsp");

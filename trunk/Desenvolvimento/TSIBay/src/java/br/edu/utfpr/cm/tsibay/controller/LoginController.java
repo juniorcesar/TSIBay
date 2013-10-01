@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
             rd.forward(req, resp);
         } else {
+//            resp.sendError(resp.SC_FORBIDDEN, "Login falhou, verifique os dados informados.");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(req, resp);
         }
