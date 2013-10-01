@@ -9,12 +9,14 @@ import br.edu.utfpr.cm.tsibay.daos.DaoPessoa;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -27,6 +29,13 @@ public class ListagemUsuariosBean implements Serializable {
     private List<Pessoa> pessoas;
     private Pessoa selectedPessoa;
     private DaoPessoa daoPessoa = new DaoPessoa();
+    private List<Pessoa> filteredPessoas;
+    private SelectItem[] itens;
+
+    public ListagemUsuariosBean() {
+        pessoas = new ArrayList<Pessoa>();
+        buscarUsuarios();
+    }
 
     public Pessoa getSelectedPessoa() {
         return selectedPessoa;
@@ -66,7 +75,7 @@ public class ListagemUsuariosBean implements Serializable {
         try {
             DaoProduto daoProduto = new DaoProduto();
             if (!daoProduto.verificaDependencias(this.selectedPessoa.getId())) {
-                if(daoPessoa == null){
+                if (daoPessoa == null) {
                     daoPessoa = new DaoPessoa();
                 }
                 daoPessoa.remover(this.selectedPessoa);
@@ -79,5 +88,22 @@ public class ListagemUsuariosBean implements Serializable {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível remover o usuário."));
             ex.printStackTrace();
         }
+    }
+
+    public List<Pessoa> getFilteredPessoas() {
+        return filteredPessoas;
+    }
+
+    public void setFilteredPessoas(List<Pessoa> filteredPessoas) {
+        this.filteredPessoas = filteredPessoas;
+    }
+
+    public SelectItem[] getItens() {
+        buscarUsuarios();
+        return itens;
+    }
+
+    private void buscarUsuarios() {
+        pessoas = daoPessoa.listar();
     }
 }

@@ -7,6 +7,7 @@ package br.edu.utfpr.cm.tsibay.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +54,7 @@ public class Produto implements Serializable {
     private Integer prazo;
     private String frete;
     private boolean principal;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Imagem> imagens;
 
     public List<Imagem> getImagens() {

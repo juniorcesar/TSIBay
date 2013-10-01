@@ -4,12 +4,14 @@
  */
 package br.edu.utfpr.cm.tsibay.managedbean;
 
+import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.controller.UploadArquivo;
 import br.edu.utfpr.cm.tsibay.daos.DaoFamilia;
-import br.edu.utfpr.cm.tsibay.daos.DaoGenerics;
+import br.edu.utfpr.cm.tsibay.daos.DaoPessoa;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Familia;
 import br.edu.utfpr.cm.tsibay.model.Imagem;
+import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,15 +32,20 @@ import org.primefaces.event.FileUploadEvent;
 public class ProdutoBean implements Serializable {
 
     private static Produto produto;
+    private Imagem selectedImagem;
     private UploadArquivo arquivo = new UploadArquivo();
     private DaoProduto daoProduto = new DaoProduto();
-    private List<Imagem> imagens = new ArrayList<Imagem>();
+    private static List<Imagem> imagens;
+    private int idProduto = 0;
 
     /**
      * Creates a new instance of ProdutoBean
      */
     public ProdutoBean() {
-        produto = new Produto();
+        if (produto == null) {
+            produto = new Produto();
+            imagens = new ArrayList<Imagem>();
+        }
         produto.setData(new Date());
     }
 
@@ -53,45 +60,129 @@ public class ProdutoBean implements Serializable {
     public void addProduto() {
         FacesContext context = FacesContext.getCurrentInstance();
         try {
-            if (produto.getFamilia() == null) {
-                Familia familia = new DaoFamilia().obterFamilia("Outros");
-                if (familia == null) {
-                    familia = new Familia("Outros");
+            if (imagens != null && !imagens.isEmpty()) {
+                if (produto.getFamilia() == null) {
+                    Familia familia = new DaoFamilia().obterFamilia("Outros");
+                    if (familia == null) {
+                        familia = new Familia("Outros");
+                    }
+                    produto.setFamilia(familia);
                 }
-                produto.setFamilia(familia);
+                for (Imagem imagem : imagens) {
+                    imagem.setProduto(produto);
+                }
+                setPrincipal();
+                if (produto.getQtdeVendida() != null) {
+                    produto.setQtdeDisponivel(produto.getQuantidade() - produto.getQtdeVendida());
+                } else {
+                    produto.setQtdeDisponivel(produto.getQuantidade());
+                }
+                produto.setPessoa(LoginBean.usuario);
+                produto.setImagens(imagens);
+
+                daoProduto.persistir(produto);
+                produto = new Produto();
+                imagens = new ArrayList<Imagem>();
+                context.addMessage(null, new FacesMessage("Sucesso", "O produto foi inserido com sucesso!"));
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", "É necessário informar pelo menos uma imagem!"));
             }
-            daoProduto.persistir(produto);
-            produto = new Produto();
-            context.addMessage(null, new FacesMessage("Sucesso", "O produto foi inserido com sucesso!"));
         } catch (Exception e) {
-            context.addMessage(null, new FacesMessage("Error", "Erro ao gravar"));
+            context.addMessage(null, new FacesMessage("Erro", "Erro ao gravar o produto."));
             e.printStackTrace();
         }
     }
 
     public void uploadAction(FileUploadEvent event) {
-        int idProduto = 0;
+        String nome = "";
         if (daoProduto == null) {
             daoProduto = new DaoProduto();
         }
-        if (produto.getId() <= 0) {
+        if (produto.getId() == null) {
             idProduto = (daoProduto.obterUltimoId() + 1);
         } else {
             idProduto = produto.getId().intValue();
         }
-        if(produto.getImagens() == null){
+        if (imagens == null && produto.getImagens() == null) {
             imagens = new ArrayList<Imagem>();
-        }else{
+        } else if (imagens == null) {
             imagens = produto.getImagens();
         }
-        imagens.add(new Imagem(idProduto+"."+getExtensaoImagem(event.getFile().getFileName())));
-        this.arquivo.fileUpload(event, "."+getExtensaoImagem(event.getFile().getFileName()), "/produtos/" + idProduto + "/" , idProduto+"."+getExtensaoImagem(event.getFile().getFileName()));
-        this.produto.setImagens(imagens);
+        if (!imagens.isEmpty()) {
+            nome = idProduto + "-" + getUltimoNome(imagens.get(imagens.size() - 1).getImagem()) + getExtensaoImagem(event.getFile().getFileName());
+        } else {
+            nome = idProduto + "-0" + getExtensaoImagem(event.getFile().getFileName());
+        }
+
+        imagens.add(new Imagem(nome));
+        this.arquivo.fileUpload(event, getExtensaoImagem(nome), "/resources/produtos/" + idProduto + "/", nome);
         this.arquivo.gravar();
         arquivo = new UploadArquivo();
     }
-    
-     public String getExtensaoImagem(String nome) {
+
+    public String getExtensaoImagem(String nome) {
         return nome.substring(nome.lastIndexOf("."), nome.length());
+    }
+
+    public String getUltimoNome(String nome) {
+        nome = nome.substring(nome.lastIndexOf("-"), nome.lastIndexOf("."));
+        nome = nome.replace("-", "");
+        Integer valor = Integer.valueOf(nome) + 1;
+        return valor.toString();
+    }
+
+    public List<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public int getId() {
+        return idProduto;
+    }
+
+    public void setPrincipal() {
+        int id = 0;
+        if (produto.getId() != null) {
+            id = produto.getId().intValue();
+        }
+        if (id == 0) {
+            id = (daoProduto.obterUltimoId() + 1);
+        }
+        for (Imagem imagem : imagens) {
+            if (imagem.getPrincipal()) {
+                produto.setUriImagem("resources/produtos/" + id + "/" + imagem.getImagem());
+                return;
+            }
+        }
+        if (imagens != null) {
+            produto.setUriImagem("resources/produtos/" + id + "/" + imagens.get(0).getImagem());
+        }
+
+    }
+
+    public boolean verificaQuantidade() {
+        if (imagens.size() >= 10) {
+            return false;
+        }
+        return true;
+    }
+
+    public void imagemDelete() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            imagens.remove(selectedImagem);
+            context.addMessage(null, new FacesMessage("Sucesso", "Imagem removida com sucesso."));
+
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível remover a imagem."));
+            ex.printStackTrace();
+        }
+    }
+
+    public Imagem getSelectedImagem() {
+        return selectedImagem;
+    }
+
+    public void setSelectedImagem(Imagem selectedImagem) {
+        this.selectedImagem = selectedImagem;
     }
 }

@@ -39,11 +39,7 @@ public class LoginBean implements Serializable {
      */
     public String doLogin() {
 
-//        for (String user : users) {
-//            String dbUsername = user.split(":")[0];
-//            String dbPassword = user.split(":")[1];
         if (setPessoa()) {
-            System.out.println(usuario.getSenha());
             if (usuario.getSenha().equals(password)) {
                 loggedIn = true;
                 return navigationBean.redirectAdmin();
@@ -54,8 +50,6 @@ public class LoginBean implements Serializable {
         FacesMessage msg = new FacesMessage("Usuário ou senha incorretos!", "ERROR MSG");
         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
         FacesContext.getCurrentInstance().addMessage(null, msg);
-
-        // To to login page
         return navigationBean.login();
 
     }

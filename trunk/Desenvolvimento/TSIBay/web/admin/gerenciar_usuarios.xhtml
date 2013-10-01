@@ -10,56 +10,83 @@
         <c:if test="#{loginBean.tipoPessoa == 'admin'}">
             <div id="principal">
                 <h:form id="form">  
+                    <p:panel id="panel" header="Gerenciamento dos usuários"  closable="true" style="margin:10px;">
+                        <p:growl id="message" showDetail="true"/>  
+                        <p:dataTable var="pessoa"  value="#{listagemUsuariosBean.pessoas}" selection="#{listagemUsuariosBean.selectedPessoa}" editable="true" rowKey="#{pessoa.nome}" paginator="true" rows="10"  selectionMode="single" id="pessoaTable"
+                                     emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemUsuariosBean.filteredPessoas}" widgetVar="pessoasTable" >  
+                            <p:ajax event="rowSelect" update=":form" /> 
 
-                    <p:growl id="message" showDetail="true"/>  
-                    <p:dataTable var="pessoa" value="#{listagemUsuariosBean.pessoas}" selection="#{listagemUsuariosBean.selectedPessoa}" editable="true" rowKey="#{pessoa.nome}" paginator="true" rows="10"  selectionMode="single" id="pessoaTable">  
-                        <p:ajax event="rowSelect" update=":form" /> 
+                            <f:facet name="header" >
+                                <p:outputPanel>
+                                    <h:outputText value="Pesquisar: " />
+                                    <p:inputText id="globalFilter" onkeyup="pessoasTable.filter()"/>
+                                </p:outputPanel>
+                            </f:facet>
+                            <p:column headerText="id"
+                                      filterBy="#{pessoa.id}" 
+                                      filterMatchMode="contains"  style="width: 30px;">  
+                                <h:outputText value="#{pessoa.id}" />  
+                            </p:column>  
 
+                            <p:column headerText="Nome"
+                                      filterBy="#{pessoa.nome}" 
+                                      filterMatchMode="contains">  
+                                <h:outputText value="#{pessoa.nome}" />  
+                            </p:column>  
 
-                        <p:column headerText="id">  
-                            <h:outputText value="#{pessoa.id}" />  
-                        </p:column>  
+                            <p:column headerText="CPF"
+                                      filterBy="#{pessoa.cpf}" 
+                                      filterMatchMode="contains"
+                                      style="width: 30px;" filterMaxLength="11">  
+                                <h:outputText value="#{pessoa.cpf}" />   
+                            </p:column> 
 
-                        <p:column headerText="Nome">  
-                            <h:outputText value="#{pessoa.nome}" />  
-                        </p:column>  
+                            <p:column headerText="Email"
+                                      filterBy="#{pessoa.email}" 
+                                      filterMatchMode="contains"
+                                      style="width: 50px;"
+                                      >
+                                <h:outputText value="#{pessoa.email}" />   
+                            </p:column> 
 
-                        <p:column headerText="CPF">  
-                            <h:outputText value="#{pessoa.cpf}" />   
-                        </p:column> 
+                            <p:column headerText="Tipo"
+                                      filterBy="#{pessoa.tipo}" 
+                                      filterMatchMode="contains"
+                                      style="width: 30px;">  
+                                <h:outputText value="#{pessoa.tipo}" />   
+                            </p:column> 
 
-                        <p:column headerText="Email">  
-                            <h:outputText value="#{pessoa.email}" />   
-                        </p:column> 
+                            <p:column headerText="Login"
+                                      filterBy="#{pessoa.login}" 
+                                      filterMatchMode="contains"
+                                      style="width: 30px;">  
+                                <h:outputText value="#{pessoa.login}" />   
+                            </p:column> 
 
-                        <p:column headerText="Tipo">  
-                            <h:outputText value="#{pessoa.tipo}" />   
-                        </p:column> 
+                            <p:column headerText="Data Nasc." filterBy="#{pessoa.dtNascimento}" 
+                                      filterMatchMode="contains"
+                                      style="width: 30px;" >  
+                                <h:outputText value="#{pessoa.dtNascimento}" />   
+                            </p:column> 
 
-                        <p:column headerText="Login">  
-                            <h:outputText value="#{pessoa.login}" />   
-                        </p:column> 
+                            <p:column headerText="Data Cad." filterBy="#{pessoa.dtCadastro}" 
+                                      filterMatchMode="contains"
+                                      style="width: 30px;">  
+                                <h:outputText value="#{pessoa.dtCadastro}" />   
+                            </p:column>  
 
-                        <p:column headerText="Data Nasc.">  
-                            <h:outputText value="#{pessoa.dtNascimento}" />   
-                        </p:column> 
+                            <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
+                                <p:commandButton id="viewButton2" icon="ui-icon-trash" oncomplete="pessoaDelete.show()"/> 
+                            </p:column> 
 
-                        <p:column headerText="Data Cad.">  
-                            <h:outputText value="#{pessoa.dtCadastro}" />   
-                        </p:column>  
+                        </p:dataTable> 
 
-                        <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
-                            <p:commandButton id="viewButton2" icon="ui-icon-trash" oncomplete="pessoaDelete.show()"/> 
-                        </p:column> 
-
-                    </p:dataTable> 
-
-                    <p:confirmDialog id="dialog" message="Deseja excluir este registro?"  
-                                     header="Deletar registro" severity="alert" widgetVar="pessoaDelete"> 
-                        <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemUsuariosBean.deletePessoa}" oncomplete="pessoaDelete.hide(); #{listagemUsuariosBean.pessoas}"/>
-                        <p:commandButton value="Não" onclick="pessoaDelete.hide()" style="margin-left: 40px;"/>
-                    </p:confirmDialog>
-
+                            <p:confirmDialog id="dialogDelete" message="Deseja excluir este registro?"  
+                                             header="Deletar registro" severity="alert" widgetVar="pessoaDelete"> 
+                                <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemUsuariosBean.deletePessoa}" oncomplete="pessoaDelete.hide(); #{listagemUsuariosBean.pessoas}"/>
+                                <p:commandButton value="Não" onclick="pessoaDelete.hide()" style="margin-left: 40px;"/>
+                            </p:confirmDialog>
+                    </p:panel>
                 </h:form> 
             </div>
         </c:if>
