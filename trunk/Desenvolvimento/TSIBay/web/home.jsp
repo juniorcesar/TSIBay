@@ -80,9 +80,6 @@
                     },
                     success: function(data) {
                         $('#content').html(data);
-                    },
-                    error: function(data) {
-                        $('#content').html(data);
                     }
                 });
             }

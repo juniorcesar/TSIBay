@@ -77,6 +77,7 @@ public class ProdutoTransacao extends HttpServlet {
             Pessoa vendedor = produto.getPessoa();
             transacao.setComprador(comprador);
             transacao.setVendedor(vendedor);
+            transacao.setStatus("EM ANDAMENTO");
 
             daoTransacao.persistir(transacao);
 

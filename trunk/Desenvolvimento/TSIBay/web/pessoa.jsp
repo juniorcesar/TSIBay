@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TSIBay</title>
+        <script src="resources/js/libs/twitter-bootstrap/js/bootstrap.js"></script>
     </head>
     <body>
         <h2>Cadastro de pessoa</h2>
@@ -21,29 +22,29 @@
                 </tr>
                 <tr>
                     <td width="69">Nome:</td>
-                    <td width="546"><input name="nome" type="text" id="nome" size="70" maxlength="60" />
+                    <td width="546"><input name="nome" type="text" id="nome" size="70" maxlength="60" required=""/>
                 </tr>
                 <tr>
                     <td>Data Nasc.:</td>
-                    <td><input name="dtNascimento" type="text" id="dtNascimento" size="20" maxlength="10" />
+                    <td><input name="dtNascimento" type="text" id="dtNascimento" size="20" maxlength="10" required=""/>
                 </tr>                
                 <tr>
                     <td>CPF:</td>
-                    <td><input name="cpf" type="text" id="cpf" size="20" maxlength="11" />
+                    <td><input name="cpf" type="text" id="cpf" size="20" maxlength="11" required=""/>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input name="email" type="text" id="email" size="70" maxlength="60" />
+                    <td><input name="email" type="text" id="email" size="70" maxlength="60" required=""/>
                 </tr>
                 <tr>
                     <td>DDD:</td>
                     <td>
-                        <input name="ddd" type="text" id="ddd" size="4" maxlength="2" />
+                        <input name="ddd" type="text" id="ddd" size="4" maxlength="2" required=""/>
                         Telefone:
-                        <input name="telefone" type="text" id="telefone" />
+                        <input name="telefone" type="text" id="telefone" required=""/>
                         Tipo:
-                        <select name="tipoTelefone" id="tipoTelefone">
-                            <option>Selecione...</option>
+                        <select name="tipoTelefone" id="tipoTelefone" required="" >
+                            <option></option>
                             <option value="RESIDENCIAL">RESIDENCIAL</option>
                             <option value="CELULAR">CELULAR</option>
                             <option value="RESIDENCIAL">RESIDENCIAL</option>
@@ -56,8 +57,8 @@
                 </tr>
                 <tr>
                     <td>Tipo log.:</td>
-                    <td><select name="tipoLogradouro" id="tipoLogradouro">
-                            <option>Selecione...</option>
+                    <td><select name="tipoLogradouro" id="tipoLogradouro" required="">
+                            <option></option>
                             <option value="RUA">RUA</option>
                             <option value="AVENIDA">AVENIDA</option>
                             <option value="TRAVESSA">TRAVESSA</option>
@@ -68,9 +69,9 @@
                 </tr>
                 <tr>
                     <td>Logradouro</td>
-                    <td><input name="logradouro" type="text" id="logradouro" size="50" maxlength="70" />
+                    <td><input name="logradouro" type="text" id="logradouro" size="50" maxlength="70" required=""/>
                         Número
-                        <input name="numero" type="text" id="numero" size="8" maxlength="8" />
+                        <input name="numero" type="text" id="numero" size="8" maxlength="8" required=""/>
                     </td>
                 </tr>
                 <tr>
@@ -79,20 +80,20 @@
                 </tr>
                 <tr>
                     <td>Bairro:</td>
-                    <td><input name="bairro" type="text" id="bairro" size="50" maxlength="70" />
+                    <td><input name="bairro" type="text" id="bairro" size="50" maxlength="70" required=""/>
                 </tr>
                 <tr>
                     <td>CEP:</td>
-                    <td><input name="cep" type="text" id="cep" size="20" maxlength="10" />
+                    <td><input name="cep" type="text" id="cep" size="20" maxlength="10" required=""/>
                 </tr>                
                 <tr>
                     <td>Cidade:</td>
-                    <td><input name="cidade" type="text" id="cidade" size="50" maxlength="70" />
+                    <td><input name="cidade" type="text" id="cidade" size="50" maxlength="70" required=""/>
                 </tr>
                 <tr>
                     <td>Estado:</td>
-                    <td><select name="estado" id="estado">
-                            <option>Selecione...</option>
+                    <td><select name="estado" id="estado" required="">
+                            <option></option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
                             <option value="AP">AP</option>
@@ -124,18 +125,18 @@
                 </tr>
                 <tr>
                     <td>País</td>
-                    <td><input name="pais" type="text" id="pais" maxlength="20" value="BRASIL" />
+                    <td><input name="pais" type="text" id="pais" maxlength="20" value="BRASIL" required=""/>
                 </tr>
                 <tr>
                     <td width="69" colspan="2">Acesso ao site</td>
                 </tr>                
                 <tr>
                     <td>Login:</td>
-                    <td><input name="login" type="text" id="login" maxlength="12" />
+                    <td><input name="login" type="text" id="login" maxlength="12" required=""/>
                 </tr>
                 <tr>
                     <td>Senha:</td>
-                    <td><input name="senha" type="password" id="senha" maxlength="12" />
+                    <td><input name="senha" type="password" id="senha" maxlength="12" required=""/>
                 </tr>
                 <tr>
                     <td colspan="2"><input name="news" type="checkbox" id="news" value="ATIVO" checked="checked" />
