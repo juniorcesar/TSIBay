@@ -71,6 +71,22 @@
                 });
             }
 
+            function validaLogin(login, senha) {
+                $.ajax({
+                    type: 'POST',
+                    url: "LoginController",
+                    data: {
+                        login: login, senha: senha
+                    },
+                    success: function(data) {
+                        $('#content').html(data);
+                    },
+                    error: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
             function atualizaDivContentPessoa() {
                 $.ajax({
                     url: "pessoa.jsp",
@@ -99,8 +115,8 @@
                     success: function(data) {
                         $('#content').html(data);
                     },
-                    error: function (data) {
-                        alert(data);
+                    error: function(data) {
+                        alert("Informe quantidade válida!");
                     }
                 });
             }
@@ -163,7 +179,7 @@
                                         <ul>
                                             <li><a href="#" title="Empresa"><span>Empresa</span></a></li>
                                             <li><a href="#" title="Politica de Privacidade"><span>Politica de Privacidade</span></a></li>
-                                            <li><a href="#" title="Termos &amp; Condições"><span>Termos &amp; Condições</span></a></li>
+                                            <li><a href="#" title="Termos &amp; Condi趥s"><span>Termos &amp; Condições</span></a></li>
                                             <li><a href="#" title="Contato"><span>Contato</span></a></li>
                                             <li class="last"><a href="#" title="Mapa do Site"><span>Mapa do Site</span></a></li>
                                         </ul>
@@ -192,7 +208,7 @@
             <div id="footer">
                 <div class="shell">
                     <p class="bottom-menu"><a href="#" title="Home">Início</a><span>|</span><a href="#" title="Ofertas especiais">Ofertas especiais</a><span>|</span><a href="#" title="Login">Login</a><span>|</span><a href="#" title="Administração">Administração</a><span>|</span><a href="#" title="Checkout">Checkout</a><span>|</span><a href="#" title="Contato">Contato</a></p>
-                    <p>Copyright &copy; TSYBay 2013. Design by: <a href="#" title="Junior Cesar de Olivera &amp; Alecsandro Lauber">Junior Cesar de Olivera &amp; Alexsandro Lauber</a>. Todos os direitos reservados. </p>
+                    <p>Copyright &copy; TSYBay 2013. Design by: <a href="#" title="Junior Cesar de Olivera &amp; Alexsandro Lauber">Junior Cesar de Olivera &amp; Alexsandro Lauber</a>. Todos os direitos reservados. </p>
                     <div class="cl">&nbsp;</div>
                 </div>
             </div>

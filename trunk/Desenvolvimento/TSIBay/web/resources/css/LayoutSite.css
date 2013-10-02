@@ -40,11 +40,18 @@ textarea { overflow: auto; }
 
 /* Search */
 #search { background: url('../imagesSite/search-bg.png') repeat-x 0 0; padding-top: 5px; }
-#search form { float: right; display: inline; width: 193px; padding-right: 0px; padding-top: 8px;}
+#search form { float: right; display: inline; width: 330px; padding-right: 0px; padding-top: 8px;}
 #search input { background: none; border: none; }
-#search .container { background: url('../imagesSite/search-field.png') no-repeat 0 0; width: 118px; height: 26px; float: left; display: inline; }
-#search .container input { color: #0000CD; font-size: 12px; line-height: 16px; padding: 5px 9px; width: 119px; height: 16px; }
-#search .search-button { background: url('../imagesSite/search-button.png') no-repeat 0 0; width: 75px; height: 26px; cursor: pointer; font-size: 0; line-height: 0; text-indent: -4000px; float: left; display: inline; }
+#search .container { background: url('../imagesSite/search-field.png') ; width: 220px; height: 38px; float: left; display: inline; }
+#search .container input { color: #0000CD; font-size: 16px; line-height: 18px; padding: 5px 9px; width: 250px; height: 20px; }
+#search .search-button { background: url('../imagesSite/search-button.png') no-repeat 0 0; width: 110px; height: 40px; cursor: pointer; font-size: 0; line-height: 0; text-indent: -4000px; float: left; display: inline; }
+
+/* Login */
+#loginDiv form { float: right; display: inline; width: 193px; padding-right: 0px; padding-top: 8px;}
+#loginDiv input { background: none; border: none; }
+#loginDiv .container { background: url('../imagesSite/search-field.png') no-repeat 0 0; width: 140px; height: 26px; float: left; display: inline; }
+#loginDiv .container input { color: #0000CD; font-size: 16px; line-height: 1px; padding: 5px 9px; width: 119px; height: 16px; }
+#loginDiv .login-button { background: url('../imagesSite/login-button.png') no-repeat 0 0; width: 110px; height: 36px; cursor: pointer; font-size: 0; line-height: 0; text-indent: -4000px; float: left; display: inline; }
 
 /* Header */
 h1#logo { padding-top: 22px; padding-bottom: 5px; }
@@ -123,7 +130,7 @@ h1#logo a { width: 214px; height: 55px; background: url('../imagesSite/logo.png'
 #products .productselect .price { font-weight: bold; font-size: 18px; color: #0000CD; }
 #products .productselect .price span { color: #0000CD; display: inline; }
 #products .productselect p { font-weight: bold; font-size: 12px; color: #0000CD; }
-#products .productselect .comprar { position: absolute; bottom: 0; right: 21px; width: 164px; height: 405px; background: url('../imagesSite/product-comprar.png') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px;}
+#products .productselect .comprar { position: absolute; bottom: 0; right: 21px; width: 230px; height: 415px; background: url('../imagesSite/product-comprar.png') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px;}
 #slider li .more { position: absolute; bottom: 0; right: 21px; width: 164px; height: 69px; background: url('../imagesSite/slide-more.png') no-repeat 0 0;  }
 
 #pessoa  { float: left; display: inline; padding-right: 5px; padding-bottom: 34px; text-align: left; position: relative; overflow: hidden; width: 500px; }

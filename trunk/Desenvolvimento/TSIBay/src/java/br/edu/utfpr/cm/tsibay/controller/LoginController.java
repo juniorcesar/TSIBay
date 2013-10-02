@@ -34,14 +34,17 @@ public class LoginController extends HttpServlet {
         DaoPessoa pessoaDao = new DaoPessoa();
         Pessoa comprador = pessoaDao.getLogin(login, senha);
 
+        HttpSession s = request.getSession();
+        s.setAttribute("comprador", comprador);
+
         if (comprador != null) {
-            HttpSession s = request.getSession();
-            s.setAttribute("comprador", comprador);
             s.setAttribute("login_id", comprador.getId());
-            RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+            request.setAttribute("erroLogin", "Login efetuado com sucesso!!!");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(req, resp);
         } else {
-//            resp.sendError(resp.SC_FORBIDDEN, "Login falhou, verifique os dados informados.");
+            s.setAttribute("login_id", null);
+            request.setAttribute("erroLogin", "Usuário ou senha incorretos!");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(req, resp);
         }

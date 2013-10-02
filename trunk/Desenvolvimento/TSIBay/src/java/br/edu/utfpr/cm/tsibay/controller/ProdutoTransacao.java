@@ -55,10 +55,14 @@ public class ProdutoTransacao extends HttpServlet {
 
         produto = daoProduto.obterPorId(Integer.parseInt(request.getParameter("idProduto")));
 
-        if (produto.getQtdeDisponivel() < Integer.parseInt(request.getParameter("qtdeCompra"))) {
+        if (request.getParameter("idComprador").equals("")) {
+            request.setAttribute("erroLogin", "Efetue Login para fazer compra!");
+            response.sendRedirect("login.jsp");
+        } else if (produto.getQtdeDisponivel() < Integer.parseInt(request.getParameter("qtdeCompra"))) {
             transacao.setQtdeProduto(Integer.parseInt(request.getParameter("qtdeCompra")));
             s.setAttribute("produtoTransacao", transacao);
             s.setAttribute("produtoPesquisa", produto);
+            response.sendRedirect("produtoTransacao.jsp");
         } else {
             transacao.setProduto(produto);
             transacao.setValorUnitario(produto.getPrecoVenda());
@@ -94,8 +98,8 @@ public class ProdutoTransacao extends HttpServlet {
             s.setAttribute("vendedor", vendedor);
             s.setAttribute("produtoTransacao", transacao);
             s.setAttribute("valorTransacao", valorTransacao);
+            response.sendRedirect("produtoTransacao.jsp");
         }
-        response.sendRedirect("produtoTransacao.jsp");
     }
 
     @Override

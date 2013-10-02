@@ -32,7 +32,7 @@
                     <span class="price">Produto esgotado!</span>
                 </c:if>
                 <c:if test="${produtoPesquisa.qtdeDisponivel != '0'}">                
-                    <span class="price">Quantidade <input type="text" name="qtdeCompra" id="qtdeCompra" /></span>
+                    <span class="price">Quantidade <input type="text" name="qtdeCompra" id="qtdeCompra" required=""/></span>
                     <a href="#content" class="comprar" title="Comprar" onclick="atualizaDivContentVenda(${produtoPesquisa.id}, $('#qtdeCompra').val(), ${login_id})"></a>
                 </c:if>
                 </br>
