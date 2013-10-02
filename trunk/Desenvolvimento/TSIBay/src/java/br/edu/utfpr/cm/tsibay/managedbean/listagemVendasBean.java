@@ -6,6 +6,7 @@ package br.edu.utfpr.cm.tsibay.managedbean;
 
 import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.daos.DaoTransacao;
+import br.edu.utfpr.cm.tsibay.model.Produto;
 import br.edu.utfpr.cm.tsibay.model.Status;
 import br.edu.utfpr.cm.tsibay.model.Transacao;
 import br.edu.utfpr.cm.tsibay.util.Moeda;
@@ -15,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -22,11 +24,13 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "listagemVendasBean")
 @RequestScoped
-public class listagemVendasBean implements Serializable{
+public class listagemVendasBean implements Serializable {
 
     private List<Transacao> vendas;
     private Transacao selectedVenda;
     private DaoTransacao daoVenda = new DaoTransacao();
+    private List<Transacao> filteredTransacoes;
+    private SelectItem[] itens;
 
     public Transacao getSelectedVenda() {
         return selectedVenda;
@@ -96,5 +100,19 @@ public class listagemVendasBean implements Serializable{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível concluir a venda."));
             ex.printStackTrace();
         }
+    }
+
+    public List<Transacao> getFilteredTransacoes() {
+        return filteredTransacoes;
+    }
+
+    public void setFilteredTransacoes(List<Transacao> filteredTransacoes) {
+        this.filteredTransacoes = filteredTransacoes;
+    }
+
+    public SelectItem[] getItens() {
+        daoVenda = new DaoTransacao();
+        vendas = daoVenda.listar();
+        return itens;
     }
 }

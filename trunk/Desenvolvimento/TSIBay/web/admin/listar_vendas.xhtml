@@ -9,11 +9,17 @@
     <c:if test="#{loginBean.loggedIn}">
         <div id="principal">
             <h:form id="form">  
-                <p:panel id="panel" header="Vendas em andamento"  closable="true" style="margin:10px;">
+                <p:panel id="panel" header="Vendas realizadas"  closable="true" style="margin:10px;">
                     <p:growl id="message" showDetail="true"/>  
-                    <p:dataTable var="vendas" value="#{listagemVendasBean.totalVendas}" paginator="true" rows="20" selection="#{listagemVendasBean.selectedVenda}" editable="true" rowKey="#{vendas.id}"  selectionMode="single" id="vendasTable">  
+                    <p:dataTable var="vendas" value="#{listagemVendasBean.totalVendas}" paginator="true" rows="20" selection="#{listagemVendasBean.selectedVenda}" editable="true" rowKey="#{vendas.id}"  selectionMode="single" id="vendasTable"
+                                 emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemVendasBean.filteredTransacoes}" widgetVar="transacoesTable" >  
                         <p:ajax event="rowSelect" update=":form" /> 
-
+                        <f:facet name="header" >
+                            <p:outputPanel style="margin-left: 60%;">
+                                <h:outputText value="Pesquisar: "/>
+                                <p:inputText id="globalFilter" onkeyup="transacoesTable.filter()"/>
+                            </p:outputPanel>
+                        </f:facet>
                         <p:column headerText="id">  
                             <h:outputText value="#{vendas.id}" />  
                         </p:column>  
@@ -49,12 +55,21 @@
                         <p:column headerText="Status">  
                             <h:outputText value="#{vendas.status}"/>   
                         </p:column>
-                        <p:column headerText="Tipo Pag.">  
-                            <h:outputText value="#{vendas.tpPagamento}"/>   
+                        <p:column headerText="Frete">  
+                            <h:outputText value="#{vendas.frete}"/>   
                         </p:column>
-                        <p:column headerText="Validade">  
-                            <h:outputText value="#{vendas.prazoValidade}"/>   
-                        </p:column>
+<!--                        <p:column headerText="Validade">  
+                            <h:outputText value="{vendas.prazoValidade}"/>   
+                        </p:column>-->
+                        <p:column filterBy="#{vendas.id}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.comprador.nome}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.produto.nome}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.qtdeProduto}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.status}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.data}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.tpPagamento}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.valorTotal}" rendered="false"/>  
+                        <p:column filterBy="#{vendas.frete}" rendered="false"/>  
                     </p:dataTable> 
                     <h:outputLabel value="Valor total das vendas realizadas #{listagemVendasBean.valorTotalVendas}"  style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"/>  
                 </p:panel> 

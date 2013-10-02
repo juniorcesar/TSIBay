@@ -15,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -22,11 +23,13 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "listagemComprasBean")
 @RequestScoped
-public class listagemComprasBean implements Serializable{
+public class listagemComprasBean implements Serializable {
 
     private List<Transacao> compras;
     private Transacao selectedCompra;
     private DaoTransacao daoCompra = new DaoTransacao();
+    private List<Transacao> filteredTransacoes;
+    private SelectItem[] itens;
 
     public Transacao getSelectedCompra() {
         return selectedCompra;
@@ -76,5 +79,19 @@ public class listagemComprasBean implements Serializable{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível cancelar a compra."));
             ex.printStackTrace();
         }
+    }
+
+    public List<Transacao> getFilteredTransacoes() {
+        return filteredTransacoes;
+    }
+
+    public void setFilteredTransacoes(List<Transacao> filteredTransacoes) {
+        this.filteredTransacoes = filteredTransacoes;
+    }
+
+    public SelectItem[] getItens() {
+        daoCompra = new DaoTransacao();
+        compras = daoCompra.listar();
+        return itens;
     }
 }

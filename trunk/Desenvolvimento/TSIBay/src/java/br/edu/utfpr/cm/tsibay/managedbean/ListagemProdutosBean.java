@@ -6,6 +6,8 @@ package br.edu.utfpr.cm.tsibay.managedbean;
 
 import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
+import br.edu.utfpr.cm.tsibay.daos.DaoTransacao;
+import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -24,16 +27,9 @@ public class ListagemProdutosBean {
 
     private List<Produto> listaProdutos;
     public Produto produtoSelecionado;
-    private List<Produto> produtoFiltrado;
+    private List<Produto> filteredProdutos;
+    private SelectItem[] itens;
     private DaoProduto daoProduto = new DaoProduto();
-
-    public List<Produto> getProdutoFiltrado() {
-        return produtoFiltrado;
-    }
-
-    public void setProdutoFiltrado(List<Produto> produtoFiltrado) {
-        this.produtoFiltrado = produtoFiltrado;
-    }
 
     public List<Produto> getListaProdutos() {
         if (LoginBean.usuario.getTipo().equals("admin")) {
@@ -73,12 +69,42 @@ public class ListagemProdutosBean {
 //        context.addMessage(null, new FacesMessage("Second Message", "Additional Info Here..."));
     }
 
-    public void removeProduto() {
-        daoProduto.remover(produtoSelecionado);
-
-        this.produtoSelecionado = new Produto();
+    public void deleteProduto() {
         FacesContext context = FacesContext.getCurrentInstance();
+        try {
 
-        context.addMessage(null, new FacesMessage("Successful", "Sala Excluida!"));
+            if (produtoSelecionado != null) {
+                if (!new DaoTransacao().verificaDependencias(produtoSelecionado)) {
+                    daoProduto.remover(produtoSelecionado);
+
+                    this.produtoSelecionado = new Produto();
+                    context.addMessage(null, new FacesMessage("Sucesso", "Produto removido com sucesso!"));
+                } else {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", "Não é possível remover o produto, pois o mesmo está associado à uma ou mais transações!"));
+                }
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Atenção", "Selecione um produto para ser removido!"));
+            }
+
+        } catch (Exception ex) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Não foi possível remover o produto!"));
+            ex.printStackTrace();
+
+        }
+
+    }
+
+    public List<Produto> getFilteredProdutos() {
+        return filteredProdutos;
+    }
+
+    public void setFilteredProdutos(List<Produto> filteredProdutos) {
+        this.filteredProdutos = filteredProdutos;
+    }
+
+    public SelectItem[] getItens() {
+        daoProduto = new DaoProduto();
+        listaProdutos = daoProduto.listar();
+        return itens;
     }
 }

@@ -7,7 +7,6 @@ package br.edu.utfpr.cm.tsibay.managedbean;
 import br.edu.utfpr.cm.tsibay.admin.login.LoginBean;
 import br.edu.utfpr.cm.tsibay.controller.UploadArquivo;
 import br.edu.utfpr.cm.tsibay.daos.DaoFamilia;
-import br.edu.utfpr.cm.tsibay.daos.DaoPessoa;
 import br.edu.utfpr.cm.tsibay.daos.DaoProduto;
 import br.edu.utfpr.cm.tsibay.model.Familia;
 import br.edu.utfpr.cm.tsibay.model.Imagem;

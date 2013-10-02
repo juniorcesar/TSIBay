@@ -4,6 +4,7 @@
  */
 package br.edu.utfpr.cm.tsibay.model;
 
+import br.edu.utfpr.cm.tsibay.daos.DaoComissao;
 import br.edu.utfpr.cm.tsibay.util.Moeda;
 import java.io.Serializable;
 import java.util.Date;
@@ -77,14 +78,14 @@ public class Transacao implements Serializable {
     public Double getValorUnitario() {
         return valorUnitario;
     }
-    
-    public String getValorUnitarioFormatado(){
+
+    public String getValorUnitarioFormatado() {
         return Moeda.mascaraDinheiro(valorUnitario, Moeda.DINHEIRO_REAL);
     }
-    
-    public String getValorTotalFormatado(){
+
+    public String getValorTotalFormatado() {
         return Moeda.mascaraDinheiro((valorUnitario * qtdeProduto), Moeda.DINHEIRO_REAL);
-        
+
     }
 
     public void setValorUnitario(Double valorUnitario) {
@@ -141,5 +142,11 @@ public class Transacao implements Serializable {
 
     public Double getValorTotal() {
         return (valorUnitario * qtdeProduto);
+    }
+
+    public String getCalculoComissao() {
+        DaoComissao daoComissao = new DaoComissao();
+        Double total = (getValorTotal() * (daoComissao.obterComissaoAtual()/100));
+        return Moeda.mascaraDinheiro(total, Moeda.DINHEIRO_REAL);
     }
 }

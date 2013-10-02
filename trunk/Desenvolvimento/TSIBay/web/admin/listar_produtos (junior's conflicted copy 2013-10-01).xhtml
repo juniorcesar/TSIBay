@@ -94,42 +94,14 @@
                     <p:dialog id="produtoDialog" dynamic="true" modal="true" width="52%" header="Cadastro do produto" widgetVar="prod">  
                         <h:form id="produto" > 
 
-<!--                                
-                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px;" >
-                                    <c:if test="#{produtoBean.verificaQuantidade()}">
-                                        <p:fileUpload  id="upload" fileUploadListener="#{produtoBean.uploadAction}" invalidFileMessage="Arquivo inválido. São permitidos somente arquivos .png, .jpeg, .gif e .jpg." mode="advanced" dragDropSupport="false" auto="true"
-                                                       allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="listaImagens" />  
-                                    </c:if>
-                                    <p:dataTable id="listaImagens" var="imagem" value="#{produtoBean.imagens}" selection="#{produtoBean.selectedImagem}" editable="true" rowKey="#{imagem.imagem}"  selectionMode="single"  style="margin-top: 15px;width: 600px;" >  
-                                        <p:ajax event="rowSelect" />
-                                        <p:column headerText="Nome" width="15%">  
-                                            <h:outputText value="#{imagem.imagem}" />  
-                                        </p:column>  
-                                        <p:column headerText="Imagem">  
-                                            <h:graphicImage value="resources/produtos/#{listagemProdutosBean.produtoSelecionado.id}/#{imagem.imagem}" width="70px" height="70px"/>
-                                        </p:column>  
-                                        <p:column headerText="Principal" width="5%">  
-                                            <p:selectBooleanButton  value="#{imagem.principal}"  onLabel="Sim" offLabel="Não" />  
-                                        </p:column>  
-                                        <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
-                                            <p:commandButton id="delImagem" icon="ui-icon-trash" oncomplete="imagemDelete.show()"/> 
-                                        </p:column> 
-                                    </p:dataTable>
-                                    <p:confirmDialog id="dialog" message="Deseja excluir esta imagem?"  
-                                                     header="Deletar imagem" severity="alert" widgetVar="imagemDelete"> 
-                                        <p:commandButton value="Sim" style="margin-left: 25px;" update="listaImagens"  action="#{produtoBean.imagemDelete}" oncomplete="imagemDelete.hide(); #{produtoBean.imagens}"/>
-                                        <p:commandButton value="Não" onclick="imagemDelete.hide()" style="margin-left: 40px;"/>
-                                    </p:confirmDialog>
-                                </p:fieldset>-->
-
                             <p:scrollPanel style="height:550px;">
                                 <p:growl id="growl" showDetail="true" sticky="true" />  
-                               <p:fieldset legend="Dados do Produto">  
+                                <p:fieldset legend="Dados do Produto">  
 
                                     <h:panelGrid columns="4" cellpadding="3">  
 
                                         <h:outputLabel for="id" value="Id:" />  
-                                        <p:inputText id="id" value="#{listagemProdutosBean.produtoSelecionado}"  readonly="true" size="15" style="margin-left: 55px"/>  
+                                        <p:inputText id="id" value="#{listagemProdutosBean.produtoSelecionado.id}"  readonly="true" size="15" style="margin-left: 55px"/>  
 
                                         <h:outputLabel for="data" value="Data cadastro:" style="margin-left: 13px" />  
                                         <p:calendar value="#{listagemProdutosBean.produtoSelecionado.data}" id="popupCal" readonly="true" size="15" disabled="true"/>
@@ -220,9 +192,31 @@
 
                                     </h:panelGrid>
                                 </p:fieldset>
-                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px" >
-                                    <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                                                  multiple="true" sizeLimit="999999"  allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />  
+                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px;" >
+                                    <c:if test="#{produtoBean.verificaQuantidade()}">
+                                        <p:fileUpload  id="upload" fileUploadListener="#{produtoBean.uploadAction}" invalidFileMessage="Arquivo inválido. São permitidos somente arquivos .png, .jpeg, .gif e .jpg." mode="advanced" dragDropSupport="false" auto="true"
+                                                       allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="listaImagens" />  
+                                    </c:if>
+                                    <p:dataTable id="listaImagens" var="imagem" value="#{produtoBean.imagens}" selection="#{produtoBean.selectedImagem}" editable="true" rowKey="#{imagem.imagem}"  selectionMode="single"  style="margin-top: 15px;width: 600px;" >  
+                                        <p:ajax event="rowSelect" />
+                                        <p:column headerText="Nome" width="15%">  
+                                            <h:outputText value="#{imagem.imagem}" />  
+                                        </p:column>  
+                                        <p:column headerText="Imagem">  
+                                            <h:graphicImage value="resources/produtos/#{produtoBean.id}/#{imagem.imagem}" width="70px" height="70px"/>
+                                        </p:column>  
+                                        <p:column headerText="Principal" width="5%">  
+                                            <p:selectBooleanButton  value="#{imagem.principal}"  onLabel="Sim" offLabel="Não" />  
+                                        </p:column>  
+                                        <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
+                                            <p:commandButton id="delImagem" icon="ui-icon-trash" oncomplete="imagemDelete.show()"/> 
+                                        </p:column> 
+                                    </p:dataTable>
+                                    <p:confirmDialog id="dialog" message="Deseja excluir esta imagem?"  
+                                                     header="Deletar imagem" severity="alert" widgetVar="imagemDelete"> 
+                                        <p:commandButton value="Sim" style="margin-left: 25px;" update="listaImagens"  action="#{produtoBean.imagemDelete}" oncomplete="imagemDelete.hide(); #{produtoBean.imagens}"/>
+                                        <p:commandButton value="Não" onclick="imagemDelete.hide()" style="margin-left: 40px;"/>
+                                    </p:confirmDialog>
                                 </p:fieldset>
 
                                 <h:panelGrid columns="2" cellpadding="3">

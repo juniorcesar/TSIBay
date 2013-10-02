@@ -1,9 +1,12 @@
 package br.edu.utfpr.cm.tsibay.admin.login;
 
+import br.edu.utfpr.cm.tsibay.daos.DaoComissao;
 import br.edu.utfpr.cm.tsibay.daos.DaoPessoa;
+import br.edu.utfpr.cm.tsibay.model.Comissao;
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Telefone;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +45,13 @@ public class LoginBean implements Serializable {
         if (setPessoa()) {
             if (usuario.getSenha().equals(password)) {
                 loggedIn = true;
+                DaoComissao daoComissao = new DaoComissao();
+                if (daoComissao.listar().isEmpty()) {
+                    Comissao c = new Comissao();
+                    c.setData(new Date());
+                    c.setPorcentagem(5D);
+                    daoComissao.persistir(c);
+                }
                 return navigationBean.redirectAdmin();
             }
         }
@@ -149,6 +159,4 @@ public class LoginBean implements Serializable {
     public void setUsuario(Pessoa usuario) {
         LoginBean.usuario = usuario;
     }
-    
-    
 }

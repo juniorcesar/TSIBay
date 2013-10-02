@@ -12,9 +12,15 @@
             <h:form id="form">  
                 <p:panel id="panel" header="Movimentações do sistema"  closable="true" style="margin:10px;">
                     <p:growl id="message" showDetail="true"/>  
-                    <p:dataTable var="transacoes" value="#{listagemMovimentacoesBean.transacoes}" selection="#{listagemMovimentacoesBean.selectedTransacao}" editable="true" rowKey="#{transacoes.id}"  paginator="true" rows="25"  selectionMode="single" id="transacoesTable">  
+                    <p:dataTable var="transacoes" value="#{listagemMovimentacoesBean.transacoes}" selection="#{listagemMovimentacoesBean.selectedTransacao}" editable="true" rowKey="#{transacoes.id}"  paginator="true" rows="25"  selectionMode="single" id="movimentacoesTable"
+                                 emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemMovimentacoesBean.filteredTransacoes}" widgetVar="transacoesTable" >  
                         <p:ajax event="rowSelect" update=":form" /> 
-
+                        <f:facet name="header" >
+                            <p:outputPanel style="margin-left: 60%;">
+                                <h:outputText value="Pesquisar: "/>
+                                <p:inputText id="globalFilter" onkeyup="transacoesTable.filter()"/>
+                            </p:outputPanel>
+                        </f:facet>
                         <p:column headerText="id">  
                             <h:outputText value="#{transacoes.id}" />  
                         </p:column>  
@@ -31,7 +37,7 @@
                             <h:outputText value="#{transacoes.produto.nome}" />   
                         </p:column> 
 
-                        <p:column headerText="Quantidade">  
+                        <p:column headerText="Qtde" width="15">  
                             <h:outputText value="#{transacoes.qtdeProduto}" />   
                         </p:column> 
 
@@ -39,11 +45,14 @@
                             <h:outputText value="#{transacoes.valorUnitarioFormatado}" />   
                         </p:column> 
 
-                        <p:column headerText="Valor Total">  
+                        <p:column headerText="Total">  
                             <h:outputText value="#{transacoes.valorTotalFormatado}" />   
                         </p:column> 
 
                         <p:column headerText="Comprador">  
+                            <h:outputText value="#{transacoes.comprador.nome}" />   
+                        </p:column>  
+                        <p:column headerText="Vendedor">  
                             <h:outputText value="#{transacoes.vendedor.nome}" />   
                         </p:column>  
 
@@ -53,9 +62,20 @@
                         <p:column headerText="Tipo Pag.">  
                             <h:outputText value="#{transacoes.tpPagamento}"/>   
                         </p:column>
-                        <p:column headerText="Validade">  
-                            <h:outputText value="#{transacoes.prazoValidade}"/>   
-                        </p:column>
+<!--                        <p:column headerText="Validade">  
+                            <h:outputText value="{transacoes.prazoValidade}"/>   
+                        </p:column>-->
+                        <p:column filterBy="#{transacoes.id}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.comprador.nome}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.vendedor.nome}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.produto.nome}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.qtdeProduto}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.status}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.data}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.tpPagamento}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.valorTotal}" rendered="false"/>  
+                        <p:column filterBy="#{transacoes.frete}" rendered="false"/>  
+
                     </p:dataTable> 
                     <h:outputLabel value="Valor total das transacoes realizadas #{listagemMovimentacoesBean.valorTotal}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"></h:outputLabel>  
                 </p:panel> 

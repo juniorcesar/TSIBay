@@ -10,27 +10,8 @@
             <h:form id="form">
                 <p:growl id="growl" showDetail="true" sticky="true" />  
                 <p:panel id="panel" header="Comissões à pagar"  closable="true" style="margin:10px;"> 
-                    <h:panelGrid columns="3" cellpadding="5">
-                        <h:outputLabel for="senhaAtual" value="SenhaAtual:*" />
-                        <p:password id="senhaAtual" value="#{senhaBean.senhaAtual}" required="true" label="SenhaAtual">  
-                        </p:password>  
-                        <p:message for="senhaAtual" /> 
-                        
-                        <h:outputLabel for="senhaNova" value="Nova Senha:*" />
-                        <p:password id="senhaNova" value="#{senhaBean.senhaNova}" required="true" label="Nova Senha" feedback="true">  
-                            <f:validateLength minimum="6" />  
-                        </p:password>  
-                        <p:message for="senhaNova" /> 
-                        
-                        <h:outputLabel for="confirma" value="Confirmação:*" />
-                        <p:password id="confirma" value="#{senhaBean.senhaConfirmacao}" required="true" label="Confirmação" feedback="true">  
-                            <f:validateLength minimum="6" />  
-                        </p:password>  
-                        <p:message for="confirma" /> 
-
-                    </h:panelGrid>
-                    <h:panelGrid style="margin-left: 95px;" columns="2" cellpadding="5">
-                        <p:commandButton value="Atualizar senha" update="form:growl"  action="#{senhaBean.atualizaSenha()}" ajax="false"  />
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="porcentagemAtual" value="Porcentagem da comissão à pagar por produto vendido é de  #{comissaoBean.porcentagemAtual}%." style="font-size: 15px;font-weight: bold;" />  
                     </h:panelGrid>
                 </p:panel>
             </h:form>
