@@ -13,6 +13,7 @@ import br.edu.utfpr.cm.tsibay.model.Imagem;
 import br.edu.utfpr.cm.tsibay.model.Pessoa;
 import br.edu.utfpr.cm.tsibay.model.Produto;
 import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -183,5 +184,13 @@ public class ProdutoBean implements Serializable {
 
     public void setSelectedImagem(Imagem selectedImagem) {
         this.selectedImagem = selectedImagem;
+    }
+    
+    public List<String> getTiposPagamento(){
+        List<String> tipos = new ArrayList<String>();
+        tipos.add("À Combinar");
+        tipos.add("Grátis");
+        tipos.add("Por conta do comprador");
+        return tipos;
     }
 }
