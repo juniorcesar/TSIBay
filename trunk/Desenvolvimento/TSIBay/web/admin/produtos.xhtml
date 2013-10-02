@@ -94,10 +94,10 @@
                         <h:panelGrid columns="3" cellpadding="3">  
 
                             <h:outputLabel for="frete" value="Frete*:" />  
-                            <p:selectOneMenu id="frete"  value="#{produtoBean.produto.frete}" required="true" requiredMessage="É obrigatório informar o frete!" style="margin-left: 96px">  
-                                <f:selectItem itemLabel="À Combinar" itemValue="À Combinar" />  
-                                <f:selectItem itemLabel="Grátis" itemValue="Grátis" /> 
-                                <f:selectItem itemLabel="Por conta do comprador" itemValue="Por conta do comprador" />  
+                            <p:selectOneMenu id="frete"  value="#{produtoBean.produto.frete}" requiredMessage="É obrigatório informar o frete!" style="margin-left: 96px">  
+                                <f:selectItem itemLabel="À Combinar" itemValue="0" />  
+                                <f:selectItem itemLabel="Grátis" itemValue="1" /> 
+                                <f:selectItem itemLabel="Por conta do comprador" itemValue="2" />  
                             </p:selectOneMenu>
                             <p:message for="frete" /> 
 
