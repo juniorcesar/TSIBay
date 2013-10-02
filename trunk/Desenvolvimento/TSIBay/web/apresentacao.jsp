@@ -15,7 +15,7 @@
         <!-- Begin Apresentacao -->
         <h2>Quem somos</h2>
             
-        <h3>A empresa TSIBay surgiu em meados de agosto de 2013.
+        A empresa TSIBay surgiu em meados de agosto de 2013.
             </br>
             </br>
             A motivação foi provocada pela necessidade de cumprimento do programa 
@@ -25,7 +25,7 @@
             desenvolvimento de um sistema de e-commerce.
             </br>
             </br>
-            Por isso, aqui estamos!...</h3>
+            Por isso, aqui estamos!...
         <!-- End Apresentacao -->
     </body>
 </html>

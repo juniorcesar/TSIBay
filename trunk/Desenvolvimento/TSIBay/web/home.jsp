@@ -71,6 +71,15 @@
                 });
             }
 
+            function atualizaDivContentTermos() {
+                $.ajax({
+                    url: "termos.jsp",
+                    success: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
             function validaLogin(login, senha) {
                 $.ajax({
                     type: 'POST',
@@ -79,9 +88,6 @@
                         login: login, senha: senha
                     },
                     success: function(data) {
-                        $('#content').html(data);
-                    },
-                    error: function(data) {
                         $('#content').html(data);
                     }
                 });
@@ -99,6 +105,24 @@
             function atualizaDivContentApresentacao() {
                 $.ajax({
                     url: "apresentacao.jsp",
+                    success: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
+            function atualizaDivContentContato() {
+                $.ajax({
+                    url: "contato.jsp",
+                    success: function(data) {
+                        $('#content').html(data);
+                    }
+                });
+            }
+
+            function atualizaDivContentPrivacidade() {
+                $.ajax({
+                    url: "privacidade.jsp",
                     success: function(data) {
                         $('#content').html(data);
                     }
@@ -139,7 +163,7 @@
                         <li><a href="#content" onclick="atualizaDivContentLogin()" title="Login">Login</a></li>
                         <li><a href="#content" onclick="atualizaDivContentPessoa()" title="Cadastro">Cadastro</a></li>
                         <li><a href="faces/admin/login.xhtml" title="Administração" target="blank">Administração</a></li>
-                        <li><a href="#" title="Contact">Contato</a></li>
+                        <li><a href="#content" onclick="atualizaDivContentContato()" title="Contato">Contato</a></li>
                         <li><a> Usuário logado: 
                                 <c:if test="${comprador.login != ''}">
                                     ${comprador.nome}
@@ -177,11 +201,10 @@
                                     <h2>Informações</h2>
                                     <div class="widget-entry">
                                         <ul>
-                                            <li><a href="#" title="Empresa"><span>Empresa</span></a></li>
-                                            <li><a href="#" title="Politica de Privacidade"><span>Politica de Privacidade</span></a></li>
-                                            <li><a href="#" title="Termos &amp; Condi趥s"><span>Termos &amp; Condições</span></a></li>
-                                            <li><a href="#" title="Contato"><span>Contato</span></a></li>
-                                            <li class="last"><a href="#" title="Mapa do Site"><span>Mapa do Site</span></a></li>
+                                            <li><a href="#content" onclick="atualizaDivContentApresentacao()" title="Empresa"><span>Empresa</span></a></li>
+                                            <li><a href="#content" onclick="atualizaDivContentPrivacidade()" title="Termos &amp; Condi趥s"><span>Politica de Privacidade</span></a></li>
+                                            <li><a href="#content" onclick="atualizaDivContentTermos()" title="Termos &amp; Condi趥s"><span>Termos &amp; Condições</span></a></li>
+                                            <li><a href="#content" onclick="atualizaDivContentContato()" title="Contato"><span>Contato</span></a></li>
                                         </ul>
                                     </div>
                                 </li>
