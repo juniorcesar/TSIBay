@@ -61,7 +61,7 @@
                         <p:column headerText="Comissão">  
                             <h:outputText value="#{vendas.calculoComissao}"/>   
                         </p:column>
-                        <p:column headerText="Opções" colspan="2" style="text-align: center;">  
+                        <p:column exportable="false" headerText="Opções" colspan="2" style="text-align: center;">  
                             <p:commandButton id="cancelar" title="Cancelar Venda" icon="ui-icon-circle-close" oncomplete="vendaCancelar.show()"  style="text-align: center;font-size: 12px;" /> 
                             <p:commandButton id="concluir" title="Concluir Venda" icon="ui-icon-circle-check" oncomplete="vendaConcluir.show()" style="text-align: center;font-size: 12px;" /> 
                         </p:column>
@@ -75,6 +75,26 @@
                         <p:column filterBy="#{vendas.valorTotal}" rendered="false"/>  
                         <p:column filterBy="#{vendas.frete}" rendered="false"/>  
                     </p:dataTable> 
+                         <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                        <p:dataExporter type="xls" target="vendasTable" fileName="vendas"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                        <p:dataExporter type="pdf" target="vendasTable" fileName="vendas"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                        <p:dataExporter type="csv" target="vendasTable" fileName="vendas"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                        <p:dataExporter type="xml" target="vendasTable" fileName="vendas"/>  
+                    </h:commandLink>  
+                    <br /> <br />
                     <h:outputLabel value="Valor total das vendas em andamento #{listagemVendasBean.valorTotalVendas}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"/>  
 
                     <p:confirmDialog id="dialogCancelar" message="Deseja cancelar esta venda?"  

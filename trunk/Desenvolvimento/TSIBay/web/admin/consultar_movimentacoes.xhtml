@@ -77,6 +77,26 @@
                         <p:column filterBy="#{transacoes.frete}" rendered="false"/>  
 
                     </p:dataTable> 
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                        <p:dataExporter type="xls" target="transacoesTable" fileName="movimentações"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                        <p:dataExporter type="pdf" target="transacoesTable" fileName="movimentações"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                        <p:dataExporter type="csv" target="transacoesTable" fileName="movimentações"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                        <p:dataExporter type="xml" target="transacoesTable" fileName="movimentações"/>  
+                    </h:commandLink>  
+                    <br /> <br />
                     <h:outputLabel value="Valor total das transacoes realizadas #{listagemMovimentacoesBean.valorTotal}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"></h:outputLabel>  
                 </p:panel> 
             </h:form> 

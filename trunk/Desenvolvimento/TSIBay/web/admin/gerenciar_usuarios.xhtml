@@ -53,7 +53,7 @@
                             <p:column headerText="Data Cad.">  
                                 <h:outputText value="#{pessoa.dtCadastro}" />   
                             </p:column>  
-                            <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
+                            <p:column exportable="false" headerText="Excluir" style="width:4%;text-align: center;"> 
                                 <p:commandButton id="viewButton2" icon="ui-icon-trash" oncomplete="pessoaDelete.show()"/> 
                             </p:column> 
                             <p:column filterBy="#{pessoa.id}" rendered="false"/>  
@@ -66,7 +66,26 @@
                             <p:column filterBy="#{pessoa.tipo}" rendered="false"/>  
 
                         </p:dataTable> 
+                        <h:commandLink>  
+                            <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                            <p:dataExporter type="xls" target="pessoaTable" fileName="usuarios"/>  
+                        </h:commandLink>  
 
+                        <h:commandLink>  
+                            <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                            <p:dataExporter type="pdf" target="pessoaTable" fileName="usuarios"/>  
+                        </h:commandLink>  
+
+                        <h:commandLink>  
+                            <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                            <p:dataExporter type="csv" target="pessoaTable" fileName="usuarios"/>  
+                        </h:commandLink>  
+
+                        <h:commandLink>  
+                            <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                            <p:dataExporter type="xml" target="pessoaTable" fileName="usuarios"/>  
+                        </h:commandLink>  
+                        <br /> <br />
                         <p:confirmDialog id="dialogDelete" message="Deseja excluir este registro?"  
                                          header="Deletar registro" severity="alert" widgetVar="pessoaDelete"> 
                             <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemUsuariosBean.deletePessoa}" oncomplete="pessoaDelete.hide(); #{listagemUsuariosBean.pessoas}"/>

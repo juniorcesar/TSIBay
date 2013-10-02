@@ -10,7 +10,7 @@
             <h:form id="form1">  
                 <p:panel id="lista_produtos" header="Listagem de Produtos"> 
                     <p:growl id="message" showDetail="true"/>   
-                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  selection="#{listagemProdutosBean.produto}" rowKey="#{produto.id}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable" style="text-align: center;"
+                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  selection="#{listagemProdutosBean.produto}" rowKey="#{produto.id}" paginator="true" rows="20"  selectionMode="single" id="produtos1Table" style="text-align: center;"
                                  emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemProdutosBean.filteredProdutos}" widgetVar="produtosTable" >  
                         <p:ajax event="rowSelect" update=":form1"/> 
                         <f:facet name="header" >
@@ -35,7 +35,7 @@
                             <h:outputText value="#{produto.fabricante}" id="fabricante"/>  
                         </p:column> 
 
-                        <p:column headerText="Descrição">  
+                        <p:column headerText="Descrição" >  
                             <h:outputText value="#{produto.fabricante}" id="descricao"/>  
                         </p:column> 
 
@@ -66,7 +66,7 @@
                             <h:outputText value="#{produto.prazo}" id="prazo"/>  
                         </p:column> 
 
-                        <p:column headerText="Opçoẽs" style="width:6%">  
+                        <p:column exportable="false" headerText="Opçoẽs" style="width:6%">  
                             <p:commandButton id="viewButton" icon="ui-icon-pencil"  
                                              onclick="prod.show();" type="button" /> 
                             <p:commandButton id="viewButton2" icon="ui-icon-trash" oncomplete="produtoDelete.show()"/> 
@@ -84,6 +84,26 @@
                         <p:column filterBy="#{produto.fabricante}" rendered="false"/>  
 
                     </p:dataTable> 
+                     <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                        <p:dataExporter type="xls" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                        <p:dataExporter type="pdf" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                        <p:dataExporter type="csv" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                        <p:dataExporter type="xml" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+                    <br /> <br />
                     <p:confirmDialog id="dialog" message="Deseja excluir este registro?"  
                                      header="Deletar registro" severity="alert" widgetVar="produtoDelete"> 
                         <p:commandButton value="Sim" style="margin-left: 25px;" actionListener="#{listagemProdutosBean.deleteProduto}" oncomplete="produtoDelete.hide(); #{listagemProdutosBean.listaProdutos}"/>

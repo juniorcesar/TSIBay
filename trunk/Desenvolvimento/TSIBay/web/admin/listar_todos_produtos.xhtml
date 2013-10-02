@@ -10,7 +10,7 @@
             <h:form id="form1">  
                 <p:panel id="lista_produtos" header="Listagem de todos os produtos"> 
                     <p:growl id="message" showDetail="true"/>   
-                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaTodosProdutos}"  selection="#{listagemProdutosBean.produto}" rowKey="#{produto.id}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable" style="text-align: center;"
+                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaTodosProdutos}"  selection="#{listagemProdutosBean.produto}" rowKey="#{produto.id}" paginator="true" rows="20"  selectionMode="single" id="produtos1Table" style="text-align: center;"
                                  emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemProdutosBean.filteredProdutos}" widgetVar="produtosTable" >  
                         <p:ajax event="rowSelect" update=":form1"/> 
                         <f:facet name="header" >
@@ -84,6 +84,26 @@
                         <p:column filterBy="#{produto.fabricante}" rendered="false"/>  
 
                     </p:dataTable> 
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                        <p:dataExporter type="xls" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                        <p:dataExporter type="pdf" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                        <p:dataExporter type="csv" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                        <p:dataExporter type="xml" target="produtos1Table" fileName="produtos"/>  
+                    </h:commandLink>  
+                    <br /> <br />
                 </p:panel>
             </h:form> 
         </div>

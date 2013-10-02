@@ -72,6 +72,26 @@
                         <p:column filterBy="#{compras.valorTotal}" rendered="false"/>  
                         <p:column filterBy="#{compras.frete}" rendered="false"/>  
                     </p:dataTable> 
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/excel.png" />  
+                        <p:dataExporter type="xls" target="comprasTable" fileName="compras"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/pdf.png" />  
+                        <p:dataExporter type="pdf" target="comprasTable" fileName="compras"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/csv.png" />  
+                        <p:dataExporter type="csv" target="comprasTable" fileName="compras"/>  
+                    </h:commandLink>  
+
+                    <h:commandLink>  
+                        <p:graphicImage value="resources/imagesAdmin/xml.png" />  
+                        <p:dataExporter type="xml" target="comprasTable" fileName="compras"/>  
+                    </h:commandLink>  
+                    <br /> <br />
                     <h:outputLabel value="Valor total das compras realizadas #{listagemComprasBean.valorTotalCompras}" style="margin-left: 5px;margin-top: 20px;font-size: 15px;font-weight: bold;"></h:outputLabel>  
                 </p:panel> 
             </h:form> 
