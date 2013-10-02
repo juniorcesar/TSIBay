@@ -7,12 +7,12 @@
                  xmlns:c="http://java.sun.com/jsp/jstl/core">
     <c:if test="#{loginBean.loggedIn}">
         <div id="principal">
-            <h:form id="form">  
+            <h:form id="form1">  
                 <p:panel id="lista_produtos" header="Listagem de Produtos"> 
-                    <p:growl id="message" showDetail="true"/>  
-                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  selection="#{listagemProdutosBean.produtoSelecionado}" rowKey="#{produto.nome}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable" style="text-align: center;"
+                    <p:growl id="message" showDetail="true"/>   
+                    <p:dataTable var="produto" value="#{listagemProdutosBean.listaProdutos}"  selection="#{listagemProdutosBean.produto}" rowKey="#{produto.id}" paginator="true" rows="20"  selectionMode="single" id="pessoaTable" style="text-align: center;"
                                  emptyMessage="Nenhum resultado foi encontrado." filteredValue="#{listagemProdutosBean.filteredProdutos}" widgetVar="produtosTable" >  
-                        <p:ajax event="rowSelect" update=":form" /> 
+                        <p:ajax event="rowSelect" update=":form1"/> 
                         <f:facet name="header" >
                             <p:outputPanel style="margin-left: 60%;">
                                 <h:outputText value="Pesquisar: "/>
@@ -91,68 +91,42 @@
                     </p:confirmDialog>
 
 
-                    <p:dialog id="produtoDialog" dynamic="true" modal="true" width="52%" header="Cadastro do produto" widgetVar="prod">  
+                    <p:dialog id="produtoDialog" dynamic="true" modal="true" width="52%" header="Alterar produto" widgetVar="prod">  
                         <h:form id="produto" > 
-
-<!--                                
-                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px;" >
-                                    <c:if test="#{produtoBean.verificaQuantidade()}">
-                                        <p:fileUpload  id="upload" fileUploadListener="#{produtoBean.uploadAction}" invalidFileMessage="Arquivo inválido. São permitidos somente arquivos .png, .jpeg, .gif e .jpg." mode="advanced" dragDropSupport="false" auto="true"
-                                                       allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="listaImagens" />  
-                                    </c:if>
-                                    <p:dataTable id="listaImagens" var="imagem" value="#{produtoBean.imagens}" selection="#{produtoBean.selectedImagem}" editable="true" rowKey="#{imagem.imagem}"  selectionMode="single"  style="margin-top: 15px;width: 600px;" >  
-                                        <p:ajax event="rowSelect" />
-                                        <p:column headerText="Nome" width="15%">  
-                                            <h:outputText value="#{imagem.imagem}" />  
-                                        </p:column>  
-                                        <p:column headerText="Imagem">  
-                                            <h:graphicImage value="resources/produtos/#{listagemProdutosBean.produtoSelecionado.id}/#{imagem.imagem}" width="70px" height="70px"/>
-                                        </p:column>  
-                                        <p:column headerText="Principal" width="5%">  
-                                            <p:selectBooleanButton  value="#{imagem.principal}"  onLabel="Sim" offLabel="Não" />  
-                                        </p:column>  
-                                        <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
-                                            <p:commandButton id="delImagem" icon="ui-icon-trash" oncomplete="imagemDelete.show()"/> 
-                                        </p:column> 
-                                    </p:dataTable>
-                                    <p:confirmDialog id="dialog" message="Deseja excluir esta imagem?"  
-                                                     header="Deletar imagem" severity="alert" widgetVar="imagemDelete"> 
-                                        <p:commandButton value="Sim" style="margin-left: 25px;" update="listaImagens"  action="#{produtoBean.imagemDelete}" oncomplete="imagemDelete.hide(); #{produtoBean.imagens}"/>
-                                        <p:commandButton value="Não" onclick="imagemDelete.hide()" style="margin-left: 40px;"/>
-                                    </p:confirmDialog>
-                                </p:fieldset>-->
-
-                            <p:scrollPanel style="height:550px;">
-                                <p:growl id="growl" showDetail="true" sticky="true" />  
-                               <p:fieldset legend="Dados do Produto">  
+                             <p:growl id="growl" showDetail="true" life="3000" />
+                            <p:scrollPanel style="height:600px;">
+                                <h:panelGrid columns="2" cellpadding="3" style="margin-left: 12px;">
+                                    <p:commandButton id="submitButton" value="Atualizar" icon="ui-icon-arrowrefresh-1-s" update="growl" ajax="true" actionListener="#{listagemProdutosBean.editProduto}" oncomplete="prod.hide();#{listagemProdutosBean.listaProdutos}"/>  
+                                </h:panelGrid>
+                                <p:fieldset legend="Dados do Produto">  
 
                                     <h:panelGrid columns="4" cellpadding="3">  
 
                                         <h:outputLabel for="id" value="Id:" />  
-                                        <p:inputText id="id" value="#{listagemProdutosBean.produtoSelecionado}"  readonly="true" size="15" style="margin-left: 55px"/>  
+                                        <p:inputText id="id" value="#{listagemProdutosBean.produto.id}"  readonly="true" size="15" style="margin-left: 55px"/>  
 
                                         <h:outputLabel for="data" value="Data cadastro:" style="margin-left: 13px" />  
-                                        <p:calendar value="#{listagemProdutosBean.produtoSelecionado.data}" id="popupCal" readonly="true" size="15" disabled="true"/>
+                                        <p:calendar value="#{listagemProdutosBean.produto.data}" id="popupCal" readonly="true" size="15" disabled="true"/>
 
                                     </h:panelGrid>  
                                     <h:panelGrid columns="3" cellpadding="3">  
 
                                         <h:outputLabel for="nome" value="Nome*:" />  
-                                        <p:inputText id="nome" value="#{listagemProdutosBean.produtoSelecionado.nome}" required="true" requiredMessage="É obrigatório informar o nome!" size="47"/> 
+                                        <p:inputText id="nome" value="#{listagemProdutosBean.produto.nome}" required="true" requiredMessage="É obrigatório informar o nome!" size="47"/> 
                                         <p:message for="nome" /> 
 
                                         <h:outputLabel for="fabricante" value="Fabricante*:" />  
-                                        <p:inputText id="fabricante" value="#{listagemProdutosBean.produtoSelecionado.fabricante}" required="true" requiredMessage="É obrigatório informar o fabricante!" size="47"/> 
+                                        <p:inputText id="fabricante" value="#{listagemProdutosBean.produto.fabricante}" required="true" requiredMessage="É obrigatório informar o fabricante!" size="47"/> 
                                         <p:message for="fabricante" /> 
 
                                         <h:outputLabel for="descricao" value="Descrição*:"/>  
-                                        <p:inputTextarea id="descricao" value="#{listagemProdutosBean.produtoSelecionado.descricao}" maxlength="150" rows="5" cols="45" autoResize="false"  required="true" requiredMessage="É obrigatório informar a descrição!" /> 
+                                        <p:inputTextarea id="descricao" value="#{listagemProdutosBean.produto.descricao}" maxlength="150" rows="5" cols="45" autoResize="false"  required="true" requiredMessage="É obrigatório informar a descrição!" /> 
                                         <p:message for="descricao" /> 
 
                                     </h:panelGrid>
                                     <h:panelGrid columns="3" cellpadding="3">  
                                         <h:outputLabel for="familia" value="Familia*:"/>  
-                                        <p:autoComplete value="#{listagemProdutosBean.produtoSelecionado.familia}" id="familia" completeMethod="#{familiaBean.completaFamilia}" 
+                                        <p:autoComplete value="#{listagemProdutosBean.produto.familia}" id="familia" completeMethod="#{familiaBean.completaFamilia}" 
                                                         converter="familiaConverter" var="f" itemLabel="#{f.nome}" itemValue="#{f}" forceSelection="true"  style="margin-left: 19px;">  
                                         </p:autoComplete>  
                                         <p:commandButton id="basic"  onclick="fam.show();" type="button"  icon="ui-icon-search" />  
@@ -175,7 +149,7 @@
                                     <h:panelGrid columns="6" cellpadding="3">  
 
                                         <h:outputLabel for="precoVenda" value="Preço Venda*:" />  
-                                        <p:inputText id="precoVenda"  value="#{listagemProdutosBean.produtoSelecionado.precoVenda}" required="true" requiredMessage="É obrigatório informar o preço de venda!" size="15">
+                                        <p:inputText id="precoVenda"  value="#{listagemProdutosBean.produto.precoVenda}" required="true" requiredMessage="É obrigatório informar o preço de venda!" size="15">
                                             <f:convertNumber pattern="#,###.##"></f:convertNumber>  
                                             <p:ajax update="precoVenda" process="precoVenda" event="change" />  
                                             <f:validator validatorId="MoedaValidator"  />  
@@ -183,24 +157,24 @@
                                         <p:message for="precoVenda" /> 
 
                                         <h:outputLabel for="qtdeDisponivel" value="Quantidade Disponível:" />  
-                                        <p:inputMask id="qtdeDisponivel" mask="9?999999999999999" value="#{listagemProdutosBean.produtoSelecionado.qtdeDisponivel}" readonly="true" size="15"/> 
+                                        <p:inputMask id="qtdeDisponivel" mask="9?999999999999999" value="#{listagemProdutosBean.produto.qtdeDisponivel}" readonly="true" size="15"/> 
                                         <p:message for="qtdeDisponivel" /> 
 
                                         <h:outputLabel for="quantidade" value="Quantidade*:" />  
-                                        <p:inputMask id="quantidade" mask="9?999999999" value="#{listagemProdutosBean.produtoSelecionado.quantidade}" requiredMessage="É obrigatório informar a quantidade!" required="true" size="15"/> 
+                                        <p:inputMask id="quantidade" mask="9?999999999" value="#{listagemProdutosBean.produto.quantidade}" requiredMessage="É obrigatório informar a quantidade!" required="true" size="15"/> 
                                         <p:message for="quantidade" /> 
 
                                         <h:outputLabel for="qtdeVendida" value="Quantidade Vendida:" />  
-                                        <p:inputMask id="qtdeVendida" mask="9?999999999" value="#{listagemProdutosBean.produtoSelecionado.qtdeVendida}" readonly="true" size="15"/> 
+                                        <p:inputMask id="qtdeVendida" mask="9?999999999" value="#{listagemProdutosBean.produto.qtdeVendida}" readonly="true" size="15"/> 
                                         <p:message for="qtdeVendida" /> 
 
                                         <h:outputLabel for="prazo" value="Prazo Pagamento (dias)*:" />  
-                                        <p:inputMask id="prazo" mask="9?99" required="true" value="#{listagemProdutosBean.produtoSelecionado.prazo}" requiredMessage="É obrigatório informar o prazo!" size="15"/> 
+                                        <p:inputMask id="prazo" mask="9?99" required="true" value="#{listagemProdutosBean.produto.prazo}" requiredMessage="É obrigatório informar o prazo!" size="15"/> 
                                         <p:message for="prazo" /> 
 
 
                                         <h:outputLabel for="dataLimite" value="Data Limite Venda*:" />  
-                                        <p:calendar  value="#{listagemProdutosBean.produtoSelecionado.dtLimiteVenda}" id="dataLimite" required="true" requiredMessage="É obrigatório informar a data limite!" size="15"/>
+                                        <p:calendar  value="#{listagemProdutosBean.produto.dtLimiteVenda}" id="dataLimite" required="true" requiredMessage="É obrigatório informar a data limite!" size="15"/>
                                         <p:message for="dataLimite" /> 
 
                                     </h:panelGrid>
@@ -208,7 +182,7 @@
                                     <h:panelGrid columns="3" cellpadding="3">  
 
                                         <h:outputLabel for="frete" value="Frete*:" />  
-                                        <p:selectOneMenu id="frete"  value="#{listagemProdutosBean.produtoSelecionado.frete}" required="true" requiredMessage="É obrigatório informar o frete!" style="margin-left: 96px">  
+                                        <p:selectOneMenu id="frete"  value="#{listagemProdutosBean.produto.frete}" required="true" requiredMessage="É obrigatório informar o frete!" style="margin-left: 96px">  
                                             <f:selectItem itemLabel="À Combinar" itemValue="À Combinar" />  
                                             <f:selectItem itemLabel="Grátis" itemValue="Grátis" /> 
                                             <f:selectItem itemLabel="Por conta do comprador" itemValue="Por conta do comprador" />  
@@ -216,18 +190,37 @@
                                         <p:message for="frete" /> 
 
                                         <h:outputLabel for="oferta" value="Ofertado:" />  
-                                        <p:selectBooleanButton value="#{listagemProdutosBean.produtoSelecionado.ofertado}"  onLabel="Sim" offLabel="Não" style="margin-left: 96px"/> 
+                                        <p:selectBooleanButton value="#{listagemProdutosBean.produto.ofertado}"  onLabel="Sim" offLabel="Não" style="margin-left: 96px"/> 
 
                                     </h:panelGrid>
                                 </p:fieldset>
-                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px" >
-                                    <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                                                  multiple="true" sizeLimit="999999"  allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />  
-                                </p:fieldset>
+                                <p:fieldset legend="Imagens do Produto*" style="margin-top: 5px;" >
+                                    <c:if test="#{listagemProdutosBean.verificaQuantidade()}">
+                                        <p:fileUpload  id="upload" fileUploadListener="#{listagemProdutosBean.uploadAction}" invalidFileMessage="Arquivo inválido. São permitidos somente arquivos .png, .jpeg, .gif e .jpg." mode="advanced" dragDropSupport="false" auto="true"
+                                                       allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="listaImagens" />  
+                                    </c:if>
+                                    <p:dataTable id="listaImagens" var="imagem" value="#{listagemProdutosBean.imagens}" selection="#{listagemProdutosBean.selectedImagem}" editable="true" rowKey="#{imagem.imagem}"  selectionMode="single"  style="margin-top: 15px;width: 600px;" >  
+                                        <p:ajax event="rowSelect" />
+                                        <p:column headerText="Nome" width="15%">  
+                                            <h:outputText value="#{imagem.imagem}" />  
+                                        </p:column>  
+                                        <p:column headerText="Imagem">  
+                                            <h:graphicImage value="resources/produtos/#{listagemProdutosBean.id}/#{imagem.imagem}" width="70px" height="70px"/>
+                                        </p:column>  
+                                        <p:column headerText="Principal" width="5%">  
+                                            <p:selectBooleanButton  value="#{imagem.principal}"  onLabel="Sim" offLabel="Não" />  
+                                        </p:column>  
+                                        <p:column headerText="Excluir" style="width:4%;text-align: center;"> 
+                                            <p:commandButton id="delImagem" icon="ui-icon-trash" oncomplete="imagemDelete.show()"/> 
+                                        </p:column> 
+                                    </p:dataTable>
+                                    <p:confirmDialog id="dialog" message="Deseja excluir esta imagem?"  
+                                                     header="Deletar imagem" severity="alert" widgetVar="imagemDelete"> 
+                                        <p:commandButton value="Sim" style="margin-left: 25px;" update="listaImagens"  action="#{listagemProdutosBean.imagemDelete}" oncomplete="imagemDelete.hide(); #{listagemProdutosBean.imagens}"/>
+                                        <p:commandButton value="Não" onclick="imagemDelete.hide()" style="margin-left: 40px;"/>
+                                    </p:confirmDialog>
 
-                                <h:panelGrid columns="2" cellpadding="3">
-                                    <p:commandButton value="Atualizar" icon="ui-icon-arrowrefresh-1-s" action="#{produtoBean.addProduto()}" update="form:growl" ajax="false"/>
-                                </h:panelGrid> 
+                                </p:fieldset>
                             </p:scrollPanel>
                         </h:form>
                     </p:dialog>

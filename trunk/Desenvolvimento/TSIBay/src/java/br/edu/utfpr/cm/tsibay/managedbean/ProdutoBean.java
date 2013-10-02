@@ -30,10 +30,10 @@ import org.primefaces.event.FileUploadEvent;
 @RequestScoped
 public class ProdutoBean implements Serializable {
 
+    private DaoProduto daoProduto = new DaoProduto();
     private static Produto produto;
     private Imagem selectedImagem;
     private UploadArquivo arquivo = new UploadArquivo();
-    private DaoProduto daoProduto = new DaoProduto();
     private static List<Imagem> imagens;
     private int idProduto = 0;
 

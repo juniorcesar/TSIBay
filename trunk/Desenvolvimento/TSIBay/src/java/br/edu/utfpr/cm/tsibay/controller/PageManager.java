@@ -60,4 +60,10 @@ public class PageManager implements Serializable {
      public void setComissoesReceber() {
         this.paginaAtiva = "./admin/comissoes_receber.xhtml";
     }
+     public void setPagListarVendedores() {
+        this.paginaAtiva = "./admin/listar_vendedores.xhtml";
+    }
+     public void setPagListarTodosProdutos() {
+        this.paginaAtiva = "./admin/listar_todos_produtos.xhtml";
+    }
 }
